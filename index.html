@@ -1743,6 +1743,26 @@
                         <i data-lucide="credit-card" class="w-6 h-6 md:w-4 md:h-4"></i>
                         <span class="hidden md:inline">会員・回数券</span>
                     </button>
+                    <!-- Register Close Tab -->
+                    <button onclick="switchTab('register-close')" id="tab-register-close" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="レジ締め">
+                        <i data-lucide="calculator" class="w-6 h-6 md:w-4 md:h-4"></i>
+                        <span class="hidden md:inline">レジ締め</span>
+                    </button>
+                    <!-- Inventory Tab -->
+                    <button onclick="switchTab('inventory')" id="tab-inventory" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="在庫管理">
+                        <i data-lucide="package" class="w-6 h-6 md:w-4 md:h-4"></i>
+                        <span class="hidden md:inline">在庫管理</span>
+                    </button>
+                    <!-- Advertising Tab -->
+                    <button onclick="switchTab('advertising')" id="tab-advertising" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="広告費">
+                        <i data-lucide="megaphone" class="w-6 h-6 md:w-4 md:h-4"></i>
+                        <span class="hidden md:inline">広告費</span>
+                    </button>
+                    <!-- LTV Tab -->
+                    <button onclick="switchTab('ltv')" id="tab-ltv" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="LTV">
+                        <i data-lucide="trending-up" class="w-6 h-6 md:w-4 md:h-4"></i>
+                        <span class="hidden md:inline">LTV</span>
+                    </button>
                     <!-- Goal Setting Tab -->
                     <button onclick="switchTab('goal')" id="tab-goal" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="売上目標設定">
                         <i data-lucide="target" class="w-6 h-6 md:w-4 md:h-4"></i>
@@ -2976,6 +2996,406 @@
                 </div>
             </section>
 
+            <!-- TAB: REGISTER CLOSE (レジ締め) -->
+            <section id="content-register-close" class="tab-content hidden space-y-8 animate-fade-in">
+                <div class="premium-card p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg gradient-accent flex items-center justify-center">
+                                <i data-lucide="calculator" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-bold text-accent-900">レジ締め</h2>
+                                <p class="text-xs text-surface-500">決済方法別の日次集計・日報</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="date" id="rc-date" onchange="updateRegisterClose()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg bg-white">
+                            <select id="rc-store" onchange="updateRegisterClose()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg bg-white">
+                                <option value="all">全店舗</option>
+                                <option value="ebisu">恵比寿駅前店</option>
+                                <option value="kadomori">大阪KADOMORI店</option>
+                                <option value="fukushima">福島店</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Summary Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総売上</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="rc-total-sales">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総客数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="rc-total-customers">0名</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">新規客数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="rc-new-customers">0名</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">既存客数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="rc-existing-customers">0名</p>
+                    </div>
+                </div>
+
+                <!-- Payment Method Breakdown -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
+                            <i data-lucide="wallet" class="w-4 h-4"></i>
+                            決済方法別内訳
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4" id="rc-payment-grid">
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">現金</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-cash">¥0</p>
+                            </div>
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">クレジット</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-credit">¥0</p>
+                            </div>
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">Square</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-square">¥0</p>
+                            </div>
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">PayPay</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-paypay">¥0</p>
+                            </div>
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">HPBポイント</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-hpbpoints">¥0</p>
+                            </div>
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">Alipay</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-alipay">¥0</p>
+                            </div>
+                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
+                                <p class="text-xs text-surface-500 mb-1">UnionPay</p>
+                                <p class="text-lg font-bold text-accent-800" id="rc-pay-unionpay">¥0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservation Rates -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">次回予約率</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-surface-600">新規 次回予約率</span>
+                                <span class="text-xl font-bold text-primary-600" id="rc-new-res-rate">0%</span>
+                            </div>
+                            <div class="w-full bg-kadomori-100 h-3 rounded-full overflow-hidden">
+                                <div class="bg-primary-500 h-3 transition-all duration-500" id="rc-new-res-bar" style="width:0%"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-surface-600">既存 次回予約率</span>
+                                <span class="text-xl font-bold text-accent-700" id="rc-exist-res-rate">0%</span>
+                            </div>
+                            <div class="w-full bg-kadomori-100 h-3 rounded-full overflow-hidden">
+                                <div class="bg-accent-600 h-3 transition-all duration-500" id="rc-exist-res-bar" style="width:0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">スタッフ別売上</h3>
+                        <div class="space-y-3" id="rc-staff-breakdown"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: INVENTORY (在庫管理) -->
+            <section id="content-inventory" class="tab-content hidden space-y-8 animate-fade-in">
+                <div class="premium-card p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg gradient-sage flex items-center justify-center">
+                                <i data-lucide="package" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-bold text-accent-900">在庫管理</h2>
+                                <p class="text-xs text-surface-500">商品マスタ・入出庫・発注管理</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="openInventoryModal('add-product')" class="btn-primary py-2 px-4 text-sm flex items-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i> 商品追加
+                            </button>
+                            <button onclick="openInventoryModal('stock-move')" class="btn-sage py-2 px-4 text-sm flex items-center gap-2">
+                                <i data-lucide="arrow-right-left" class="w-4 h-4"></i> 入出庫処理
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Summary -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">登録商品数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-products">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総在庫数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-stock">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">在庫金額</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-value">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">発注アラート</p>
+                        <p class="text-2xl font-display font-bold text-rose-600" id="inv-alert-count">0</p>
+                    </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200 flex justify-between items-center">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase">商品一覧・在庫状況</h3>
+                        <input type="text" id="inv-search" placeholder="商品名で検索..." onkeyup="renderInventoryTable()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg w-48">
+                    </div>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="min-w-full divide-y divide-kadomori-200">
+                            <thead class="bg-kadomori-100">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品名</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">カテゴリ</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">単価</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">現在庫</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">最低在庫</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">状態</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-kadomori-100" id="inv-product-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Stock Movement History -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase">入出庫履歴（直近20件）</h3>
+                    </div>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="min-w-full divide-y divide-kadomori-200">
+                            <thead class="bg-kadomori-100">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">日付</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">種別</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">数量</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">メモ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-kadomori-100" id="inv-history-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Inventory Modal -->
+                <div id="inventory-modal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4">
+                    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6" id="inventory-modal-content"></div>
+                </div>
+            </section>
+
+            <!-- TAB: ADVERTISING (広告費) -->
+            <section id="content-advertising" class="tab-content hidden space-y-8 animate-fade-in">
+                <div class="premium-card p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg gradient-rose flex items-center justify-center">
+                                <i data-lucide="megaphone" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-bold text-accent-900">広告費管理</h2>
+                                <p class="text-xs text-surface-500">Meta広告のCV数・費用・CPA分析</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="openAdModal()" class="btn-primary py-2 px-4 text-sm flex items-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i> データ登録
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ad KPI Summary -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">Meta広告費用</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ad-total-cost">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">CV数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ad-total-cv">0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">広告CPA</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ad-cpa">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">実来店CPA</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ad-real-cpa">¥0</p>
+                    </div>
+                </div>
+
+                <!-- Ad Chart -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                    <h3 class="text-lg font-display font-bold text-accent-900 mb-4">月別広告パフォーマンス推移</h3>
+                    <div class="chart-container"><canvas id="adTrendChart"></canvas></div>
+                </div>
+
+                <!-- Ad Monthly Data Table -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase">月別広告データ</h3>
+                    </div>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="min-w-full divide-y divide-kadomori-200">
+                            <thead class="bg-kadomori-100">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">月</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">媒体</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">費用</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">CV数</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">広告CPA</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">実来店数</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">実来店CPA</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-kadomori-100" id="ad-data-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Ad Modal -->
+                <div id="ad-modal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4">
+                    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+                        <h3 class="text-lg font-bold text-accent-900 mb-4">広告データ登録</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-surface-600 mb-1">月</label>
+                                <input type="month" id="ad-edit-month" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-surface-600 mb-1">媒体</label>
+                                <select id="ad-edit-platform" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                                    <option value="meta">Meta広告</option>
+                                    <option value="google">Google広告</option>
+                                    <option value="other">その他</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-surface-600 mb-1">費用 (円)</label>
+                                <input type="number" id="ad-edit-cost" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" step="1000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-surface-600 mb-1">CV数</label>
+                                <input type="number" id="ad-edit-cv" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-surface-600 mb-1">実来店数</label>
+                                <input type="number" id="ad-edit-visits" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0">
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="saveAdData()" class="flex-1 btn-primary py-2 text-sm">保存</button>
+                                <button onclick="closeAdModal()" class="flex-1 bg-surface-200 text-surface-700 py-2 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB: LTV -->
+            <section id="content-ltv" class="tab-content hidden space-y-8 animate-fade-in">
+                <div class="premium-card p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg gradient-warmgold flex items-center justify-center">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-bold text-accent-900">LTV（顧客生涯価値）</h2>
+                                <p class="text-xs text-surface-500">顧客IDベースのLTV計測・分析</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LTV Summary -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">平均LTV</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ltv-average">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">平均客単価</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ltv-avg-unit">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">平均来店回数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ltv-avg-visits">0回</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">ユニーク顧客数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="ltv-unique-customers">0</p>
+                    </div>
+                </div>
+
+                <!-- LTV Customer Ranking -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase">顧客別LTVランキング（上位20件）</h3>
+                    </div>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="min-w-full divide-y divide-kadomori-200">
+                            <thead class="bg-kadomori-100">
+                                <tr>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">順位</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">顧客ID</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">累計売上 (LTV)</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">来店回数</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">平均客単価</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">初回来店</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">最終来店</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-kadomori-100" id="ltv-ranking-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <p class="text-sm text-blue-800 font-bold mb-1">LTV計測について</p>
+                    <p class="text-xs text-blue-600">現在は売上データから概算LTV（平均客単価 × 平均来店頻度 × 12ヶ月）を算出しています。<br>より正確なLTVには顧客IDの追跡が必要です。データ編集タブで顧客IDを入力すると、個別のLTV追跡が可能になります。</p>
+                </div>
+            </section>
+
             <!-- TAB: GOAL SETTING -->
             <section id="content-goal" class="tab-content hidden space-y-8 animate-fade-in">
                 <div class="bg-gradient-to-br from-kadomori-50 to-white rounded-lg shadow-lg border border-kadomori-200 overflow-hidden">
@@ -3396,6 +3816,7 @@
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(クレカ)</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(QR)</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">物販</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名料</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPBポイント</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPBギフト</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">その他割引</th>
@@ -3431,6 +3852,7 @@
                 <div class="flex gap-2 mb-6">
                     <button onclick="switchMembershipSubTab('subscription')" id="membership-subtab-subscription" class="membership-subtab-btn px-4 py-2 rounded-lg text-sm font-medium bg-accent-700 text-white">サブスク会員管理</button>
                     <button onclick="switchMembershipSubTab('tickets')" id="membership-subtab-tickets" class="membership-subtab-btn px-4 py-2 rounded-lg text-sm font-medium bg-surface-200 text-surface-600">回数券管理</button>
+                    <button onclick="switchMembershipSubTab('plans')" id="membership-subtab-plans" class="membership-subtab-btn px-4 py-2 rounded-lg text-sm font-medium bg-surface-200 text-surface-600">プラン別分析</button>
                 </div>
 
                 <!-- ===== SUBSCRIPTION MANAGEMENT ===== -->
@@ -3597,7 +4019,134 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== PLAN-BASED ANALYSIS ===== -->
+                <div id="membership-content-plans" class="hidden">
+                    <!-- Filters -->
+                    <div class="premium-card p-6 mb-6">
+                        <div class="flex flex-wrap items-end gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
+                                <select id="plan-store-selector" onchange="updatePlanAnalysis()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
+                                    <option value="all">全店舗</option>
+                                    <option value="ebisu">恵比寿駅前店</option>
+                                    <option value="kadomori">大阪KADOMORI店</option>
+                                    <option value="fukushima">福島店</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">期間</label>
+                                <select id="plan-period-selector" onchange="updatePlanAnalysis()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
+                                    <option value="3">直近3ヶ月</option>
+                                    <option value="6" selected>直近6ヶ月</option>
+                                    <option value="12">直近12ヶ月</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Plan Summary Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="premium-card p-4 text-center">
+                            <p class="text-xs text-surface-500 mb-1">プラン数</p>
+                            <p class="text-3xl font-bold text-accent-800" id="plan-total-count">0</p>
+                        </div>
+                        <div class="premium-card p-4 text-center">
+                            <p class="text-xs text-surface-500 mb-1">総会員数</p>
+                            <p class="text-3xl font-bold text-primary-500" id="plan-total-members">0</p>
+                        </div>
+                        <div class="premium-card p-4 text-center">
+                            <p class="text-xs text-surface-500 mb-1">平均解約率</p>
+                            <p class="text-3xl font-bold text-rose-500" id="plan-avg-churn">0%</p>
+                        </div>
+                        <div class="premium-card p-4 text-center">
+                            <p class="text-xs text-surface-500 mb-1">月間総売上</p>
+                            <p class="text-2xl font-bold text-sage-500" id="plan-total-revenue">¥0</p>
+                        </div>
+                    </div>
+
+                    <!-- Plan Management -->
+                    <div class="premium-card p-6 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-display font-bold text-accent-900">プラン管理</h3>
+                            <button onclick="openPlanModal()" class="btn-primary py-2 px-4 text-sm flex items-center gap-2">
+                                <i data-lucide="plus" class="w-4 h-4"></i>プラン追加
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b-2 border-kadomori-300">
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-kadomori-800">プラン名</th>
+                                        <th class="py-2 px-3 text-center text-xs font-medium text-kadomori-800">月額</th>
+                                        <th class="py-2 px-3 text-center text-xs font-medium text-kadomori-800">現会員数</th>
+                                        <th class="py-2 px-3 text-center text-xs font-medium text-kadomori-800">新規入会</th>
+                                        <th class="py-2 px-3 text-center text-xs font-medium text-kadomori-800">退会</th>
+                                        <th class="py-2 px-3 text-center text-xs font-medium text-kadomori-800">解約率</th>
+                                        <th class="py-2 px-3 text-right text-xs font-medium text-kadomori-800">月間売上</th>
+                                        <th class="py-2 px-3 text-center text-xs font-medium text-kadomori-800">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="plan-table-body" class="divide-y divide-kadomori-100">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Churn Trend Chart -->
+                    <div class="premium-card p-6">
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">解約率推移</h3>
+                        <div class="h-64">
+                            <canvas id="plan-churn-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </section>
+
+            <!-- Modal: Plan Edit -->
+            <div id="plan-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
+                    <h3 class="text-lg font-display font-bold text-accent-800 mb-4" id="plan-modal-title">プラン登録</h3>
+                    <input type="hidden" id="plan-edit-id">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">プラン名</label>
+                            <input type="text" id="plan-edit-name" placeholder="例: ベーシックプラン" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
+                            <select id="plan-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                                <option value="all">全店舗共通</option>
+                                <option value="ebisu">恵比寿駅前店</option>
+                                <option value="kadomori">大阪KADOMORI店</option>
+                                <option value="fukushima">福島店</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">月額 (¥)</label>
+                            <input type="number" id="plan-edit-fee" min="0" value="9800" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">現会員数</label>
+                            <input type="number" id="plan-edit-members" min="0" value="0" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">当月新規入会</label>
+                                <input type="number" id="plan-edit-new" min="0" value="0" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">当月退会</label>
+                                <input type="number" id="plan-edit-cancelled" min="0" value="0" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 mt-6">
+                        <button onclick="savePlan()" class="flex-1 btn-primary py-2 text-sm">保存</button>
+                        <button onclick="closePlanModal()" class="flex-1 btn-secondary py-2 text-sm">キャンセル</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Modal: Subscription Edit -->
             <div id="subscription-modal" class="fixed inset-0 bg-black bg-opacity-50 z-[9999] hidden flex items-center justify-center p-4">
@@ -6394,6 +6943,594 @@
             link.click();
         }
 
+        // ========== REGISTER CLOSE (レジ締め) ==========
+        function updateRegisterClose() {
+            const dateStr = document.getElementById('rc-date')?.value;
+            const storeFilter = document.getElementById('rc-store')?.value || 'all';
+            const fmt = n => n.toLocaleString();
+            if (!dateStr) return;
+
+            const parts = dateStr.split('-');
+            const datePrefix = `${parseInt(parts[0])}/${parseInt(parts[1])}/${parseInt(parts[2])}`;
+            const allData = Array.isArray(rawData) ? rawData : [];
+            const dayData = allData.filter(d => {
+                if (!d.date) return false;
+                const matches = d.date === datePrefix;
+                if (!matches) return false;
+                return storeFilter === 'all' || d.store === storeFilter;
+            });
+
+            let totalSales = 0, cash = 0, credit = 0, newC = 0, existC = 0;
+            let square = 0, paypay = 0, hpbPoints = 0, alipay = 0, unionpay = 0;
+            let nextResNew = 0, nextResExist = 0;
+            const staffSales = {};
+
+            dayData.forEach(d => {
+                const s = d.sales || {};
+                const c = d.customers || {};
+                const nr = d.nextRes || {};
+                const disc = d.discounts || {};
+                const daySales = (s.cash || 0) + (s.credit || 0) + (s.qr || 0) + (disc.hpbPoints || 0) + (disc.hpbGift || 0);
+                totalSales += daySales;
+                cash += (s.cash || 0);
+                credit += (s.credit || 0);
+                square += (s.square || 0);
+                paypay += (s.paypay || 0);
+                hpbPoints += (disc.hpbPoints || 0);
+                alipay += (s.alipay || 0);
+                unionpay += (s.unionpay || 0);
+
+                const nc = (c.newHPB || 0) + (c.newMiniNai || 0);
+                const ec = (c.existing || 0) + (c.acquaintance || 0);
+                newC += nc;
+                existC += ec;
+                nextResNew += (nr.hpbNew || 0) + (nr.mininaiNew || 0);
+                nextResExist += (nr.existing || 0);
+
+                const key = d.staff || 'unknown';
+                if (!staffSales[key]) staffSales[key] = 0;
+                staffSales[key] += daySales;
+            });
+
+            document.getElementById('rc-total-sales').textContent = `¥${fmt(totalSales)}`;
+            document.getElementById('rc-total-customers').textContent = `${newC + existC}名`;
+            document.getElementById('rc-new-customers').textContent = `${newC}名`;
+            document.getElementById('rc-existing-customers').textContent = `${existC}名`;
+
+            document.getElementById('rc-pay-cash').textContent = `¥${fmt(cash)}`;
+            document.getElementById('rc-pay-credit').textContent = `¥${fmt(credit)}`;
+            document.getElementById('rc-pay-square').textContent = `¥${fmt(square)}`;
+            document.getElementById('rc-pay-paypay').textContent = `¥${fmt(paypay)}`;
+            document.getElementById('rc-pay-hpbpoints').textContent = `¥${fmt(hpbPoints)}`;
+            document.getElementById('rc-pay-alipay').textContent = `¥${fmt(alipay)}`;
+            document.getElementById('rc-pay-unionpay').textContent = `¥${fmt(unionpay)}`;
+
+            const newResRate = newC > 0 ? ((nextResNew / newC) * 100).toFixed(1) : '0.0';
+            const existResRate = existC > 0 ? ((nextResExist / existC) * 100).toFixed(1) : '0.0';
+            document.getElementById('rc-new-res-rate').textContent = `${newResRate}%`;
+            document.getElementById('rc-exist-res-rate').textContent = `${existResRate}%`;
+            document.getElementById('rc-new-res-bar').style.width = `${Math.min(parseFloat(newResRate), 100)}%`;
+            document.getElementById('rc-exist-res-bar').style.width = `${Math.min(parseFloat(existResRate), 100)}%`;
+
+            const staffDiv = document.getElementById('rc-staff-breakdown');
+            const sortedStaff = Object.entries(staffSales).sort((a, b) => b[1] - a[1]);
+            const maxStaffSales = sortedStaff.length > 0 ? sortedStaff[0][1] : 1;
+            staffDiv.innerHTML = sortedStaff.map(([name, sales]) => `
+                <div class="flex items-center gap-3">
+                    <span class="text-sm font-medium text-accent-800 w-16 truncate">${name}</span>
+                    <div class="flex-1 bg-kadomori-100 h-6 rounded-full overflow-hidden">
+                        <div class="bg-primary-500 h-6 rounded-full flex items-center px-2" style="width: ${(sales / maxStaffSales) * 100}%">
+                            <span class="text-xs text-white font-bold">¥${fmt(sales)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // ========== INVENTORY MANAGEMENT (在庫管理) ==========
+        const INV_STORAGE_KEY = 'kadomori_inventory';
+        const INV_HISTORY_KEY = 'kadomori_inventory_history';
+
+        function loadInventory() {
+            try { return JSON.parse(localStorage.getItem(INV_STORAGE_KEY)) || []; } catch { return []; }
+        }
+        function saveInventory(data) { localStorage.setItem(INV_STORAGE_KEY, JSON.stringify(data)); }
+        function loadInventoryHistory() {
+            try { return JSON.parse(localStorage.getItem(INV_HISTORY_KEY)) || []; } catch { return []; }
+        }
+        function saveInventoryHistory(data) { localStorage.setItem(INV_HISTORY_KEY, JSON.stringify(data)); }
+
+        function renderInventoryTable() {
+            const products = loadInventory();
+            const history = loadInventoryHistory();
+            const search = (document.getElementById('inv-search')?.value || '').toLowerCase();
+            const fmt = n => n.toLocaleString();
+
+            const filtered = products.filter(p => !search || p.name.toLowerCase().includes(search));
+            let totalStock = 0, totalValue = 0, alertCount = 0;
+
+            const tbody = document.getElementById('inv-product-tbody');
+            tbody.innerHTML = filtered.map((p, i) => {
+                totalStock += p.stock;
+                totalValue += p.stock * p.price;
+                const isLow = p.stock <= p.minStock;
+                if (isLow) alertCount++;
+                return `<tr class="hover:bg-kadomori-50 ${isLow ? 'bg-red-50' : ''}">
+                    <td class="px-4 py-3 text-sm font-medium text-accent-900">${p.name}</td>
+                    <td class="px-4 py-3 text-sm text-surface-600">${p.category}</td>
+                    <td class="px-4 py-3 text-sm text-right">¥${fmt(p.price)}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold ${isLow ? 'text-red-600' : ''}">${p.stock}</td>
+                    <td class="px-4 py-3 text-sm text-right text-surface-500">${p.minStock}</td>
+                    <td class="px-4 py-3 text-sm text-center">
+                        ${isLow ? '<span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">要発注</span>' : '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">適正</span>'}
+                    </td>
+                    <td class="px-4 py-3 text-sm text-center">
+                        <button onclick="deleteInventoryProduct(${i})" class="text-red-500 hover:text-red-700 text-xs">削除</button>
+                    </td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="7" class="text-center py-8 text-surface-400">商品が登録されていません</td></tr>';
+
+            document.getElementById('inv-total-products').textContent = products.length;
+            document.getElementById('inv-total-stock').textContent = totalStock;
+            document.getElementById('inv-total-value').textContent = `¥${fmt(totalValue)}`;
+            document.getElementById('inv-alert-count').textContent = alertCount;
+
+            // History
+            const hTbody = document.getElementById('inv-history-tbody');
+            const recent = history.slice(-20).reverse();
+            hTbody.innerHTML = recent.map(h => {
+                const typeLabel = h.type === 'in' ? '入庫' : h.type === 'out' ? '払出' : '発注';
+                const typeClass = h.type === 'in' ? 'bg-green-100 text-green-700' : h.type === 'out' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700';
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm">${h.date}</td>
+                    <td class="px-4 py-3 text-sm font-medium">${h.product}</td>
+                    <td class="px-4 py-3 text-sm text-center"><span class="px-2 py-1 ${typeClass} rounded-full text-xs font-bold">${typeLabel}</span></td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">${h.type === 'out' ? '-' : '+'}${h.qty}</td>
+                    <td class="px-4 py-3 text-sm text-surface-500">${h.memo || ''}</td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="5" class="text-center py-8 text-surface-400">履歴なし</td></tr>';
+        }
+
+        function openInventoryModal(mode) {
+            const modal = document.getElementById('inventory-modal');
+            const content = document.getElementById('inventory-modal-content');
+            const products = loadInventory();
+
+            if (mode === 'add-product') {
+                content.innerHTML = `
+                    <h3 class="text-lg font-bold text-accent-900 mb-4">商品追加</h3>
+                    <div class="space-y-4">
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">商品名</label>
+                            <input type="text" id="inv-new-name" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">カテゴリ</label>
+                            <select id="inv-new-category" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                                <option value="シャンプー">シャンプー</option><option value="トリートメント">トリートメント</option>
+                                <option value="オイル">オイル</option><option value="サプリメント">サプリメント</option>
+                                <option value="器具">器具</option><option value="その他">その他</option>
+                            </select></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">単価 (円)</label>
+                            <input type="number" id="inv-new-price" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">初期在庫数</label>
+                            <input type="number" id="inv-new-stock" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" value="0"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">最低在庫数 (発注点)</label>
+                            <input type="number" id="inv-new-min" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" value="5"></div>
+                        <div class="flex gap-2">
+                            <button onclick="addInventoryProduct()" class="flex-1 btn-primary py-2 text-sm">追加</button>
+                            <button onclick="closeInventoryModal()" class="flex-1 bg-surface-200 text-surface-700 py-2 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
+                        </div>
+                    </div>`;
+            } else {
+                const opts = products.map((p, i) => `<option value="${i}">${p.name}</option>`).join('');
+                content.innerHTML = `
+                    <h3 class="text-lg font-bold text-accent-900 mb-4">入出庫処理</h3>
+                    <div class="space-y-4">
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">商品</label>
+                            <select id="inv-move-product" class="w-full px-3 py-2 border border-surface-300 rounded-lg">${opts}</select></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">種別</label>
+                            <select id="inv-move-type" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                                <option value="in">入庫</option><option value="out">払出</option><option value="order">発注</option>
+                            </select></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">数量</label>
+                            <input type="number" id="inv-move-qty" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="1" value="1"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">メモ</label>
+                            <input type="text" id="inv-move-memo" class="w-full px-3 py-2 border border-surface-300 rounded-lg" placeholder="任意"></div>
+                        <div class="flex gap-2">
+                            <button onclick="processStockMove()" class="flex-1 btn-primary py-2 text-sm">処理実行</button>
+                            <button onclick="closeInventoryModal()" class="flex-1 bg-surface-200 text-surface-700 py-2 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
+                        </div>
+                    </div>`;
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closeInventoryModal() { document.getElementById('inventory-modal').classList.add('hidden'); }
+
+        function addInventoryProduct() {
+            const name = document.getElementById('inv-new-name').value.trim();
+            if (!name) { alert('商品名を入力してください'); return; }
+            const products = loadInventory();
+            products.push({
+                name, category: document.getElementById('inv-new-category').value,
+                price: parseInt(document.getElementById('inv-new-price').value) || 0,
+                stock: parseInt(document.getElementById('inv-new-stock').value) || 0,
+                minStock: parseInt(document.getElementById('inv-new-min').value) || 5
+            });
+            saveInventory(products);
+            closeInventoryModal();
+            renderInventoryTable();
+        }
+
+        function deleteInventoryProduct(idx) {
+            if (!confirm('この商品を削除しますか？')) return;
+            const products = loadInventory();
+            products.splice(idx, 1);
+            saveInventory(products);
+            renderInventoryTable();
+        }
+
+        function processStockMove() {
+            const products = loadInventory();
+            const idx = parseInt(document.getElementById('inv-move-product').value);
+            const type = document.getElementById('inv-move-type').value;
+            const qty = parseInt(document.getElementById('inv-move-qty').value) || 0;
+            const memo = document.getElementById('inv-move-memo').value;
+            if (qty <= 0) { alert('数量を入力してください'); return; }
+            if (!products[idx]) return;
+
+            if (type === 'in') products[idx].stock += qty;
+            else if (type === 'out') products[idx].stock = Math.max(0, products[idx].stock - qty);
+
+            saveInventory(products);
+            const history = loadInventoryHistory();
+            history.push({ date: new Date().toLocaleDateString('ja-JP'), product: products[idx].name, type, qty, memo });
+            saveInventoryHistory(history);
+            closeInventoryModal();
+            renderInventoryTable();
+        }
+
+        // ========== ADVERTISING MANAGEMENT (広告費) ==========
+        const AD_STORAGE_KEY = 'kadomori_ad_data';
+
+        function loadAdData() { try { return JSON.parse(localStorage.getItem(AD_STORAGE_KEY)) || []; } catch { return []; } }
+        function saveAdStorage(data) { localStorage.setItem(AD_STORAGE_KEY, JSON.stringify(data)); }
+
+        function openAdModal() {
+            const now = new Date();
+            document.getElementById('ad-edit-month').value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+            document.getElementById('ad-edit-cost').value = '';
+            document.getElementById('ad-edit-cv').value = '';
+            document.getElementById('ad-edit-visits').value = '';
+            document.getElementById('ad-modal').classList.remove('hidden');
+        }
+        function closeAdModal() { document.getElementById('ad-modal').classList.add('hidden'); }
+
+        function saveAdData() {
+            const month = document.getElementById('ad-edit-month').value;
+            const platform = document.getElementById('ad-edit-platform').value;
+            const cost = parseInt(document.getElementById('ad-edit-cost').value) || 0;
+            const cv = parseInt(document.getElementById('ad-edit-cv').value) || 0;
+            const visits = parseInt(document.getElementById('ad-edit-visits').value) || 0;
+            if (!month) { alert('月を選択してください'); return; }
+
+            const data = loadAdData();
+            data.push({ month, platform, cost, cv, visits, id: Date.now() });
+            saveAdStorage(data);
+            closeAdModal();
+            updateAdvertisingDashboard();
+        }
+
+        function deleteAdEntry(id) {
+            if (!confirm('削除しますか？')) return;
+            const data = loadAdData().filter(d => d.id !== id);
+            saveAdStorage(data);
+            updateAdvertisingDashboard();
+        }
+
+        function updateAdvertisingDashboard() {
+            const data = loadAdData();
+            const fmt = n => n.toLocaleString();
+            let totalCost = 0, totalCv = 0, totalVisits = 0;
+
+            data.forEach(d => { totalCost += d.cost; totalCv += d.cv; totalVisits += d.visits; });
+            const cpa = totalCv > 0 ? Math.round(totalCost / totalCv) : 0;
+            const realCpa = totalVisits > 0 ? Math.round(totalCost / totalVisits) : 0;
+
+            document.getElementById('ad-total-cost').textContent = `¥${fmt(totalCost)}`;
+            document.getElementById('ad-total-cv').textContent = totalCv;
+            document.getElementById('ad-cpa').textContent = `¥${fmt(cpa)}`;
+            document.getElementById('ad-real-cpa').textContent = `¥${fmt(realCpa)}`;
+
+            // Table
+            const tbody = document.getElementById('ad-data-tbody');
+            const platformLabels = { meta: 'Meta広告', google: 'Google広告', other: 'その他' };
+            const sorted = [...data].sort((a, b) => b.month.localeCompare(a.month));
+            tbody.innerHTML = sorted.map(d => {
+                const adCpa = d.cv > 0 ? Math.round(d.cost / d.cv) : '-';
+                const rCpa = d.visits > 0 ? Math.round(d.cost / d.visits) : '-';
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm">${d.month}</td>
+                    <td class="px-4 py-3 text-sm">${platformLabels[d.platform] || d.platform}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(d.cost)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${d.cv}</td>
+                    <td class="px-4 py-3 text-sm text-right">${typeof adCpa === 'number' ? '¥' + fmt(adCpa) : adCpa}</td>
+                    <td class="px-4 py-3 text-sm text-right">${d.visits}</td>
+                    <td class="px-4 py-3 text-sm text-right">${typeof rCpa === 'number' ? '¥' + fmt(rCpa) : rCpa}</td>
+                    <td class="px-4 py-3 text-sm text-center"><button onclick="deleteAdEntry(${d.id})" class="text-red-500 hover:text-red-700 text-xs">削除</button></td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="8" class="text-center py-8 text-surface-400">データなし</td></tr>';
+
+            // Chart
+            const monthlyAgg = {};
+            data.forEach(d => {
+                if (!monthlyAgg[d.month]) monthlyAgg[d.month] = { cost: 0, cv: 0, visits: 0 };
+                monthlyAgg[d.month].cost += d.cost;
+                monthlyAgg[d.month].cv += d.cv;
+                monthlyAgg[d.month].visits += d.visits;
+            });
+            const months = Object.keys(monthlyAgg).sort();
+            if (charts.adTrend) charts.adTrend.destroy();
+            const ctx = document.getElementById('adTrendChart')?.getContext('2d');
+            if (ctx && months.length > 0) {
+                charts.adTrend = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [
+                            { label: '広告費', data: months.map(m => monthlyAgg[m].cost), backgroundColor: BrandColors.rose, yAxisID: 'y' },
+                            { label: 'CV数', data: months.map(m => monthlyAgg[m].cv), type: 'line', borderColor: BrandColors.primary, tension: 0.3, yAxisID: 'y1' }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        scales: { y: { position: 'left', title: { display: true, text: '費用 (円)' } }, y1: { position: 'right', title: { display: true, text: 'CV数' }, grid: { drawOnChartArea: false } } },
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // ========== LTV DASHBOARD ==========
+        function updateLtvDashboard() {
+            const allData = Array.isArray(rawData) ? rawData : [];
+            const fmt = n => n.toLocaleString();
+
+            // Aggregate per-staff data as proxy for customer tracking
+            // (Since we don't have customer IDs yet, we use total metrics)
+            const metrics = calculateMetrics(allData);
+            const avgUnitPrice = metrics.customersTotal > 0 ? Math.round(metrics.salesTotal / metrics.customersTotal) : 0;
+
+            // Estimate avg visit frequency (monthly) and LTV
+            const months = new Set();
+            allData.forEach(d => {
+                if (d.date) {
+                    const parts = d.date.split('/');
+                    if (parts.length >= 2) months.add(`${parts[0]}/${parts[1]}`);
+                }
+            });
+            const monthCount = Math.max(months.size, 1);
+            const avgMonthlyVisitsPerCustomer = metrics.customersTotal > 0 ? (metrics.customersExisting / monthCount) : 0;
+            const estimatedLTV = Math.round(avgUnitPrice * Math.max(avgMonthlyVisitsPerCustomer, 1) * 12);
+
+            document.getElementById('ltv-average').textContent = `¥${fmt(estimatedLTV)}`;
+            document.getElementById('ltv-avg-unit').textContent = `¥${fmt(avgUnitPrice)}`;
+            document.getElementById('ltv-avg-visits').textContent = `${avgMonthlyVisitsPerCustomer.toFixed(1)}回/月`;
+            document.getElementById('ltv-unique-customers').textContent = metrics.customersTotal;
+
+            // Per-staff LTV ranking (as proxy until customer IDs are available)
+            const staffAgg = {};
+            allData.forEach(d => {
+                const key = d.staff || 'unknown';
+                if (!staffAgg[key]) staffAgg[key] = { id: key, totalSales: 0, visits: 0, firstDate: d.date, lastDate: d.date };
+                const s = d.sales || {};
+                const disc = d.discounts || {};
+                staffAgg[key].totalSales += (s.cash || 0) + (s.credit || 0) + (s.qr || 0) + (disc.hpbPoints || 0) + (disc.hpbGift || 0);
+                const cust = d.customers || {};
+                staffAgg[key].visits += (cust.newHPB || 0) + (cust.newMiniNai || 0) + (cust.existing || 0) + (cust.acquaintance || 0);
+                if (d.date < staffAgg[key].firstDate) staffAgg[key].firstDate = d.date;
+                if (d.date > staffAgg[key].lastDate) staffAgg[key].lastDate = d.date;
+            });
+
+            const ranked = Object.values(staffAgg).sort((a, b) => b.totalSales - a.totalSales).slice(0, 20);
+            const tbody = document.getElementById('ltv-ranking-tbody');
+            tbody.innerHTML = ranked.map((r, i) => {
+                const avgPrice = r.visits > 0 ? Math.round(r.totalSales / r.visits) : 0;
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm text-center font-bold ${i < 3 ? 'text-primary-600' : ''}">${i + 1}</td>
+                    <td class="px-4 py-3 text-sm font-medium text-accent-900">${r.id}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold text-primary-700">¥${fmt(r.totalSales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${r.visits}</td>
+                    <td class="px-4 py-3 text-sm text-right">¥${fmt(avgPrice)}</td>
+                    <td class="px-4 py-3 text-sm">${r.firstDate || '-'}</td>
+                    <td class="px-4 py-3 text-sm">${r.lastDate || '-'}</td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="7" class="text-center py-8 text-surface-400">データなし</td></tr>';
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // ========== SUBSCRIPTION PLAN MANAGEMENT ==========
+        function getSubscriptionPlanData() {
+            try { return JSON.parse(localStorage.getItem('kadomori_sub_plans')) || []; } catch { return []; }
+        }
+        function saveSubscriptionPlanData(data) { localStorage.setItem('kadomori_sub_plans', JSON.stringify(data)); }
+
+        // ========================================
+        // プラン別分析
+        // ========================================
+        let planChurnChart = null;
+
+        function openPlanModal(planId) {
+            const modal = document.getElementById('plan-modal');
+            const title = document.getElementById('plan-modal-title');
+            if (planId) {
+                title.textContent = 'プラン編集';
+                const plans = getSubscriptionPlanData();
+                const plan = plans.find(p => p.id === planId);
+                if (plan) {
+                    document.getElementById('plan-edit-id').value = plan.id;
+                    document.getElementById('plan-edit-name').value = plan.name || '';
+                    document.getElementById('plan-edit-store').value = plan.store || 'all';
+                    document.getElementById('plan-edit-fee').value = plan.fee || 0;
+                    document.getElementById('plan-edit-members').value = plan.members || 0;
+                    document.getElementById('plan-edit-new').value = plan.newMembers || 0;
+                    document.getElementById('plan-edit-cancelled').value = plan.cancelled || 0;
+                }
+            } else {
+                title.textContent = 'プラン登録';
+                document.getElementById('plan-edit-id').value = '';
+                document.getElementById('plan-edit-name').value = '';
+                document.getElementById('plan-edit-store').value = 'all';
+                document.getElementById('plan-edit-fee').value = 9800;
+                document.getElementById('plan-edit-members').value = 0;
+                document.getElementById('plan-edit-new').value = 0;
+                document.getElementById('plan-edit-cancelled').value = 0;
+            }
+            modal.classList.remove('hidden');
+        }
+
+        function closePlanModal() {
+            document.getElementById('plan-modal').classList.add('hidden');
+        }
+
+        function savePlan() {
+            const plans = getSubscriptionPlanData();
+            const editId = document.getElementById('plan-edit-id').value;
+            const planData = {
+                id: editId ? parseInt(editId) : Date.now(),
+                name: document.getElementById('plan-edit-name').value.trim(),
+                store: document.getElementById('plan-edit-store').value,
+                fee: parseInt(document.getElementById('plan-edit-fee').value) || 0,
+                members: parseInt(document.getElementById('plan-edit-members').value) || 0,
+                newMembers: parseInt(document.getElementById('plan-edit-new').value) || 0,
+                cancelled: parseInt(document.getElementById('plan-edit-cancelled').value) || 0,
+                updatedAt: new Date().toISOString()
+            };
+            if (!planData.name) { alert('プラン名を入力してください'); return; }
+
+            if (editId) {
+                const idx = plans.findIndex(p => p.id === parseInt(editId));
+                if (idx !== -1) {
+                    // Preserve history
+                    planData.history = plans[idx].history || [];
+                    planData.history.push({
+                        date: new Date().toISOString().slice(0, 7),
+                        members: planData.members,
+                        newMembers: planData.newMembers,
+                        cancelled: planData.cancelled
+                    });
+                    plans[idx] = planData;
+                }
+            } else {
+                planData.history = [{
+                    date: new Date().toISOString().slice(0, 7),
+                    members: planData.members,
+                    newMembers: planData.newMembers,
+                    cancelled: planData.cancelled
+                }];
+                plans.push(planData);
+            }
+            saveSubscriptionPlanData(plans);
+            closePlanModal();
+            updatePlanAnalysis();
+        }
+
+        function deletePlan(planId) {
+            if (!confirm('このプランを削除しますか？')) return;
+            const plans = getSubscriptionPlanData().filter(p => p.id !== planId);
+            saveSubscriptionPlanData(plans);
+            updatePlanAnalysis();
+        }
+
+        function updatePlanAnalysis() {
+            const storeFilter = document.getElementById('plan-store-selector')?.value || 'all';
+            const plans = getSubscriptionPlanData().filter(p => storeFilter === 'all' || p.store === storeFilter || p.store === 'all');
+
+            // Summary cards
+            const totalMembers = plans.reduce((s, p) => s + (p.members || 0), 0);
+            const totalCancelled = plans.reduce((s, p) => s + (p.cancelled || 0), 0);
+            const totalRevenue = plans.reduce((s, p) => s + ((p.members || 0) * (p.fee || 0)), 0);
+            const avgChurn = totalMembers > 0 ? ((totalCancelled / totalMembers) * 100).toFixed(1) : '0.0';
+
+            document.getElementById('plan-total-count').textContent = plans.length;
+            document.getElementById('plan-total-members').textContent = totalMembers;
+            document.getElementById('plan-avg-churn').textContent = avgChurn + '%';
+            document.getElementById('plan-total-revenue').textContent = '¥' + totalRevenue.toLocaleString();
+
+            // Table
+            const tbody = document.getElementById('plan-table-body');
+            if (tbody) {
+                const storeLabels = { ebisu: '恵比寿', kadomori: 'KADOMORI', fukushima: '福島', all: '全店舗' };
+                tbody.innerHTML = plans.map(p => {
+                    const churn = p.members > 0 ? ((p.cancelled / p.members) * 100).toFixed(1) : '0.0';
+                    const revenue = (p.members || 0) * (p.fee || 0);
+                    return `<tr class="hover:bg-kadomori-50">
+                        <td class="py-2 px-3 font-medium text-accent-800">${p.name}</td>
+                        <td class="py-2 px-3 text-center">¥${(p.fee || 0).toLocaleString()}</td>
+                        <td class="py-2 px-3 text-center font-bold">${p.members || 0}</td>
+                        <td class="py-2 px-3 text-center text-primary-600">+${p.newMembers || 0}</td>
+                        <td class="py-2 px-3 text-center text-rose-500">-${p.cancelled || 0}</td>
+                        <td class="py-2 px-3 text-center"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${parseFloat(churn) > 5 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">${churn}%</span></td>
+                        <td class="py-2 px-3 text-right font-bold">¥${revenue.toLocaleString()}</td>
+                        <td class="py-2 px-3 text-center">
+                            <button onclick="openPlanModal(${p.id})" class="text-xs text-accent-700 hover:text-accent-900 mr-2">編集</button>
+                            <button onclick="deletePlan(${p.id})" class="text-xs text-rose-500 hover:text-rose-700">削除</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            }
+
+            // Churn trend chart
+            renderPlanChurnChart(plans);
+        }
+
+        function renderPlanChurnChart(plans) {
+            const ctx = document.getElementById('plan-churn-chart');
+            if (!ctx) return;
+            if (planChurnChart) { planChurnChart.destroy(); planChurnChart = null; }
+
+            // Collect all unique months from plan histories
+            const allMonths = new Set();
+            plans.forEach(p => {
+                (p.history || []).forEach(h => allMonths.add(h.date));
+            });
+            const months = [...allMonths].sort();
+            if (months.length === 0) return;
+
+            const datasets = plans.map((p, i) => {
+                const colors = [BrandColors.primary, BrandColors.accent, BrandColors.sage, BrandColors.rose, BrandColors.purple, BrandColors.warmgold];
+                const color = colors[i % colors.length];
+                const data = months.map(m => {
+                    const entry = (p.history || []).find(h => h.date === m);
+                    if (!entry || !entry.members) return null;
+                    return parseFloat(((entry.cancelled / entry.members) * 100).toFixed(1));
+                });
+                return {
+                    label: p.name,
+                    data,
+                    borderColor: color,
+                    backgroundColor: color + '20',
+                    tension: 0.3,
+                    fill: false
+                };
+            });
+
+            planChurnChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: months, datasets },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { position: 'top' } },
+                    scales: {
+                        y: { beginAtZero: true, title: { display: true, text: '解約率 (%)' },
+                            ticks: { callback: v => v + '%' } }
+                    }
+                }
+            });
+        }
+
         function updateDashboard() {
             const filtered = getFilteredData();
             const metrics = calculateMetrics(filtered);
@@ -7251,6 +8388,7 @@
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.credit" value="${safeNum(sales.credit)}" onchange="markChanged(${row.id})"></td>
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.qr" value="${safeNum(sales.qr)}" onchange="markChanged(${row.id})"></td>
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.product" value="${safeNum(sales.product)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.nomination" value="${safeNum(sales.nomination)}" onchange="markChanged(${row.id})"></td>
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.hpbPoints" value="${safeNum(discounts.hpbPoints)}" onchange="markChanged(${row.id})"></td>
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.hpbGift" value="${safeNum(discounts.hpbGift)}" onchange="markChanged(${row.id})"></td>
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.other" value="${safeNum(discounts.other)}" onchange="markChanged(${row.id})"></td>
@@ -7987,6 +9125,30 @@
             // Load sales detail when switching
             if (id === 'sales') {
                 updateSalesDetail();
+            }
+
+            // Load register close when switching
+            if (id === 'register-close') {
+                const today = new Date();
+                if (!document.getElementById('rc-date').value) {
+                    document.getElementById('rc-date').value = today.toISOString().split('T')[0];
+                }
+                updateRegisterClose();
+            }
+
+            // Load inventory when switching
+            if (id === 'inventory') {
+                renderInventoryTable();
+            }
+
+            // Load advertising when switching
+            if (id === 'advertising') {
+                updateAdvertisingDashboard();
+            }
+
+            // Load LTV when switching
+            if (id === 'ltv') {
+                updateLtvDashboard();
             }
 
             // Load counseling results when switching to staff-dashboard or counseling-results tab
@@ -9474,6 +10636,7 @@
         function switchMembershipSubTab(subTabId) {
             document.getElementById('membership-content-subscription').classList.toggle('hidden', subTabId !== 'subscription');
             document.getElementById('membership-content-tickets').classList.toggle('hidden', subTabId !== 'tickets');
+            document.getElementById('membership-content-plans').classList.toggle('hidden', subTabId !== 'plans');
             document.querySelectorAll('.membership-subtab-btn').forEach(btn => {
                 btn.classList.remove('bg-accent-700', 'text-white');
                 btn.classList.add('bg-surface-200', 'text-surface-600');
@@ -9481,6 +10644,7 @@
             const active = document.getElementById(`membership-subtab-${subTabId}`);
             active.classList.remove('bg-surface-200', 'text-surface-600');
             active.classList.add('bg-accent-700', 'text-white');
+            if (subTabId === 'plans') updatePlanAnalysis();
         }
 
         // ========================================
