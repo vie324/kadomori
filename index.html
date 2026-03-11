@@ -1748,10 +1748,10 @@
                         <i data-lucide="calculator" class="w-6 h-6 md:w-4 md:h-4"></i>
                         <span class="hidden md:inline">レジ締め</span>
                     </button>
-                    <!-- Inventory Tab -->
-                    <button onclick="switchTab('inventory')" id="tab-inventory" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="在庫管理">
-                        <i data-lucide="package" class="w-6 h-6 md:w-4 md:h-4"></i>
-                        <span class="hidden md:inline">在庫管理</span>
+                    <!-- Product Sales & Inventory Tab -->
+                    <button onclick="switchTab('inventory')" id="tab-inventory" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="物販管理">
+                        <i data-lucide="shopping-bag" class="w-6 h-6 md:w-4 md:h-4"></i>
+                        <span class="hidden md:inline">物販管理</span>
                     </button>
                     <!-- Advertising Tab -->
                     <button onclick="switchTab('advertising')" id="tab-advertising" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="広告費">
@@ -3115,102 +3115,497 @@
                 </div>
             </section>
 
-            <!-- TAB: INVENTORY (在庫管理) -->
-            <section id="content-inventory" class="tab-content hidden space-y-8 animate-fade-in">
+            <!-- TAB: PRODUCT SALES & INVENTORY (物販管理) -->
+            <section id="content-inventory" class="tab-content hidden space-y-6 animate-fade-in">
+                <!-- Header -->
                 <div class="premium-card p-6">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-lg gradient-sage flex items-center justify-center">
-                                <i data-lucide="package" class="w-5 h-5 text-white"></i>
+                                <i data-lucide="shopping-bag" class="w-5 h-5 text-white"></i>
                             </div>
                             <div>
-                                <h2 class="text-xl font-display font-bold text-accent-900">在庫管理</h2>
-                                <p class="text-xs text-surface-500">商品マスタ・入出庫・発注管理</p>
+                                <h2 class="text-xl font-display font-bold text-accent-900">物販管理</h2>
+                                <p class="text-xs text-surface-500">販売記録・売上分析・ランキング・在庫管理</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <button onclick="openInventoryModal('add-product')" class="btn-primary py-2 px-4 text-sm flex items-center gap-2">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <button onclick="openRetailSaleModal()" class="btn-primary py-2 px-4 text-sm flex items-center gap-2">
+                                <i data-lucide="receipt" class="w-4 h-4"></i> 販売記録
+                            </button>
+                            <button onclick="openInventoryModal('add-product')" class="btn-sage py-2 px-4 text-sm flex items-center gap-2">
                                 <i data-lucide="plus" class="w-4 h-4"></i> 商品追加
                             </button>
-                            <button onclick="openInventoryModal('stock-move')" class="btn-sage py-2 px-4 text-sm flex items-center gap-2">
-                                <i data-lucide="arrow-right-left" class="w-4 h-4"></i> 入出庫処理
+                            <button onclick="openInventoryModal('stock-move')" class="bg-warmgold-100 text-warmgold-800 py-2 px-4 rounded-lg text-sm font-medium hover:bg-warmgold-200 flex items-center gap-2">
+                                <i data-lucide="arrow-right-left" class="w-4 h-4"></i> 入出庫
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Inventory Summary -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
-                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">登録商品数</p>
-                        <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-products">0</p>
+                <!-- Sub-tab Navigation -->
+                <div class="flex gap-1 bg-kadomori-100 p-1 rounded-xl overflow-x-auto">
+                    <button onclick="switchRetailSubTab('retail-overview')" id="retail-subtab-retail-overview" class="retail-subtab px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-white text-accent-800 shadow-sm">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 inline mr-1"></i>売上概要
+                    </button>
+                    <button onclick="switchRetailSubTab('retail-records')" id="retail-subtab-retail-records" class="retail-subtab px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all text-surface-500 hover:text-accent-800">
+                        <i data-lucide="list" class="w-4 h-4 inline mr-1"></i>販売履歴
+                    </button>
+                    <button onclick="switchRetailSubTab('retail-ranking')" id="retail-subtab-retail-ranking" class="retail-subtab px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all text-surface-500 hover:text-accent-800">
+                        <i data-lucide="trophy" class="w-4 h-4 inline mr-1"></i>ランキング
+                    </button>
+                    <button onclick="switchRetailSubTab('retail-stock')" id="retail-subtab-retail-stock" class="retail-subtab px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all text-surface-500 hover:text-accent-800">
+                        <i data-lucide="package" class="w-4 h-4 inline mr-1"></i>在庫管理
+                    </button>
+                    <button onclick="switchRetailSubTab('retail-abc')" id="retail-subtab-retail-abc" class="retail-subtab px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all text-surface-500 hover:text-accent-800">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 inline mr-1"></i>ABC分析
+                    </button>
+                </div>
+
+                <!-- ===== SUB-TAB: 売上概要 ===== -->
+                <div id="retail-content-retail-overview" class="retail-subcontent space-y-6">
+                    <!-- Period Filter -->
+                    <div class="flex items-center gap-3">
+                        <label class="text-sm font-medium text-surface-600">表示期間:</label>
+                        <select id="retail-period-filter" onchange="updateRetailDashboard()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                            <option value="month">今月</option>
+                            <option value="3month">直近3ヶ月</option>
+                            <option value="6month">直近6ヶ月</option>
+                            <option value="year">1年</option>
+                            <option value="all">全期間</option>
+                        </select>
                     </div>
-                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
-                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総在庫数</p>
-                        <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-stock">0</p>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">物販総売上</p>
+                            <p class="text-xl font-display font-bold text-accent-900" id="retail-kpi-total-sales">¥0</p>
+                            <p class="text-xs text-surface-400 mt-1" id="retail-kpi-total-count">0件</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">粗利益</p>
+                            <p class="text-xl font-display font-bold text-sage-700" id="retail-kpi-profit">¥0</p>
+                            <p class="text-xs text-surface-400 mt-1" id="retail-kpi-margin">利益率 0%</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">平均客単価</p>
+                            <p class="text-xl font-display font-bold text-accent-900" id="retail-kpi-avg-price">¥0</p>
+                            <p class="text-xs text-surface-400 mt-1" id="retail-kpi-avg-qty">平均 0個/件</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-rose-400"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">目標達成率</p>
+                            <p class="text-xl font-display font-bold" id="retail-kpi-goal-rate">--%</p>
+                            <p class="text-xs text-surface-400 mt-1" id="retail-kpi-goal-detail">目標未設定</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-blue-400"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">在庫回転率</p>
+                            <p class="text-xl font-display font-bold text-accent-900" id="retail-kpi-turnover">0.0</p>
+                            <p class="text-xs text-surface-400 mt-1">回/月</p>
+                        </div>
                     </div>
-                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
-                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">在庫金額</p>
-                        <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-value">¥0</p>
+
+                    <!-- Charts Row -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Monthly Sales Trend -->
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                            <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">月別物販売上推移</h3>
+                            <canvas id="retail-monthly-chart" height="250"></canvas>
+                        </div>
+                        <!-- Category Breakdown -->
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                            <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">カテゴリ別売上構成</h3>
+                            <canvas id="retail-category-chart" height="250"></canvas>
+                        </div>
                     </div>
-                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
-                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">発注アラート</p>
-                        <p class="text-2xl font-display font-bold text-rose-600" id="inv-alert-count">0</p>
+
+                    <!-- Daily Sales Chart -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">日別物販売上</h3>
+                        <canvas id="retail-daily-chart" height="200"></canvas>
+                    </div>
+
+                    <!-- Top Products Quick View -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                            <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                                <h3 class="text-sm font-bold text-accent-800 uppercase">売れ筋 TOP5</h3>
+                            </div>
+                            <div id="retail-top5-products" class="p-4 space-y-3"></div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                            <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                                <h3 class="text-sm font-bold text-accent-800 uppercase">スタッフ別物販成績</h3>
+                            </div>
+                            <div id="retail-staff-quick" class="p-4 space-y-3"></div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Product List -->
-                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
-                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200 flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-accent-800 uppercase">商品一覧・在庫状況</h3>
-                        <input type="text" id="inv-search" placeholder="商品名で検索..." onkeyup="renderInventoryTable()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg w-48">
+                <!-- ===== SUB-TAB: 販売履歴 ===== -->
+                <div id="retail-content-retail-records" class="retail-subcontent hidden space-y-6">
+                    <!-- Filters -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-4">
+                        <div class="flex flex-wrap gap-3 items-center">
+                            <div>
+                                <label class="text-xs font-medium text-surface-500">期間</label>
+                                <input type="month" id="retail-rec-month" onchange="renderRetailRecords()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="text-xs font-medium text-surface-500">スタッフ</label>
+                                <select id="retail-rec-staff" onchange="renderRetailRecords()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                                    <option value="">全スタッフ</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs font-medium text-surface-500">商品</label>
+                                <select id="retail-rec-product" onchange="renderRetailRecords()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                                    <option value="">全商品</option>
+                                </select>
+                            </div>
+                            <button onclick="exportRetailCSV()" class="ml-auto btn-sage py-2 px-4 text-sm flex items-center gap-2">
+                                <i data-lucide="download" class="w-4 h-4"></i> CSV出力
+                            </button>
+                        </div>
                     </div>
-                    <div class="overflow-x-auto custom-scroll">
-                        <table class="min-w-full divide-y divide-kadomori-200">
-                            <thead class="bg-kadomori-100">
-                                <tr>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品名</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">カテゴリ</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">単価</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">現在庫</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">最低在庫</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">状態</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">操作</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-kadomori-100" id="inv-product-tbody"></tbody>
-                        </table>
+
+                    <!-- Records Summary -->
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 border border-kadomori-200 text-center">
+                            <p class="text-[10px] font-bold text-surface-500 uppercase">件数</p>
+                            <p class="text-lg font-bold text-accent-900" id="retail-rec-count">0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border border-kadomori-200 text-center">
+                            <p class="text-[10px] font-bold text-surface-500 uppercase">売上合計</p>
+                            <p class="text-lg font-bold text-accent-900" id="retail-rec-total">¥0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 border border-kadomori-200 text-center">
+                            <p class="text-[10px] font-bold text-surface-500 uppercase">粗利合計</p>
+                            <p class="text-lg font-bold text-sage-700" id="retail-rec-profit">¥0</p>
+                        </div>
+                    </div>
+
+                    <!-- Sales Records Table -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                        <div class="overflow-x-auto custom-scroll">
+                            <table class="min-w-full divide-y divide-kadomori-200">
+                                <thead class="bg-kadomori-100">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">日付</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">スタッフ</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品名</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">数量</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">単価</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">売上</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">利益</th>
+                                        <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-kadomori-100" id="retail-records-tbody"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Stock Movement History -->
-                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
-                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
-                        <h3 class="text-sm font-bold text-accent-800 uppercase">入出庫履歴（直近20件）</h3>
+                <!-- ===== SUB-TAB: ランキング ===== -->
+                <div id="retail-content-retail-ranking" class="retail-subcontent hidden space-y-6">
+                    <!-- Ranking Period Filter -->
+                    <div class="flex items-center gap-3">
+                        <label class="text-sm font-medium text-surface-600">集計期間:</label>
+                        <select id="retail-rank-period" onchange="updateRetailRankings()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                            <option value="month">今月</option>
+                            <option value="3month">直近3ヶ月</option>
+                            <option value="year">1年</option>
+                            <option value="all">全期間</option>
+                        </select>
                     </div>
-                    <div class="overflow-x-auto custom-scroll">
-                        <table class="min-w-full divide-y divide-kadomori-200">
-                            <thead class="bg-kadomori-100">
-                                <tr>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">日付</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">種別</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">数量</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">メモ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-kadomori-100" id="inv-history-tbody"></tbody>
-                        </table>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Product Ranking -->
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                            <div class="px-6 py-4 bg-gradient-to-r from-warmgold-50 to-warmgold-100 border-b border-kadomori-200">
+                                <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
+                                    <i data-lucide="award" class="w-4 h-4 text-warmgold-600"></i> 商品別売上ランキング
+                                </h3>
+                            </div>
+                            <div class="overflow-x-auto custom-scroll">
+                                <table class="min-w-full divide-y divide-kadomori-200">
+                                    <thead class="bg-kadomori-50">
+                                        <tr>
+                                            <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 w-12">順位</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-accent-800">商品名</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">売上</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">数量</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">構成比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="retail-rank-product-tbody" class="divide-y divide-kadomori-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Staff Ranking -->
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                            <div class="px-6 py-4 bg-gradient-to-r from-primary-50 to-sage-50 border-b border-kadomori-200">
+                                <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
+                                    <i data-lucide="users" class="w-4 h-4 text-primary-600"></i> スタッフ別物販ランキング
+                                </h3>
+                            </div>
+                            <div class="overflow-x-auto custom-scroll">
+                                <table class="min-w-full divide-y divide-kadomori-200">
+                                    <thead class="bg-kadomori-50">
+                                        <tr>
+                                            <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 w-12">順位</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-accent-800">スタッフ</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">売上</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">件数</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">平均単価</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="retail-rank-staff-tbody" class="divide-y divide-kadomori-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Category Ranking -->
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                            <div class="px-6 py-4 bg-gradient-to-r from-rose-50 to-kadomori-50 border-b border-kadomori-200">
+                                <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
+                                    <i data-lucide="tag" class="w-4 h-4 text-rose-500"></i> カテゴリ別売上ランキング
+                                </h3>
+                            </div>
+                            <div class="overflow-x-auto custom-scroll">
+                                <table class="min-w-full divide-y divide-kadomori-200">
+                                    <thead class="bg-kadomori-50">
+                                        <tr>
+                                            <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 w-12">順位</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-accent-800">カテゴリ</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">売上</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">商品数</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">利益率</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="retail-rank-category-tbody" class="divide-y divide-kadomori-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Store Ranking -->
+                        <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                            <div class="px-6 py-4 bg-gradient-to-r from-blue-50 to-kadomori-50 border-b border-kadomori-200">
+                                <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
+                                    <i data-lucide="building-2" class="w-4 h-4 text-blue-500"></i> 店舗別物販ランキング
+                                </h3>
+                            </div>
+                            <div class="overflow-x-auto custom-scroll">
+                                <table class="min-w-full divide-y divide-kadomori-200">
+                                    <thead class="bg-kadomori-50">
+                                        <tr>
+                                            <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 w-12">順位</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-accent-800">店舗</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">売上</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">件数</th>
+                                            <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">客単価</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="retail-rank-store-tbody" class="divide-y divide-kadomori-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ranking Chart -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">商品別売上比較</h3>
+                        <canvas id="retail-ranking-chart" height="300"></canvas>
                     </div>
                 </div>
 
-                <!-- Inventory Modal -->
+                <!-- ===== SUB-TAB: 在庫管理 ===== -->
+                <div id="retail-content-retail-stock" class="retail-subcontent hidden space-y-6">
+                    <!-- Inventory Summary -->
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">登録商品数</p>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-products">0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-sage-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総在庫数</p>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-stock">0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">在庫金額(売価)</p>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-value">¥0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-blue-400"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">在庫金額(原価)</p>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="inv-total-cost-value">¥0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                            <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">発注アラート</p>
+                            <p class="text-2xl font-display font-bold text-rose-600" id="inv-alert-count">0</p>
+                        </div>
+                    </div>
+
+                    <!-- Product List -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                        <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200 flex flex-wrap justify-between items-center gap-3">
+                            <h3 class="text-sm font-bold text-accent-800 uppercase">商品一覧・在庫状況</h3>
+                            <div class="flex items-center gap-2">
+                                <select id="inv-category-filter" onchange="renderInventoryTable()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                                    <option value="">全カテゴリ</option>
+                                    <option value="シャンプー">シャンプー</option>
+                                    <option value="トリートメント">トリートメント</option>
+                                    <option value="オイル">オイル</option>
+                                    <option value="サプリメント">サプリメント</option>
+                                    <option value="化粧品">化粧品</option>
+                                    <option value="器具">器具</option>
+                                    <option value="その他">その他</option>
+                                </select>
+                                <input type="text" id="inv-search" placeholder="商品名で検索..." onkeyup="renderInventoryTable()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg w-48">
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto custom-scroll">
+                            <table class="min-w-full divide-y divide-kadomori-200">
+                                <thead class="bg-kadomori-100">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品名</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">カテゴリ</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">売価</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">原価</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">利益率</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">現在庫</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">発注点</th>
+                                        <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">状態</th>
+                                        <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-kadomori-100" id="inv-product-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Stock Movement History -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                        <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200 flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-accent-800 uppercase">入出庫履歴（直近30件）</h3>
+                            <select id="inv-history-type-filter" onchange="renderInventoryTable()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                                <option value="">全種別</option>
+                                <option value="in">入庫</option>
+                                <option value="out">払出</option>
+                                <option value="sale">販売</option>
+                                <option value="order">発注</option>
+                            </select>
+                        </div>
+                        <div class="overflow-x-auto custom-scroll">
+                            <table class="min-w-full divide-y divide-kadomori-200">
+                                <thead class="bg-kadomori-100">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">日付</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">商品</th>
+                                        <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">種別</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">数量</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">担当</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">メモ</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-kadomori-100" id="inv-history-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== SUB-TAB: ABC分析 ===== -->
+                <div id="retail-content-retail-abc" class="retail-subcontent hidden space-y-6">
+                    <div class="flex items-center gap-3">
+                        <label class="text-sm font-medium text-surface-600">分析期間:</label>
+                        <select id="retail-abc-period" onchange="updateABCAnalysis()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg">
+                            <option value="3month">直近3ヶ月</option>
+                            <option value="6month">直近6ヶ月</option>
+                            <option value="year">1年</option>
+                            <option value="all">全期間</option>
+                        </select>
+                    </div>
+
+                    <!-- ABC Summary Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-5 border-2 border-warmgold-300 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1.5 bg-warmgold-500"></div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-warmgold-700">Aランク</span>
+                                <span class="px-2 py-0.5 bg-warmgold-100 text-warmgold-700 rounded-full text-xs font-bold">売上上位70%</span>
+                            </div>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="abc-a-count">0商品</p>
+                            <p class="text-xs text-surface-400 mt-1" id="abc-a-sales">¥0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border-2 border-blue-300 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1.5 bg-blue-500"></div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-blue-700">Bランク</span>
+                                <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">売上上位70-90%</span>
+                            </div>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="abc-b-count">0商品</p>
+                            <p class="text-xs text-surface-400 mt-1" id="abc-b-sales">¥0</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-5 border-2 border-surface-300 relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-full h-1.5 bg-surface-400"></div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-bold text-surface-600">Cランク</span>
+                                <span class="px-2 py-0.5 bg-surface-100 text-surface-600 rounded-full text-xs font-bold">売上下位10%</span>
+                            </div>
+                            <p class="text-2xl font-display font-bold text-accent-900" id="abc-c-count">0商品</p>
+                            <p class="text-xs text-surface-400 mt-1" id="abc-c-sales">¥0</p>
+                        </div>
+                    </div>
+
+                    <!-- Pareto Chart -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase mb-4">パレート図（売上累積構成比）</h3>
+                        <canvas id="retail-pareto-chart" height="300"></canvas>
+                    </div>
+
+                    <!-- ABC Detail Table -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                        <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                            <h3 class="text-sm font-bold text-accent-800 uppercase">ABC分析 詳細</h3>
+                        </div>
+                        <div class="overflow-x-auto custom-scroll">
+                            <table class="min-w-full divide-y divide-kadomori-200">
+                                <thead class="bg-kadomori-100">
+                                    <tr>
+                                        <th class="px-4 py-3 text-center text-xs font-medium text-accent-800">ランク</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-accent-800">商品名</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">売上</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">数量</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">構成比</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">累積比</th>
+                                        <th class="px-4 py-3 text-right text-xs font-medium text-accent-800">利益率</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="retail-abc-tbody" class="divide-y divide-kadomori-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modals -->
+                <!-- Inventory Modal (Add Product / Stock Move) -->
                 <div id="inventory-modal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4">
                     <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6" id="inventory-modal-content"></div>
+                </div>
+                <!-- Retail Sale Modal -->
+                <div id="retail-sale-modal" class="fixed inset-0 bg-black/50 z-[200] hidden flex items-center justify-center p-4">
+                    <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto" id="retail-sale-modal-content"></div>
                 </div>
             </section>
 
@@ -7029,9 +7424,10 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // ========== INVENTORY MANAGEMENT (在庫管理) ==========
+        // ========== PRODUCT SALES & INVENTORY MANAGEMENT (物販管理) ==========
         const INV_STORAGE_KEY = 'kadomori_inventory';
         const INV_HISTORY_KEY = 'kadomori_inventory_history';
+        const RETAIL_SALES_KEY = 'kadomori_retail_sales';
 
         function loadInventory() {
             try { return JSON.parse(localStorage.getItem(INV_STORAGE_KEY)) || []; } catch { return []; }
@@ -7041,56 +7437,485 @@
             try { return JSON.parse(localStorage.getItem(INV_HISTORY_KEY)) || []; } catch { return []; }
         }
         function saveInventoryHistory(data) { localStorage.setItem(INV_HISTORY_KEY, JSON.stringify(data)); }
+        function loadRetailSales() {
+            try { return JSON.parse(localStorage.getItem(RETAIL_SALES_KEY)) || []; } catch { return []; }
+        }
+        function saveRetailSales(data) { localStorage.setItem(RETAIL_SALES_KEY, JSON.stringify(data)); }
 
+        // Sub-tab switching
+        function switchRetailSubTab(id) {
+            document.querySelectorAll('.retail-subcontent').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`retail-content-${id}`).classList.remove('hidden');
+            document.querySelectorAll('.retail-subtab').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-accent-800', 'shadow-sm');
+                btn.classList.add('text-surface-500');
+            });
+            const active = document.getElementById(`retail-subtab-${id}`);
+            active.classList.add('bg-white', 'text-accent-800', 'shadow-sm');
+            active.classList.remove('text-surface-500');
+
+            if (id === 'retail-overview') updateRetailDashboard();
+            else if (id === 'retail-records') renderRetailRecords();
+            else if (id === 'retail-ranking') updateRetailRankings();
+            else if (id === 'retail-stock') renderInventoryTable();
+            else if (id === 'retail-abc') updateABCAnalysis();
+            lucide.createIcons();
+        }
+
+        // ---- Retail Sales Period Filter Helper ----
+        function getRetailSalesFiltered(periodId) {
+            const sales = loadRetailSales();
+            const period = document.getElementById(periodId)?.value || 'month';
+            const now = new Date();
+            let startDate;
+            if (period === 'month') {
+                startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            } else if (period === '3month') {
+                startDate = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+            } else if (period === '6month') {
+                startDate = new Date(now.getFullYear(), now.getMonth() - 5, 1);
+            } else if (period === 'year') {
+                startDate = new Date(now.getFullYear() - 1, now.getMonth() + 1, 1);
+            } else {
+                return sales;
+            }
+            return sales.filter(s => new Date(s.date) >= startDate);
+        }
+
+        // ---- Chart instances ----
+        let retailMonthlyChart, retailCategoryChart, retailDailyChart, retailRankingChart, retailParetoChart;
+
+        // ---- OVERVIEW DASHBOARD ----
+        function updateRetailDashboard() {
+            const sales = getRetailSalesFiltered('retail-period-filter');
+            const products = loadInventory();
+            const fmt = n => n.toLocaleString();
+
+            // KPIs
+            let totalSales = 0, totalCost = 0, totalQty = 0;
+            sales.forEach(s => { totalSales += s.amount; totalCost += (s.cost || 0) * (s.qty || 1); totalQty += (s.qty || 1); });
+            const profit = totalSales - totalCost;
+            const margin = totalSales > 0 ? ((profit / totalSales) * 100).toFixed(1) : 0;
+            const avgPrice = sales.length > 0 ? Math.round(totalSales / sales.length) : 0;
+            const avgQty = sales.length > 0 ? (totalQty / sales.length).toFixed(1) : 0;
+
+            document.getElementById('retail-kpi-total-sales').textContent = `¥${fmt(totalSales)}`;
+            document.getElementById('retail-kpi-total-count').textContent = `${sales.length}件`;
+            document.getElementById('retail-kpi-profit').textContent = `¥${fmt(profit)}`;
+            document.getElementById('retail-kpi-margin').textContent = `利益率 ${margin}%`;
+            document.getElementById('retail-kpi-avg-price').textContent = `¥${fmt(avgPrice)}`;
+            document.getElementById('retail-kpi-avg-qty').textContent = `平均 ${avgQty}個/件`;
+
+            // Goal rate (use retail goal from goal settings)
+            const storeVal = document.getElementById('store-selector')?.value || 'all';
+            const goalKey = `kadomori_staff_goals_v2`;
+            try {
+                const goals = JSON.parse(localStorage.getItem(goalKey)) || {};
+                const now = new Date();
+                const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+                let retailGoal = 0;
+                Object.values(goals).forEach(staffGoals => {
+                    Object.entries(staffGoals).forEach(([key, val]) => {
+                        if (key.startsWith(monthKey) && val.retail) retailGoal += parseInt(val.retail) || 0;
+                    });
+                });
+                if (retailGoal > 0) {
+                    const goalRate = ((totalSales / retailGoal) * 100).toFixed(1);
+                    document.getElementById('retail-kpi-goal-rate').textContent = `${goalRate}%`;
+                    document.getElementById('retail-kpi-goal-rate').className = `text-xl font-display font-bold ${parseFloat(goalRate) >= 100 ? 'text-green-600' : parseFloat(goalRate) >= 70 ? 'text-warmgold-600' : 'text-rose-600'}`;
+                    document.getElementById('retail-kpi-goal-detail').textContent = `目標 ¥${fmt(retailGoal)}`;
+                } else {
+                    document.getElementById('retail-kpi-goal-rate').textContent = '--%';
+                    document.getElementById('retail-kpi-goal-detail').textContent = '目標未設定';
+                }
+            } catch { }
+
+            // Inventory turnover
+            let totalStockValue = 0;
+            products.forEach(p => totalStockValue += (p.stock || 0) * (p.cost || p.price || 0));
+            const turnover = totalStockValue > 0 ? (totalCost / totalStockValue).toFixed(1) : '0.0';
+            document.getElementById('retail-kpi-turnover').textContent = turnover;
+
+            // Monthly Sales Trend Chart
+            const monthlyData = {};
+            sales.forEach(s => {
+                const d = new Date(s.date);
+                const key = `${d.getFullYear()}/${d.getMonth() + 1}`;
+                if (!monthlyData[key]) monthlyData[key] = { sales: 0, profit: 0, count: 0 };
+                monthlyData[key].sales += s.amount;
+                monthlyData[key].profit += s.amount - (s.cost || 0) * (s.qty || 1);
+                monthlyData[key].count++;
+            });
+            const monthKeys = Object.keys(monthlyData).sort();
+            if (retailMonthlyChart) retailMonthlyChart.destroy();
+            const monthlyCtx = document.getElementById('retail-monthly-chart')?.getContext('2d');
+            if (monthlyCtx) {
+                retailMonthlyChart = new Chart(monthlyCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: monthKeys.map(k => k + '月'),
+                        datasets: [
+                            { label: '売上', data: monthKeys.map(k => monthlyData[k].sales), backgroundColor: 'rgba(45, 138, 78, 0.7)', borderRadius: 4, order: 2 },
+                            { label: '利益', data: monthKeys.map(k => monthlyData[k].profit), backgroundColor: 'rgba(139, 109, 63, 0.5)', borderRadius: 4, order: 2 },
+                            { label: '件数', data: monthKeys.map(k => monthlyData[k].count), type: 'line', borderColor: '#e8927c', backgroundColor: 'transparent', yAxisID: 'y1', tension: 0.3, pointRadius: 4, order: 1 }
+                        ]
+                    },
+                    options: {
+                        responsive: true, plugins: { legend: { position: 'bottom' } },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { callback: v => '¥' + v.toLocaleString() } },
+                            y1: { position: 'right', beginAtZero: true, grid: { display: false }, title: { display: true, text: '件数' } }
+                        }
+                    }
+                });
+            }
+
+            // Category Breakdown Doughnut
+            const catData = {};
+            sales.forEach(s => {
+                const cat = s.category || 'その他';
+                catData[cat] = (catData[cat] || 0) + s.amount;
+            });
+            const catKeys = Object.keys(catData).sort((a, b) => catData[b] - catData[a]);
+            const catColors = ['#2d8a4e', '#8b6d3f', '#e8927c', '#6b9080', '#d4a574', '#7c9cb0', '#b5838d'];
+            if (retailCategoryChart) retailCategoryChart.destroy();
+            const catCtx = document.getElementById('retail-category-chart')?.getContext('2d');
+            if (catCtx) {
+                retailCategoryChart = new Chart(catCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: catKeys,
+                        datasets: [{ data: catKeys.map(k => catData[k]), backgroundColor: catColors.slice(0, catKeys.length), borderWidth: 2, borderColor: '#fff' }]
+                    },
+                    options: { responsive: true, plugins: { legend: { position: 'right' } } }
+                });
+            }
+
+            // Daily Sales Chart
+            const dailyData = {};
+            sales.forEach(s => {
+                const key = s.date;
+                dailyData[key] = (dailyData[key] || 0) + s.amount;
+            });
+            const dailyKeys = Object.keys(dailyData).sort();
+            const last30 = dailyKeys.slice(-30);
+            if (retailDailyChart) retailDailyChart.destroy();
+            const dailyCtx = document.getElementById('retail-daily-chart')?.getContext('2d');
+            if (dailyCtx) {
+                retailDailyChart = new Chart(dailyCtx, {
+                    type: 'line',
+                    data: {
+                        labels: last30.map(k => { const d = new Date(k); return `${d.getMonth()+1}/${d.getDate()}`; }),
+                        datasets: [{ label: '日別物販売上', data: last30.map(k => dailyData[k]), borderColor: '#2d8a4e', backgroundColor: 'rgba(45,138,78,0.1)', fill: true, tension: 0.3, pointRadius: 3 }]
+                    },
+                    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥' + v.toLocaleString() } } } }
+                });
+            }
+
+            // Top 5 Products
+            const prodSales = {};
+            sales.forEach(s => {
+                if (!prodSales[s.productName]) prodSales[s.productName] = { sales: 0, qty: 0 };
+                prodSales[s.productName].sales += s.amount;
+                prodSales[s.productName].qty += (s.qty || 1);
+            });
+            const top5 = Object.entries(prodSales).sort((a, b) => b[1].sales - a[1].sales).slice(0, 5);
+            const maxSales = top5.length > 0 ? top5[0][1].sales : 1;
+            document.getElementById('retail-top5-products').innerHTML = top5.length > 0 ? top5.map(([name, data], i) => {
+                const pct = ((data.sales / maxSales) * 100).toFixed(0);
+                const medals = ['text-warmgold-500', 'text-surface-400', 'text-amber-700'];
+                return `<div class="flex items-center gap-3">
+                    <span class="text-lg font-bold w-6 text-center ${medals[i] || 'text-surface-400'}">${i + 1}</span>
+                    <div class="flex-1">
+                        <div class="flex justify-between mb-1"><span class="text-sm font-medium text-accent-900">${name}</span><span class="text-sm font-bold text-accent-900">¥${fmt(data.sales)}</span></div>
+                        <div class="w-full bg-kadomori-100 rounded-full h-2"><div class="h-2 rounded-full bg-primary-500" style="width:${pct}%"></div></div>
+                        <p class="text-xs text-surface-400 mt-0.5">${data.qty}個販売</p>
+                    </div>
+                </div>`;
+            }).join('') : '<p class="text-center text-surface-400 py-4">販売データなし</p>';
+
+            // Staff Quick View
+            const staffSales = {};
+            sales.forEach(s => {
+                const staff = s.staff || '不明';
+                if (!staffSales[staff]) staffSales[staff] = { sales: 0, count: 0 };
+                staffSales[staff].sales += s.amount;
+                staffSales[staff].count++;
+            });
+            const staffRank = Object.entries(staffSales).sort((a, b) => b[1].sales - a[1].sales);
+            const maxStaffSales = staffRank.length > 0 ? staffRank[0][1].sales : 1;
+            document.getElementById('retail-staff-quick').innerHTML = staffRank.length > 0 ? staffRank.map(([name, data], i) => {
+                const pct = ((data.sales / maxStaffSales) * 100).toFixed(0);
+                return `<div class="flex items-center gap-3">
+                    <span class="text-lg font-bold w-6 text-center ${i === 0 ? 'text-warmgold-500' : 'text-surface-400'}">${i + 1}</span>
+                    <div class="flex-1">
+                        <div class="flex justify-between mb-1"><span class="text-sm font-medium text-accent-900">${name}</span><span class="text-sm font-bold text-accent-900">¥${fmt(data.sales)}</span></div>
+                        <div class="w-full bg-kadomori-100 rounded-full h-2"><div class="h-2 rounded-full bg-sage-500" style="width:${pct}%"></div></div>
+                        <p class="text-xs text-surface-400 mt-0.5">${data.count}件</p>
+                    </div>
+                </div>`;
+            }).join('') : '<p class="text-center text-surface-400 py-4">販売データなし</p>';
+        }
+
+        // ---- SALES RECORDS ----
+        function renderRetailRecords() {
+            const allSales = loadRetailSales();
+            const products = loadInventory();
+
+            // Populate filter dropdowns
+            const staffSel = document.getElementById('retail-rec-staff');
+            const prodSel = document.getElementById('retail-rec-product');
+            const staffSet = new Set(allSales.map(s => s.staff).filter(Boolean));
+            const prodSet = new Set(allSales.map(s => s.productName).filter(Boolean));
+
+            const currentStaff = staffSel.value;
+            const currentProd = prodSel.value;
+            staffSel.innerHTML = '<option value="">全スタッフ</option>' + [...staffSet].map(s => `<option value="${s}" ${s === currentStaff ? 'selected' : ''}>${s}</option>`).join('');
+            prodSel.innerHTML = '<option value="">全商品</option>' + [...prodSet].map(p => `<option value="${p}" ${p === currentProd ? 'selected' : ''}>${p}</option>`).join('');
+
+            // Filter
+            const monthVal = document.getElementById('retail-rec-month').value;
+            const staffFilter = staffSel.value;
+            const prodFilter = prodSel.value;
+
+            let filtered = allSales;
+            if (monthVal) {
+                filtered = filtered.filter(s => s.date && s.date.startsWith(monthVal));
+            }
+            if (staffFilter) filtered = filtered.filter(s => s.staff === staffFilter);
+            if (prodFilter) filtered = filtered.filter(s => s.productName === prodFilter);
+
+            filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const fmt = n => n.toLocaleString();
+            let totalAmt = 0, totalProfit = 0;
+            filtered.forEach(s => { totalAmt += s.amount; totalProfit += s.amount - (s.cost || 0) * (s.qty || 1); });
+
+            document.getElementById('retail-rec-count').textContent = filtered.length;
+            document.getElementById('retail-rec-total').textContent = `¥${fmt(totalAmt)}`;
+            document.getElementById('retail-rec-profit').textContent = `¥${fmt(totalProfit)}`;
+
+            const tbody = document.getElementById('retail-records-tbody');
+            tbody.innerHTML = filtered.map(s => {
+                const saleProfit = s.amount - (s.cost || 0) * (s.qty || 1);
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm">${s.date}</td>
+                    <td class="px-4 py-3 text-sm">${s.staff || '-'}</td>
+                    <td class="px-4 py-3 text-sm font-medium text-accent-900">${s.productName}</td>
+                    <td class="px-4 py-3 text-sm text-right">${s.qty || 1}</td>
+                    <td class="px-4 py-3 text-sm text-right">¥${fmt(s.unitPrice || 0)}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(s.amount)}</td>
+                    <td class="px-4 py-3 text-sm text-right ${saleProfit > 0 ? 'text-green-600' : ''}">¥${fmt(saleProfit)}</td>
+                    <td class="px-4 py-3 text-sm text-center">
+                        <button onclick="deleteRetailSale('${s.id}')" class="text-red-500 hover:text-red-700 text-xs">削除</button>
+                    </td>
+                </tr>`;
+            }).join('') || '<tr><td colspan="8" class="text-center py-8 text-surface-400">販売記録なし</td></tr>';
+        }
+
+        function deleteRetailSale(id) {
+            if (!confirm('この販売記録を削除しますか？')) return;
+            const sales = loadRetailSales().filter(s => s.id !== id);
+            saveRetailSales(sales);
+            renderRetailRecords();
+            updateRetailDashboard();
+        }
+
+        function exportRetailCSV() {
+            const sales = loadRetailSales();
+            if (sales.length === 0) { alert('エクスポートするデータがありません'); return; }
+            let csv = '日付,スタッフ,店舗,商品名,カテゴリ,数量,単価,売上,原価,利益\n';
+            sales.sort((a, b) => new Date(a.date) - new Date(b.date)).forEach(s => {
+                const profit = s.amount - (s.cost || 0) * (s.qty || 1);
+                csv += `${s.date},${s.staff || ''},${s.store || ''},${s.productName},${s.category || ''},${s.qty || 1},${s.unitPrice || 0},${s.amount},${(s.cost || 0) * (s.qty || 1)},${profit}\n`;
+            });
+            const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `物販販売記録_${new Date().toISOString().slice(0, 10)}.csv`;
+            link.click();
+        }
+
+        // ---- RANKINGS ----
+        function updateRetailRankings() {
+            const sales = getRetailSalesFiltered('retail-rank-period');
+            const fmt = n => n.toLocaleString();
+
+            // Product Ranking
+            const prodMap = {};
+            let grandTotal = 0;
+            sales.forEach(s => {
+                if (!prodMap[s.productName]) prodMap[s.productName] = { sales: 0, qty: 0 };
+                prodMap[s.productName].sales += s.amount;
+                prodMap[s.productName].qty += (s.qty || 1);
+                grandTotal += s.amount;
+            });
+            const prodRank = Object.entries(prodMap).sort((a, b) => b[1].sales - a[1].sales);
+            document.getElementById('retail-rank-product-tbody').innerHTML = prodRank.length > 0 ? prodRank.map(([name, data], i) => {
+                const pct = grandTotal > 0 ? ((data.sales / grandTotal) * 100).toFixed(1) : 0;
+                const medal = i === 0 ? 'bg-warmgold-100 font-bold' : i === 1 ? 'bg-surface-100' : i === 2 ? 'bg-amber-50' : '';
+                return `<tr class="hover:bg-kadomori-50 ${medal}">
+                    <td class="px-4 py-3 text-sm text-center font-bold">${i + 1}</td>
+                    <td class="px-4 py-3 text-sm font-medium">${name}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(data.sales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${data.qty}</td>
+                    <td class="px-4 py-3 text-sm text-right">${pct}%</td>
+                </tr>`;
+            }).join('') : '<tr><td colspan="5" class="text-center py-6 text-surface-400">データなし</td></tr>';
+
+            // Staff Ranking
+            const staffMap = {};
+            sales.forEach(s => {
+                const staff = s.staff || '不明';
+                if (!staffMap[staff]) staffMap[staff] = { sales: 0, count: 0 };
+                staffMap[staff].sales += s.amount;
+                staffMap[staff].count++;
+            });
+            const staffRank = Object.entries(staffMap).sort((a, b) => b[1].sales - a[1].sales);
+            document.getElementById('retail-rank-staff-tbody').innerHTML = staffRank.length > 0 ? staffRank.map(([name, data], i) => {
+                const avg = data.count > 0 ? Math.round(data.sales / data.count) : 0;
+                const medal = i === 0 ? 'bg-primary-50 font-bold' : i === 1 ? 'bg-surface-100' : i === 2 ? 'bg-sage-50' : '';
+                return `<tr class="hover:bg-kadomori-50 ${medal}">
+                    <td class="px-4 py-3 text-sm text-center font-bold">${i + 1}</td>
+                    <td class="px-4 py-3 text-sm font-medium">${name}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(data.sales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${data.count}</td>
+                    <td class="px-4 py-3 text-sm text-right">¥${fmt(avg)}</td>
+                </tr>`;
+            }).join('') : '<tr><td colspan="5" class="text-center py-6 text-surface-400">データなし</td></tr>';
+
+            // Category Ranking
+            const catMap = {};
+            sales.forEach(s => {
+                const cat = s.category || 'その他';
+                if (!catMap[cat]) catMap[cat] = { sales: 0, cost: 0, products: new Set() };
+                catMap[cat].sales += s.amount;
+                catMap[cat].cost += (s.cost || 0) * (s.qty || 1);
+                catMap[cat].products.add(s.productName);
+            });
+            const catRank = Object.entries(catMap).sort((a, b) => b[1].sales - a[1].sales);
+            document.getElementById('retail-rank-category-tbody').innerHTML = catRank.length > 0 ? catRank.map(([name, data], i) => {
+                const marginPct = data.sales > 0 ? (((data.sales - data.cost) / data.sales) * 100).toFixed(1) : 0;
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm text-center font-bold">${i + 1}</td>
+                    <td class="px-4 py-3 text-sm font-medium">${name}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(data.sales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${data.products.size}</td>
+                    <td class="px-4 py-3 text-sm text-right">${marginPct}%</td>
+                </tr>`;
+            }).join('') : '<tr><td colspan="5" class="text-center py-6 text-surface-400">データなし</td></tr>';
+
+            // Store Ranking
+            const storeMap = {};
+            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            sales.forEach(s => {
+                const store = s.store || '不明';
+                if (!storeMap[store]) storeMap[store] = { sales: 0, count: 0 };
+                storeMap[store].sales += s.amount;
+                storeMap[store].count++;
+            });
+            const storeRank = Object.entries(storeMap).sort((a, b) => b[1].sales - a[1].sales);
+            document.getElementById('retail-rank-store-tbody').innerHTML = storeRank.length > 0 ? storeRank.map(([name, data], i) => {
+                const avg = data.count > 0 ? Math.round(data.sales / data.count) : 0;
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm text-center font-bold">${i + 1}</td>
+                    <td class="px-4 py-3 text-sm font-medium">${storeNames[name] || name}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(data.sales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${data.count}</td>
+                    <td class="px-4 py-3 text-sm text-right">¥${fmt(avg)}</td>
+                </tr>`;
+            }).join('') : '<tr><td colspan="5" class="text-center py-6 text-surface-400">データなし</td></tr>';
+
+            // Ranking Bar Chart
+            if (retailRankingChart) retailRankingChart.destroy();
+            const rankCtx = document.getElementById('retail-ranking-chart')?.getContext('2d');
+            if (rankCtx && prodRank.length > 0) {
+                const top10 = prodRank.slice(0, 10);
+                const barColors = ['#2d8a4e', '#3da55e', '#4db86e', '#6b9080', '#8b6d3f', '#d4a574', '#e8927c', '#b5838d', '#7c9cb0', '#a0aec0'];
+                retailRankingChart = new Chart(rankCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: top10.map(([name]) => name.length > 8 ? name.slice(0, 8) + '...' : name),
+                        datasets: [{ label: '売上', data: top10.map(([, d]) => d.sales), backgroundColor: barColors.slice(0, top10.length), borderRadius: 6 }]
+                    },
+                    options: {
+                        indexAxis: 'y', responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { beginAtZero: true, ticks: { callback: v => '¥' + v.toLocaleString() } } }
+                    }
+                });
+            }
+        }
+
+        // ---- INVENTORY TABLE (Enhanced) ----
         function renderInventoryTable() {
             const products = loadInventory();
             const history = loadInventoryHistory();
             const search = (document.getElementById('inv-search')?.value || '').toLowerCase();
+            const catFilter = document.getElementById('inv-category-filter')?.value || '';
+            const histTypeFilter = document.getElementById('inv-history-type-filter')?.value || '';
             const fmt = n => n.toLocaleString();
 
-            const filtered = products.filter(p => !search || p.name.toLowerCase().includes(search));
-            let totalStock = 0, totalValue = 0, alertCount = 0;
+            let filtered = products.filter(p => {
+                if (search && !p.name.toLowerCase().includes(search)) return false;
+                if (catFilter && p.category !== catFilter) return false;
+                return true;
+            });
+            let totalStock = 0, totalValue = 0, totalCostValue = 0, alertCount = 0;
 
             const tbody = document.getElementById('inv-product-tbody');
             tbody.innerHTML = filtered.map((p, i) => {
+                const realIdx = products.indexOf(p);
                 totalStock += p.stock;
                 totalValue += p.stock * p.price;
+                totalCostValue += p.stock * (p.cost || 0);
                 const isLow = p.stock <= p.minStock;
                 if (isLow) alertCount++;
+                const marginPct = p.price > 0 && p.cost ? (((p.price - p.cost) / p.price) * 100).toFixed(1) : '-';
                 return `<tr class="hover:bg-kadomori-50 ${isLow ? 'bg-red-50' : ''}">
                     <td class="px-4 py-3 text-sm font-medium text-accent-900">${p.name}</td>
                     <td class="px-4 py-3 text-sm text-surface-600">${p.category}</td>
                     <td class="px-4 py-3 text-sm text-right">¥${fmt(p.price)}</td>
+                    <td class="px-4 py-3 text-sm text-right text-surface-500">${p.cost ? '¥' + fmt(p.cost) : '-'}</td>
+                    <td class="px-4 py-3 text-sm text-right">${marginPct}${marginPct !== '-' ? '%' : ''}</td>
                     <td class="px-4 py-3 text-sm text-right font-bold ${isLow ? 'text-red-600' : ''}">${p.stock}</td>
                     <td class="px-4 py-3 text-sm text-right text-surface-500">${p.minStock}</td>
                     <td class="px-4 py-3 text-sm text-center">
                         ${isLow ? '<span class="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold">要発注</span>' : '<span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">適正</span>'}
                     </td>
-                    <td class="px-4 py-3 text-sm text-center">
-                        <button onclick="deleteInventoryProduct(${i})" class="text-red-500 hover:text-red-700 text-xs">削除</button>
+                    <td class="px-4 py-3 text-sm text-center space-x-1">
+                        <button onclick="editInventoryProduct(${realIdx})" class="text-blue-500 hover:text-blue-700 text-xs">編集</button>
+                        <button onclick="deleteInventoryProduct(${realIdx})" class="text-red-500 hover:text-red-700 text-xs">削除</button>
                     </td>
                 </tr>`;
-            }).join('') || '<tr><td colspan="7" class="text-center py-8 text-surface-400">商品が登録されていません</td></tr>';
+            }).join('') || '<tr><td colspan="9" class="text-center py-8 text-surface-400">商品が登録されていません</td></tr>';
 
             document.getElementById('inv-total-products').textContent = products.length;
             document.getElementById('inv-total-stock').textContent = totalStock;
             document.getElementById('inv-total-value').textContent = `¥${fmt(totalValue)}`;
+            const costValEl = document.getElementById('inv-total-cost-value');
+            if (costValEl) costValEl.textContent = `¥${fmt(totalCostValue)}`;
             document.getElementById('inv-alert-count').textContent = alertCount;
 
-            // History
+            // History with filter
             const hTbody = document.getElementById('inv-history-tbody');
-            const recent = history.slice(-20).reverse();
+            let histFiltered = history;
+            if (histTypeFilter) histFiltered = history.filter(h => h.type === histTypeFilter);
+            const recent = histFiltered.slice(-30).reverse();
             hTbody.innerHTML = recent.map(h => {
-                const typeLabel = h.type === 'in' ? '入庫' : h.type === 'out' ? '払出' : '発注';
-                const typeClass = h.type === 'in' ? 'bg-green-100 text-green-700' : h.type === 'out' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700';
+                const typeLabels = { in: '入庫', out: '払出', sale: '販売', order: '発注' };
+                const typeClasses = { in: 'bg-green-100 text-green-700', out: 'bg-orange-100 text-orange-700', sale: 'bg-primary-100 text-primary-700', order: 'bg-blue-100 text-blue-700' };
+                const typeLabel = typeLabels[h.type] || h.type;
+                const typeClass = typeClasses[h.type] || 'bg-surface-100 text-surface-700';
                 return `<tr class="hover:bg-kadomori-50">
                     <td class="px-4 py-3 text-sm">${h.date}</td>
                     <td class="px-4 py-3 text-sm font-medium">${h.product}</td>
                     <td class="px-4 py-3 text-sm text-center"><span class="px-2 py-1 ${typeClass} rounded-full text-xs font-bold">${typeLabel}</span></td>
-                    <td class="px-4 py-3 text-sm text-right font-bold">${h.type === 'out' ? '-' : '+'}${h.qty}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">${h.type === 'out' || h.type === 'sale' ? '-' : '+'}${h.qty}</td>
+                    <td class="px-4 py-3 text-sm text-surface-500">${h.staff || ''}</td>
                     <td class="px-4 py-3 text-sm text-surface-500">${h.memo || ''}</td>
                 </tr>`;
-            }).join('') || '<tr><td colspan="5" class="text-center py-8 text-surface-400">履歴なし</td></tr>';
+            }).join('') || '<tr><td colspan="6" class="text-center py-8 text-surface-400">履歴なし</td></tr>';
         }
 
         function openInventoryModal(mode) {
@@ -7108,26 +7933,32 @@
                             <select id="inv-new-category" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
                                 <option value="シャンプー">シャンプー</option><option value="トリートメント">トリートメント</option>
                                 <option value="オイル">オイル</option><option value="サプリメント">サプリメント</option>
-                                <option value="器具">器具</option><option value="その他">その他</option>
+                                <option value="化粧品">化粧品</option><option value="器具">器具</option><option value="その他">その他</option>
                             </select></div>
-                        <div><label class="block text-sm font-medium text-surface-600 mb-1">単価 (円)</label>
-                            <input type="number" id="inv-new-price" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0"></div>
-                        <div><label class="block text-sm font-medium text-surface-600 mb-1">初期在庫数</label>
-                            <input type="number" id="inv-new-stock" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" value="0"></div>
-                        <div><label class="block text-sm font-medium text-surface-600 mb-1">最低在庫数 (発注点)</label>
-                            <input type="number" id="inv-new-min" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" value="5"></div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">売価 (円)</label>
+                                <input type="number" id="inv-new-price" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0"></div>
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">原価 (円)</label>
+                                <input type="number" id="inv-new-cost" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" placeholder="任意"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">初期在庫数</label>
+                                <input type="number" id="inv-new-stock" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" value="0"></div>
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">発注点</label>
+                                <input type="number" id="inv-new-min" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" value="5"></div>
+                        </div>
                         <div class="flex gap-2">
                             <button onclick="addInventoryProduct()" class="flex-1 btn-primary py-2 text-sm">追加</button>
                             <button onclick="closeInventoryModal()" class="flex-1 bg-surface-200 text-surface-700 py-2 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
                         </div>
                     </div>`;
-            } else {
-                const opts = products.map((p, i) => `<option value="${i}">${p.name}</option>`).join('');
+            } else if (mode === 'stock-move') {
+                const opts = products.map((p, i) => `<option value="${i}">${p.name} (在庫: ${p.stock})</option>`).join('');
                 content.innerHTML = `
                     <h3 class="text-lg font-bold text-accent-900 mb-4">入出庫処理</h3>
                     <div class="space-y-4">
                         <div><label class="block text-sm font-medium text-surface-600 mb-1">商品</label>
-                            <select id="inv-move-product" class="w-full px-3 py-2 border border-surface-300 rounded-lg">${opts}</select></div>
+                            <select id="inv-move-product" class="w-full px-3 py-2 border border-surface-300 rounded-lg">${opts || '<option>商品未登録</option>'}</select></div>
                         <div><label class="block text-sm font-medium text-surface-600 mb-1">種別</label>
                             <select id="inv-move-type" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
                                 <option value="in">入庫</option><option value="out">払出</option><option value="order">発注</option>
@@ -7141,11 +7972,59 @@
                             <button onclick="closeInventoryModal()" class="flex-1 bg-surface-200 text-surface-700 py-2 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
                         </div>
                     </div>`;
+            } else if (typeof mode === 'number') {
+                // Edit product
+                const p = products[mode];
+                if (!p) return;
+                content.innerHTML = `
+                    <h3 class="text-lg font-bold text-accent-900 mb-4">商品編集</h3>
+                    <div class="space-y-4">
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">商品名</label>
+                            <input type="text" id="inv-edit-name" value="${p.name}" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">カテゴリ</label>
+                            <select id="inv-edit-category" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                                ${['シャンプー','トリートメント','オイル','サプリメント','化粧品','器具','その他'].map(c => `<option value="${c}" ${c === p.category ? 'selected' : ''}>${c}</option>`).join('')}
+                            </select></div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">売価</label>
+                                <input type="number" id="inv-edit-price" value="${p.price}" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0"></div>
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">原価</label>
+                                <input type="number" id="inv-edit-cost" value="${p.cost || ''}" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0" placeholder="任意"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">現在庫</label>
+                                <input type="number" id="inv-edit-stock" value="${p.stock}" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0"></div>
+                            <div><label class="block text-sm font-medium text-surface-600 mb-1">発注点</label>
+                                <input type="number" id="inv-edit-min" value="${p.minStock}" class="w-full px-3 py-2 border border-surface-300 rounded-lg" min="0"></div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="saveEditedProduct(${mode})" class="flex-1 btn-primary py-2 text-sm">保存</button>
+                            <button onclick="closeInventoryModal()" class="flex-1 bg-surface-200 text-surface-700 py-2 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
+                        </div>
+                    </div>`;
             }
             modal.classList.remove('hidden');
         }
 
         function closeInventoryModal() { document.getElementById('inventory-modal').classList.add('hidden'); }
+
+        function editInventoryProduct(idx) { openInventoryModal(idx); }
+
+        function saveEditedProduct(idx) {
+            const products = loadInventory();
+            if (!products[idx]) return;
+            const name = document.getElementById('inv-edit-name').value.trim();
+            if (!name) { alert('商品名を入力してください'); return; }
+            products[idx].name = name;
+            products[idx].category = document.getElementById('inv-edit-category').value;
+            products[idx].price = parseInt(document.getElementById('inv-edit-price').value) || 0;
+            products[idx].cost = parseInt(document.getElementById('inv-edit-cost').value) || 0;
+            products[idx].stock = parseInt(document.getElementById('inv-edit-stock').value) || 0;
+            products[idx].minStock = parseInt(document.getElementById('inv-edit-min').value) || 5;
+            saveInventory(products);
+            closeInventoryModal();
+            renderInventoryTable();
+        }
 
         function addInventoryProduct() {
             const name = document.getElementById('inv-new-name').value.trim();
@@ -7154,6 +8033,7 @@
             products.push({
                 name, category: document.getElementById('inv-new-category').value,
                 price: parseInt(document.getElementById('inv-new-price').value) || 0,
+                cost: parseInt(document.getElementById('inv-new-cost')?.value) || 0,
                 stock: parseInt(document.getElementById('inv-new-stock').value) || 0,
                 minStock: parseInt(document.getElementById('inv-new-min').value) || 5
             });
@@ -7188,6 +8068,233 @@
             saveInventoryHistory(history);
             closeInventoryModal();
             renderInventoryTable();
+        }
+
+        // ---- RETAIL SALE MODAL ----
+        function openRetailSaleModal() {
+            const products = loadInventory();
+            const modal = document.getElementById('retail-sale-modal');
+            const content = document.getElementById('retail-sale-modal-content');
+
+            const now = new Date();
+            const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+            // Get staff list from current store context
+            const currentStore = document.getElementById('store-selector')?.value || 'all';
+            const staffOpts = [];
+            const staffSel = document.getElementById('staff-selector');
+            if (staffSel) {
+                for (const opt of staffSel.options) {
+                    if (opt.value && opt.value !== 'all') staffOpts.push(opt.value);
+                }
+            }
+
+            const prodOpts = products.map((p, i) => `<option value="${i}" data-price="${p.price}" data-cost="${p.cost || 0}" data-category="${p.category}" data-stock="${p.stock}">${p.name} (¥${p.price.toLocaleString()} / 在庫:${p.stock})</option>`).join('');
+
+            content.innerHTML = `
+                <h3 class="text-lg font-bold text-accent-900 mb-4 flex items-center gap-2"><i data-lucide="receipt" class="w-5 h-5 text-primary-600"></i> 物販販売記録</h3>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">販売日</label>
+                            <input type="date" id="retail-sale-date" value="${todayStr}" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">店舗</label>
+                            <select id="retail-sale-store" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                                <option value="ebisu" ${currentStore === 'ebisu' ? 'selected' : ''}>恵比寿駅前店</option>
+                                <option value="kadomori" ${currentStore === 'kadomori' ? 'selected' : ''}>大阪KADOMORI店</option>
+                                <option value="fukushima" ${currentStore === 'fukushima' ? 'selected' : ''}>福島店</option>
+                            </select></div>
+                    </div>
+                    <div><label class="block text-sm font-medium text-surface-600 mb-1">担当スタッフ</label>
+                        <select id="retail-sale-staff" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                            ${staffOpts.map(s => `<option value="${s}">${s}</option>`).join('') || '<option value="">スタッフ未設定</option>'}
+                        </select></div>
+                    <div><label class="block text-sm font-medium text-surface-600 mb-1">商品</label>
+                        <select id="retail-sale-product" onchange="onRetailProductChange()" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
+                            ${prodOpts || '<option value="">商品未登録</option>'}
+                        </select></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">数量</label>
+                            <input type="number" id="retail-sale-qty" value="1" min="1" onchange="calcRetailSaleTotal()" oninput="calcRetailSaleTotal()" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
+                        <div><label class="block text-sm font-medium text-surface-600 mb-1">単価 (変更可)</label>
+                            <input type="number" id="retail-sale-price" min="0" onchange="calcRetailSaleTotal()" oninput="calcRetailSaleTotal()" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
+                    </div>
+                    <div class="bg-kadomori-50 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-surface-600">合計金額</span>
+                            <span class="text-xl font-bold text-accent-900" id="retail-sale-total-display">¥0</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-xs text-surface-400">予想利益</span>
+                            <span class="text-sm font-medium text-sage-600" id="retail-sale-profit-display">¥0</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="flex items-center gap-2 text-sm text-surface-600">
+                            <input type="checkbox" id="retail-sale-deduct-stock" checked class="rounded border-surface-300">
+                            在庫から自動差引
+                        </label>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="saveRetailSale()" class="flex-1 btn-primary py-2.5 text-sm font-bold">販売記録を保存</button>
+                        <button onclick="closeRetailSaleModal()" class="flex-1 bg-surface-200 text-surface-700 py-2.5 rounded-lg text-sm font-medium hover:bg-surface-300">キャンセル</button>
+                    </div>
+                </div>`;
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+            onRetailProductChange();
+        }
+
+        function closeRetailSaleModal() { document.getElementById('retail-sale-modal').classList.add('hidden'); }
+
+        function onRetailProductChange() {
+            const sel = document.getElementById('retail-sale-product');
+            if (!sel || !sel.selectedOptions[0]) return;
+            const opt = sel.selectedOptions[0];
+            const price = parseInt(opt.dataset.price) || 0;
+            document.getElementById('retail-sale-price').value = price;
+            calcRetailSaleTotal();
+        }
+
+        function calcRetailSaleTotal() {
+            const qty = parseInt(document.getElementById('retail-sale-qty')?.value) || 1;
+            const price = parseInt(document.getElementById('retail-sale-price')?.value) || 0;
+            const total = qty * price;
+            document.getElementById('retail-sale-total-display').textContent = `¥${total.toLocaleString()}`;
+
+            const sel = document.getElementById('retail-sale-product');
+            const cost = sel?.selectedOptions[0] ? parseInt(sel.selectedOptions[0].dataset.cost) || 0 : 0;
+            const profit = total - (cost * qty);
+            document.getElementById('retail-sale-profit-display').textContent = `¥${profit.toLocaleString()}`;
+        }
+
+        function saveRetailSale() {
+            const products = loadInventory();
+            const sel = document.getElementById('retail-sale-product');
+            const idx = parseInt(sel?.value);
+            if (isNaN(idx) || !products[idx]) { alert('商品を選択してください'); return; }
+
+            const qty = parseInt(document.getElementById('retail-sale-qty').value) || 1;
+            const unitPrice = parseInt(document.getElementById('retail-sale-price').value) || 0;
+            const amount = qty * unitPrice;
+            const date = document.getElementById('retail-sale-date').value;
+            const staff = document.getElementById('retail-sale-staff').value;
+            const store = document.getElementById('retail-sale-store').value;
+            const deductStock = document.getElementById('retail-sale-deduct-stock').checked;
+
+            const product = products[idx];
+            const saleRecord = {
+                id: 'rs_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                date, staff, store,
+                productName: product.name,
+                category: product.category,
+                qty, unitPrice, amount,
+                cost: product.cost || 0
+            };
+
+            // Save sale
+            const sales = loadRetailSales();
+            sales.push(saleRecord);
+            saveRetailSales(sales);
+
+            // Deduct stock & record history
+            if (deductStock) {
+                products[idx].stock = Math.max(0, products[idx].stock - qty);
+                saveInventory(products);
+                const history = loadInventoryHistory();
+                history.push({
+                    date: new Date(date).toLocaleDateString('ja-JP'),
+                    product: product.name, type: 'sale', qty, staff,
+                    memo: `販売 (¥${amount.toLocaleString()})`
+                });
+                saveInventoryHistory(history);
+            }
+
+            closeRetailSaleModal();
+            // Refresh current sub-tab
+            updateRetailDashboard();
+            renderRetailRecords();
+        }
+
+        // ---- ABC ANALYSIS ----
+        function updateABCAnalysis() {
+            const sales = getRetailSalesFiltered('retail-abc-period');
+            const fmt = n => n.toLocaleString();
+
+            // Aggregate by product
+            const prodMap = {};
+            let grandTotal = 0;
+            sales.forEach(s => {
+                if (!prodMap[s.productName]) prodMap[s.productName] = { sales: 0, qty: 0, cost: 0 };
+                prodMap[s.productName].sales += s.amount;
+                prodMap[s.productName].qty += (s.qty || 1);
+                prodMap[s.productName].cost += (s.cost || 0) * (s.qty || 1);
+                grandTotal += s.amount;
+            });
+
+            const sorted = Object.entries(prodMap).sort((a, b) => b[1].sales - a[1].sales);
+
+            // Classify ABC
+            let cumulative = 0;
+            const classified = sorted.map(([name, data]) => {
+                cumulative += data.sales;
+                const pct = grandTotal > 0 ? (data.sales / grandTotal * 100) : 0;
+                const cumPct = grandTotal > 0 ? (cumulative / grandTotal * 100) : 0;
+                const marginPct = data.sales > 0 ? (((data.sales - data.cost) / data.sales) * 100).toFixed(1) : 0;
+                let rank = 'C';
+                if (cumPct <= 70) rank = 'A';
+                else if (cumPct <= 90) rank = 'B';
+                return { name, ...data, pct, cumPct, marginPct, rank };
+            });
+
+            // Summary
+            const aItems = classified.filter(c => c.rank === 'A');
+            const bItems = classified.filter(c => c.rank === 'B');
+            const cItems = classified.filter(c => c.rank === 'C');
+
+            document.getElementById('abc-a-count').textContent = `${aItems.length}商品`;
+            document.getElementById('abc-a-sales').textContent = `¥${fmt(aItems.reduce((s, c) => s + c.sales, 0))}`;
+            document.getElementById('abc-b-count').textContent = `${bItems.length}商品`;
+            document.getElementById('abc-b-sales').textContent = `¥${fmt(bItems.reduce((s, c) => s + c.sales, 0))}`;
+            document.getElementById('abc-c-count').textContent = `${cItems.length}商品`;
+            document.getElementById('abc-c-sales').textContent = `¥${fmt(cItems.reduce((s, c) => s + c.sales, 0))}`;
+
+            // Detail Table
+            const rankColors = { A: 'bg-warmgold-100 text-warmgold-700', B: 'bg-blue-100 text-blue-700', C: 'bg-surface-100 text-surface-600' };
+            document.getElementById('retail-abc-tbody').innerHTML = classified.length > 0 ? classified.map(c => {
+                return `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm text-center"><span class="px-2 py-1 ${rankColors[c.rank]} rounded-full text-xs font-bold">${c.rank}</span></td>
+                    <td class="px-4 py-3 text-sm font-medium">${c.name}</td>
+                    <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(c.sales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">${c.qty}</td>
+                    <td class="px-4 py-3 text-sm text-right">${c.pct.toFixed(1)}%</td>
+                    <td class="px-4 py-3 text-sm text-right font-medium">${c.cumPct.toFixed(1)}%</td>
+                    <td class="px-4 py-3 text-sm text-right">${c.marginPct}%</td>
+                </tr>`;
+            }).join('') : '<tr><td colspan="7" class="text-center py-8 text-surface-400">データなし</td></tr>';
+
+            // Pareto Chart
+            if (retailParetoChart) retailParetoChart.destroy();
+            const paretoCtx = document.getElementById('retail-pareto-chart')?.getContext('2d');
+            if (paretoCtx && classified.length > 0) {
+                const barBg = classified.map(c => c.rank === 'A' ? 'rgba(196,164,60,0.7)' : c.rank === 'B' ? 'rgba(59,130,246,0.5)' : 'rgba(156,163,175,0.4)');
+                retailParetoChart = new Chart(paretoCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: classified.map(c => c.name.length > 6 ? c.name.slice(0, 6) + '..' : c.name),
+                        datasets: [
+                            { label: '売上', data: classified.map(c => c.sales), backgroundColor: barBg, borderRadius: 4, order: 2 },
+                            { label: '累積構成比', data: classified.map(c => c.cumPct), type: 'line', borderColor: '#e8927c', backgroundColor: 'transparent', yAxisID: 'y1', tension: 0.3, pointRadius: 3, order: 1 }
+                        ]
+                    },
+                    options: {
+                        responsive: true, plugins: { legend: { position: 'bottom' } },
+                        scales: {
+                            y: { beginAtZero: true, ticks: { callback: v => '¥' + v.toLocaleString() } },
+                            y1: { position: 'right', min: 0, max: 100, grid: { display: false }, ticks: { callback: v => v + '%' } }
+                        }
+                    }
+                });
+            }
         }
 
         // ========== ADVERTISING MANAGEMENT (広告費) ==========
@@ -9079,6 +10186,12 @@
                     goalStaffSel.value = mainStaff;
                 }
                 loadGoalInputs();
+            }
+
+            // Load retail dashboard when switching to inventory (物販管理) tab
+            if (id === 'inventory') {
+                updateRetailDashboard();
+                if (typeof lucide !== 'undefined') lucide.createIcons();
             }
 
             // Update settings list when switching to settings tab
