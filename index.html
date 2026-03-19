@@ -1695,6 +1695,37 @@
 
             </div>
 
+            <!-- メンバー売上 KPI (院長売上除外) -->
+            <div class="mb-6 md:mb-10">
+                <div class="premium-card p-4 md:p-6 border-l-4 border-primary-500">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
+                                <i data-lucide="users" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-surface-500 uppercase tracking-wider">メンバー売上 (院長除外)</p>
+                                <h2 class="text-2xl md:text-4xl font-display font-bold text-primary-600" id="kpi-member-sales">¥0</h2>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 md:gap-6 text-center">
+                            <div>
+                                <p class="text-[10px] font-bold text-surface-500 uppercase">メンバー客数</p>
+                                <p class="text-lg md:text-2xl font-bold text-accent-900" id="kpi-member-customers">0名</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-surface-500 uppercase">メンバー客単価</p>
+                                <p class="text-lg md:text-2xl font-bold text-accent-900" id="kpi-member-unit-price">¥0</p>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-surface-500 uppercase">院長売上</p>
+                                <p class="text-lg md:text-2xl font-bold text-surface-400" id="kpi-director-sales">¥0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Tabs -->
             <div class="mb-8 tab-container">
                 <nav id="main-tabs" class="flex space-x-1 overflow-x-auto custom-scroll pb-px">
@@ -1762,6 +1793,11 @@
                     <button onclick="switchTab('ltv')" id="tab-ltv" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="LTV">
                         <i data-lucide="trending-up" class="w-6 h-6 md:w-4 md:h-4"></i>
                         <span class="hidden md:inline">LTV</span>
+                    </button>
+                    <!-- Cancellation Analytics Tab -->
+                    <button onclick="switchTab('cancellation')" id="tab-cancellation" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="キャンセル分析">
+                        <i data-lucide="x-circle" class="w-6 h-6 md:w-4 md:h-4"></i>
+                        <span class="hidden md:inline">キャンセル分析</span>
                     </button>
                     <!-- Goal Setting Tab -->
                     <button onclick="switchTab('goal')" id="tab-goal" class="tab-btn py-2 px-3 md:py-3 md:px-4 font-medium text-sm text-surface-500 flex items-center justify-center gap-2" title="売上目標設定">
@@ -2308,7 +2344,7 @@
             <!-- TAB: SALES -->
             <section id="content-sales" class="tab-content hidden space-y-8 animate-fade-in">
                 <!-- Sales Summary Cards -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
                         <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総売上</p>
@@ -2326,8 +2362,19 @@
                     </div>
                     <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
-                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">純売上 (割引後)</p>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">純売上 (指名料・社販除外)</p>
                         <p class="text-xl font-display font-bold text-accent-900" id="sales-net">¥0</p>
+                        <p class="text-[9px] text-surface-400 mt-1">総売上 − 指名料 − 物販</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-accent-600"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">指名料</p>
+                        <p class="text-xl font-display font-bold text-accent-900" id="sales-nomination">¥0</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-400"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">指名数</p>
+                        <p class="text-xl font-display font-bold text-accent-900" id="sales-nomination-count">0件</p>
                     </div>
                 </div>
 
@@ -2348,6 +2395,8 @@
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">総売上</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">技術売上</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">物販売上</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">指名料</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">指名数</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">純売上</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">客数</th>
                                 </tr>
@@ -2856,33 +2905,209 @@
                     </div>
                 </div>
 
-                <!-- Store/Staff Breakdown Table -->
+                <!-- 媒体別・個人別テーブル -->
+                <div id="nc-media-tables" class="space-y-6"></div>
+
+                <!-- 全体合計テーブル -->
                 <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
                     <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
                         <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
                             <i data-lucide="table" class="w-4 h-4"></i>
-                            新規売上 サロン別・個人別
+                            全体合計 (全媒体)
                         </h3>
                     </div>
                     <div class="overflow-x-auto custom-scroll">
                         <table class="min-w-full divide-y divide-kadomori-200">
                             <thead class="bg-kadomori-100">
                                 <tr>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">店舗</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">スタッフ</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">新規数</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">HPB</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">minimo/Nailie</th>
-                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">推定新規売上</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase" style="background:#f97316;color:white;">担当</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">予約</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">次回予約</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">次回予約率</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">成約数</th>
                                     <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">成約率</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">サブスク率</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">回数券率</th>
+                                    <th class="px-4 py-3 text-right text-xs font-medium text-accent-800 uppercase">前払い</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-kadomori-100" id="nc-breakdown-tbody"></tbody>
+                            <tbody class="bg-white divide-y divide-kadomori-100" id="nc-total-tbody"></tbody>
                         </table>
                     </div>
                 </div>
             </section>
+
+            <!-- TAB: CANCELLATION ANALYTICS (キャンセル分析) -->
+            <section id="content-cancellation" class="tab-content hidden space-y-8 animate-fade-in">
+                <!-- Header -->
+                <div class="premium-card p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg gradient-rose flex items-center justify-center">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-display font-bold text-accent-900">キャンセル分析</h2>
+                                <p class="text-xs text-surface-500">キャンセルデータの分析・管理</p>
+                            </div>
+                        </div>
+                        <button onclick="openCancellationModal()" class="btn-primary py-2 px-4 text-sm flex items-center gap-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i>キャンセル登録
+                        </button>
+                    </div>
+                </div>
+
+                <!-- KPI Summary -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-rose-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">総キャンセル数</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="cancel-total">0件</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">無断キャンセル</p>
+                        <p class="text-2xl font-display font-bold text-red-600" id="cancel-noshow">0件</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-warmgold-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">事前キャンセル</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="cancel-advance">0件</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-5 border border-kadomori-200 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-primary-500"></div>
+                        <p class="text-[10px] font-bold text-surface-500 uppercase mb-1">キャンセル率</p>
+                        <p class="text-2xl font-display font-bold text-accent-900" id="cancel-rate">0%</p>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 媒体別キャンセル -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="bar-chart" class="w-5 h-5 text-primary-500"></i>
+                            媒体別キャンセル
+                        </h3>
+                        <div class="chart-container h-64"><canvas id="cancelChannelChart"></canvas></div>
+                    </div>
+                    <!-- キャンセル種別 (無断/事前) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-rose-500"></i>
+                            キャンセル種別
+                        </h3>
+                        <div class="chart-container h-64"><canvas id="cancelTypeChart"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- キャンセル理由分析 -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 p-6">
+                    <h3 class="text-lg font-display font-bold text-accent-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="list" class="w-5 h-5 text-warmgold-500"></i>
+                        キャンセル理由
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="chart-container h-64"><canvas id="cancelReasonChart"></canvas></div>
+                        <div id="cancel-reason-list" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- キャンセル一覧テーブル -->
+                <div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
+                            <i data-lucide="table" class="w-4 h-4"></i>
+                            キャンセル一覧
+                        </h3>
+                    </div>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="min-w-full divide-y divide-kadomori-200">
+                            <thead class="bg-kadomori-100">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">日付</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">店舗</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">スタッフ</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">媒体</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">種別</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-accent-800 uppercase">理由</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-accent-800 uppercase">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-kadomori-100" id="cancel-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cancellation Registration Modal -->
+            <div id="cancellation-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-xl w-full max-w-md">
+                    <div class="px-6 py-4 border-b border-kadomori-200">
+                        <h3 class="text-lg font-display font-bold text-accent-900">キャンセル登録</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">日付</label>
+                            <input type="date" id="cancel-input-date" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
+                                <select id="cancel-input-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                                    <option value="ebisu">恵比寿駅前店</option>
+                                    <option value="kadomori">大阪KADOMORI店</option>
+                                    <option value="fukushima">福島店</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">スタッフ</label>
+                                <input type="text" id="cancel-input-staff" placeholder="担当スタッフ名" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">媒体</label>
+                                <select id="cancel-input-channel" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                                    <option value="HPB">HPB</option>
+                                    <option value="minimo">minimo</option>
+                                    <option value="Nailie">Nailie</option>
+                                    <option value="電話">電話</option>
+                                    <option value="LINE">LINE</option>
+                                    <option value="その他">その他</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-surface-600 mb-1">種別</label>
+                                <select id="cancel-input-type" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                                    <option value="無断キャンセル">無断キャンセル</option>
+                                    <option value="事前キャンセル">事前キャンセル</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">理由</label>
+                            <select id="cancel-input-reason" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                                <option value="体調不良">体調不良</option>
+                                <option value="仕事・急用">仕事・急用</option>
+                                <option value="忘れていた">忘れていた</option>
+                                <option value="予定変更">予定変更</option>
+                                <option value="天候">天候</option>
+                                <option value="連絡なし">連絡なし</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-surface-600 mb-1">メモ (任意)</label>
+                            <input type="text" id="cancel-input-memo" placeholder="備考" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-kadomori-200 flex gap-3">
+                        <button onclick="closeCancellationModal()" class="flex-1 btn-secondary py-2 text-sm">戻る</button>
+                        <button onclick="saveCancellation()" class="flex-1 btn-primary py-2 text-sm">登録</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- TAB: KPI/KDI -->
             <section id="content-kpi" class="tab-content hidden space-y-8 animate-fade-in">
@@ -6906,6 +7131,7 @@
         function calculateMetrics(data) {
             let agg = {
                 salesTotal: 0, salesCash: 0, salesCredit: 0, salesQR: 0, salesProduct: 0,
+                salesNomination: 0, nominationCount: 0,
                 customersTotal: 0, customersNew: 0, customersExisting: 0,
                 newByChannel: { hpb: 0, mininai: 0 },
                 nextRes: { hpbNew: 0, mininaiNew: 0, existing: 0, total: 0 },
@@ -6947,6 +7173,9 @@
                 agg.salesCredit += salesCredit;
                 agg.salesQR += salesQR;
                 agg.salesProduct += (sales.product || 0);
+                const nominationFee = sales.nomination || 0;
+                agg.salesNomination += nominationFee;
+                if (nominationFee > 0) agg.nominationCount += 1;
                 // 損失 = その他割引 + 返金（HPBポイントとギフト券は売上に含まれるため除外）
                 agg.lossTotal += ((discounts.other || 0) + (discounts.refund || 0));
                 agg.discounts.hpbPoints += (discounts.hpbPoints || 0);
@@ -7031,48 +7260,225 @@
             return role === 'director' ? '院長' : 'メンバー';
         }
 
+        // ========== CANCELLATION ANALYTICS ==========
+        const CANCEL_STORAGE_KEY = 'kadomori_cancellation_data';
+
+        function loadCancellationData() {
+            const stored = localStorage.getItem(CANCEL_STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveCancellationData(data) {
+            localStorage.setItem(CANCEL_STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function openCancellationModal() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('cancel-input-date').value = today;
+            document.getElementById('cancel-input-staff').value = '';
+            document.getElementById('cancel-input-memo').value = '';
+            document.getElementById('cancellation-modal').classList.remove('hidden');
+        }
+
+        function closeCancellationModal() {
+            document.getElementById('cancellation-modal').classList.add('hidden');
+        }
+
+        function saveCancellation() {
+            const entry = {
+                id: Date.now(),
+                date: document.getElementById('cancel-input-date').value,
+                store: document.getElementById('cancel-input-store').value,
+                staff: document.getElementById('cancel-input-staff').value,
+                channel: document.getElementById('cancel-input-channel').value,
+                type: document.getElementById('cancel-input-type').value,
+                reason: document.getElementById('cancel-input-reason').value,
+                memo: document.getElementById('cancel-input-memo').value
+            };
+            const data = loadCancellationData();
+            data.push(entry);
+            saveCancellationData(data);
+            closeCancellationModal();
+            updateCancellationDashboard();
+        }
+
+        function deleteCancellation(id) {
+            const data = loadCancellationData().filter(d => d.id !== id);
+            saveCancellationData(data);
+            updateCancellationDashboard();
+        }
+
+        function updateCancellationDashboard() {
+            const allData = loadCancellationData();
+            const storeFilter = document.getElementById('store-selector')?.value || 'all';
+            const dateSelector = document.getElementById('date-selector');
+            const selectedDate = dateSelector ? dateSelector.value : null;
+
+            // Filter by store and month
+            const filtered = allData.filter(d => {
+                if (storeFilter !== 'all' && d.store !== storeFilter) return false;
+                if (selectedDate) {
+                    const [year, month] = selectedDate.split('/').map(Number);
+                    const dDate = new Date(d.date);
+                    return dDate.getFullYear() === year && (dDate.getMonth() + 1) === month;
+                }
+                return true;
+            });
+
+            const total = filtered.length;
+            const noshow = filtered.filter(d => d.type === '無断キャンセル').length;
+            const advance = filtered.filter(d => d.type === '事前キャンセル').length;
+
+            // Calculate cancel rate based on total customers + cancels
+            const filteredSalesData = getFilteredData();
+            const metrics = calculateMetrics(filteredSalesData);
+            const totalCustomersAndCancels = metrics.customersTotal + total;
+            const cancelRate = totalCustomersAndCancels > 0 ? ((total / totalCustomersAndCancels) * 100).toFixed(1) : '0.0';
+
+            document.getElementById('cancel-total').textContent = `${total}件`;
+            document.getElementById('cancel-noshow').textContent = `${noshow}件`;
+            document.getElementById('cancel-advance').textContent = `${advance}件`;
+            document.getElementById('cancel-rate').textContent = `${cancelRate}%`;
+
+            // Channel chart
+            const channelCounts = {};
+            filtered.forEach(d => { channelCounts[d.channel] = (channelCounts[d.channel] || 0) + 1; });
+            const channelLabels = Object.keys(channelCounts);
+            const channelData = Object.values(channelCounts);
+            const channelColors = [BrandColors.primary, BrandColors.sage, BrandColors.rose, BrandColors.gold, BrandColors.brown, BrandColors.accent];
+
+            if (charts.cancelChannel) charts.cancelChannel.destroy();
+            const ctx1 = document.getElementById('cancelChannelChart')?.getContext('2d');
+            if (ctx1) {
+                charts.cancelChannel = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: channelLabels.length > 0 ? channelLabels : ['データなし'],
+                        datasets: [{ label: 'キャンセル数', data: channelData.length > 0 ? channelData : [0], backgroundColor: channelColors.slice(0, channelLabels.length || 1), borderRadius: 6 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+                });
+            }
+
+            // Type chart (no-show vs advance)
+            if (charts.cancelType) charts.cancelType.destroy();
+            const ctx2 = document.getElementById('cancelTypeChart')?.getContext('2d');
+            if (ctx2) {
+                charts.cancelType = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['無断キャンセル', '事前キャンセル'],
+                        datasets: [{ data: [noshow, advance], backgroundColor: ['#c04040', '#b08d55'], borderWidth: 0 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+                });
+            }
+
+            // Reason chart
+            const reasonCounts = {};
+            filtered.forEach(d => { reasonCounts[d.reason] = (reasonCounts[d.reason] || 0) + 1; });
+            const reasonLabels = Object.keys(reasonCounts);
+            const reasonData = Object.values(reasonCounts);
+            const reasonColors = ['#c04040', '#b08d55', '#2d8a4e', '#5e8f63', '#503d23', '#d4b06a', '#3d5a80'];
+
+            if (charts.cancelReason) charts.cancelReason.destroy();
+            const ctx3 = document.getElementById('cancelReasonChart')?.getContext('2d');
+            if (ctx3) {
+                charts.cancelReason = new Chart(ctx3, {
+                    type: 'pie',
+                    data: {
+                        labels: reasonLabels.length > 0 ? reasonLabels : ['データなし'],
+                        datasets: [{ data: reasonData.length > 0 ? reasonData : [0], backgroundColor: reasonColors.slice(0, reasonLabels.length || 1), borderWidth: 0 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+                });
+            }
+
+            // Reason list
+            const reasonList = document.getElementById('cancel-reason-list');
+            if (reasonList) {
+                const sorted = Object.entries(reasonCounts).sort((a, b) => b[1] - a[1]);
+                reasonList.innerHTML = sorted.length > 0 ? sorted.map(([reason, count]) => {
+                    const pct = total > 0 ? ((count / total) * 100).toFixed(1) : '0.0';
+                    return `<div class="flex items-center justify-between bg-kadomori-50 rounded-lg px-4 py-3">
+                        <span class="text-sm font-medium text-accent-800">${reason}</span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-sm font-bold text-accent-900">${count}件</span>
+                            <span class="text-xs text-surface-500">(${pct}%)</span>
+                        </div>
+                    </div>`;
+                }).join('') : '<p class="text-sm text-surface-500 text-center py-4">キャンセルデータがありません</p>';
+            }
+
+            // Table
+            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const tbody = document.getElementById('cancel-table-body');
+            if (tbody) {
+                const sorted = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
+                tbody.innerHTML = sorted.length > 0 ? sorted.map(d => `<tr class="hover:bg-kadomori-50">
+                    <td class="px-4 py-3 text-sm text-accent-800">${d.date}</td>
+                    <td class="px-4 py-3 text-sm">${storeNames[d.store] || d.store}</td>
+                    <td class="px-4 py-3 text-sm font-medium">${d.staff || '-'}</td>
+                    <td class="px-4 py-3 text-sm">${d.channel}</td>
+                    <td class="px-4 py-3 text-sm"><span class="px-2 py-1 rounded-full text-xs font-bold ${d.type === '無断キャンセル' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}">${d.type}</span></td>
+                    <td class="px-4 py-3 text-sm">${d.reason}${d.memo ? ' <span class="text-xs text-surface-400">(' + d.memo + ')</span>' : ''}</td>
+                    <td class="px-4 py-3 text-sm text-center"><button onclick="deleteCancellation(${d.id})" class="text-red-500 hover:text-red-700 text-xs">削除</button></td>
+                </tr>`).join('') : '<tr><td colspan="7" class="px-4 py-8 text-center text-surface-500">キャンセルデータがありません</td></tr>';
+            }
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
         // ========== NEW CUSTOMER MANAGEMENT SHEET ==========
         function updateNewCustomerSheet() {
             const filtered = getFilteredData();
             const fmt = n => n.toLocaleString();
+            const pct = (a, b) => b > 0 ? ((a / b) * 100).toFixed(2) + '%' : '0%';
             const convDef = document.getElementById('nc-conversion-def')?.value || 'nextRes';
 
             let totalNewCount = 0, totalNewSales = 0, totalNextRes = 0, totalConverted = 0;
             let hpbCount = 0, mininaiCount = 0;
-            const staffBreakdown = {};
+
+            // 媒体別・担当別の集計
+            // channels: HPB, sattou(minimo/Nailie)
+            const mediaData = { HPB: {}, sattou: {} };
+            const totalByStaff = {};
 
             filtered.forEach(d => {
+                const staff = d.staff || 'unknown';
                 const newHPB = d.customers.newHPB || 0;
                 const newMini = d.customers.newMiniNai || 0;
-                const newTotal = newHPB + newMini;
-                const allCustomers = newTotal + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
-                const totalSales = (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                const unitPrice = allCustomers > 0 ? totalSales / allCustomers : 0;
-                const estNewSales = Math.round(unitPrice * newTotal);
+                const nextResHPB = d.nextRes?.newHPB || 0;
+                const nextResMini = d.nextRes?.newMiniNai || 0;
 
-                totalNewCount += newTotal;
-                totalNewSales += estNewSales;
                 hpbCount += newHPB;
                 mininaiCount += newMini;
+                totalNewCount += newHPB + newMini;
+                totalNextRes += nextResHPB + nextResMini;
+                totalConverted += nextResHPB + nextResMini;
 
-                const nextResNew = (d.nextRes?.hpbNew || 0) + (d.nextRes?.mininaiNew || 0);
-                totalNextRes += nextResNew;
+                const allCustomers = newHPB + newMini + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
+                const totalSales = (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
+                const unitPrice = allCustomers > 0 ? totalSales / allCustomers : 0;
+                totalNewSales += Math.round(unitPrice * (newHPB + newMini));
 
-                // Conversion based on definition
-                if (convDef === 'nextRes') totalConverted += nextResNew;
-                else if (convDef === 'nextResOrSub') totalConverted += nextResNew;
-                else totalConverted += nextResNew; // fallback
+                // HPB集計
+                if (!mediaData.HPB[staff]) mediaData.HPB[staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
+                mediaData.HPB[staff].reservations += newHPB;
+                mediaData.HPB[staff].nextRes += nextResHPB;
+                mediaData.HPB[staff].conversions += nextResHPB;
 
-                const key = `${d.store}|${d.staff}`;
-                if (!staffBreakdown[key]) {
-                    staffBreakdown[key] = { store: d.store, staff: d.staff, newCount: 0, hpb: 0, mini: 0, sales: 0, nextRes: 0, converted: 0 };
-                }
-                staffBreakdown[key].newCount += newTotal;
-                staffBreakdown[key].hpb += newHPB;
-                staffBreakdown[key].mini += newMini;
-                staffBreakdown[key].sales += estNewSales;
-                staffBreakdown[key].nextRes += nextResNew;
-                staffBreakdown[key].converted += nextResNew;
+                // sattou (minimo/Nailie) 集計
+                if (!mediaData.sattou[staff]) mediaData.sattou[staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
+                mediaData.sattou[staff].reservations += newMini;
+                mediaData.sattou[staff].nextRes += nextResMini;
+                mediaData.sattou[staff].conversions += nextResMini;
+
+                // 全体合計
+                if (!totalByStaff[staff]) totalByStaff[staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
+                totalByStaff[staff].reservations += newHPB + newMini;
+                totalByStaff[staff].nextRes += nextResHPB + nextResMini;
+                totalByStaff[staff].conversions += nextResHPB + nextResMini;
             });
 
             const convRate = totalNewCount > 0 ? ((totalConverted / totalNewCount) * 100).toFixed(1) : '0.0';
@@ -7099,23 +7505,79 @@
                 });
             }
 
-            // Breakdown Table
-            const tbody = document.getElementById('nc-breakdown-tbody');
-            if (tbody) {
-                const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
-                const rows = Object.values(staffBreakdown).sort((a, b) => b.sales - a.sales);
-                tbody.innerHTML = rows.map(r => {
-                    const nrRate = r.newCount > 0 ? ((r.nextRes / r.newCount) * 100).toFixed(1) : '0.0';
-                    const cRate = r.newCount > 0 ? ((r.converted / r.newCount) * 100).toFixed(1) : '0.0';
+            // 媒体別テーブル生成
+            function buildMediaTable(title, staffMap) {
+                const entries = Object.entries(staffMap).filter(([, v]) => v.reservations > 0);
+                if (entries.length === 0) return '';
+                const rows = entries.sort((a, b) => b[1].reservations - a[1].reservations).map(([staff, d]) => {
+                    const nrRate = pct(d.nextRes, d.reservations);
+                    const cRate = pct(d.conversions, d.reservations);
+                    const subRate = d.reservations > 0 ? pct(d.subCount, d.reservations) : '0%';
+                    const ticketRate = d.reservations > 0 ? pct(d.ticketCount, d.reservations) : '0%';
+                    const prepaidRate = d.reservations > 0 ? pct(d.prepaid, d.reservations) : '0%';
                     return `<tr class="hover:bg-kadomori-50">
-                        <td class="px-4 py-3 text-sm text-accent-800">${storeNames[r.store] || r.store}</td>
-                        <td class="px-4 py-3 text-sm font-medium text-accent-900">${r.staff}</td>
-                        <td class="px-4 py-3 text-sm text-right font-bold">${r.newCount}名</td>
-                        <td class="px-4 py-3 text-sm text-right">${r.hpb}</td>
-                        <td class="px-4 py-3 text-sm text-right">${r.mini}</td>
-                        <td class="px-4 py-3 text-sm text-right font-bold text-primary-700">¥${fmt(r.sales)}</td>
-                        <td class="px-4 py-3 text-sm text-right">${nrRate}%</td>
-                        <td class="px-4 py-3 text-sm text-right">${cRate}%</td>
+                        <td class="px-4 py-2 text-sm font-medium text-accent-900">${staff}</td>
+                        <td class="px-4 py-2 text-sm text-right">${d.reservations}</td>
+                        <td class="px-4 py-2 text-sm text-right">${d.nextRes}</td>
+                        <td class="px-4 py-2 text-sm text-right">${nrRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${d.conversions}</td>
+                        <td class="px-4 py-2 text-sm text-right">${cRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${subRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${ticketRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${prepaidRate}</td>
+                    </tr>`;
+                }).join('');
+
+                return `<div class="bg-white rounded-lg shadow-sm border border-kadomori-200 overflow-hidden">
+                    <div class="px-6 py-3 bg-kadomori-50 border-b border-kadomori-200">
+                        <h3 class="text-sm font-bold text-accent-800 uppercase">${title}</h3>
+                    </div>
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="min-w-full divide-y divide-kadomori-200">
+                            <thead class="bg-kadomori-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-xs font-medium text-accent-800">担当</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">予約</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">次回予約</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">次回予約率</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">成約数</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">成約率</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">サブスク率</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">回数券率</th>
+                                    <th class="px-4 py-2 text-right text-xs font-medium text-accent-800">前払い</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-kadomori-100">${rows}</tbody>
+                        </table>
+                    </div>
+                </div>`;
+            }
+
+            const mediaTables = document.getElementById('nc-media-tables');
+            if (mediaTables) {
+                mediaTables.innerHTML = buildMediaTable('HPB', mediaData.HPB) + buildMediaTable('sattou (minimo/Nailie)', mediaData.sattou);
+            }
+
+            // 全体合計テーブル
+            const totalTbody = document.getElementById('nc-total-tbody');
+            if (totalTbody) {
+                const entries = Object.entries(totalByStaff).sort((a, b) => b[1].reservations - a[1].reservations);
+                totalTbody.innerHTML = entries.map(([staff, d]) => {
+                    const nrRate = pct(d.nextRes, d.reservations);
+                    const cRate = pct(d.conversions, d.reservations);
+                    const subRate = pct(d.subCount, d.reservations);
+                    const ticketRate = pct(d.ticketCount, d.reservations);
+                    const prepaidRate = pct(d.prepaid, d.reservations);
+                    return `<tr class="hover:bg-kadomori-50">
+                        <td class="px-4 py-2 text-sm font-medium text-accent-900">${staff}</td>
+                        <td class="px-4 py-2 text-sm text-right">${d.reservations}</td>
+                        <td class="px-4 py-2 text-sm text-right">${d.nextRes}</td>
+                        <td class="px-4 py-2 text-sm text-right">${nrRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${d.conversions}</td>
+                        <td class="px-4 py-2 text-sm text-right">${cRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${subRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${ticketRate}</td>
+                        <td class="px-4 py-2 text-sm text-right">${prepaidRate}</td>
                     </tr>`;
                 }).join('');
             }
@@ -7209,13 +7671,17 @@
             const totalSales = metrics.salesTotal;
             const retailSales = metrics.salesProduct || 0;
             const serviceSales = totalSales - retailSales;
-            const discounts = (metrics.discounts?.hpbPoints || 0) + (metrics.discounts?.hpbGift || 0) + (metrics.discounts?.other || 0) + (metrics.discounts?.refund || 0);
-            const netSales = totalSales - discounts;
+            const nominationFee = metrics.salesNomination || 0;
+            const nominationCount = metrics.nominationCount || 0;
+            // 純売上 = 総売上 − 指名料 − 物販（KADOMORIの定義）
+            const netSales = totalSales - nominationFee - retailSales;
 
             document.getElementById('sales-total').textContent = `¥${fmt(totalSales)}`;
             document.getElementById('sales-service').textContent = `¥${fmt(serviceSales)}`;
             document.getElementById('sales-retail').textContent = `¥${fmt(retailSales)}`;
             document.getElementById('sales-net').textContent = `¥${fmt(netSales)}`;
+            document.getElementById('sales-nomination').textContent = `¥${fmt(nominationFee)}`;
+            document.getElementById('sales-nomination-count').textContent = `${nominationCount}件`;
 
             // Role-based table
             const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
@@ -7223,11 +7689,14 @@
             filtered.forEach(d => {
                 const key = `${d.store}_${d.staff}`;
                 if (!staffData[key]) {
-                    staffData[key] = { store: d.store, staff: d.staff, total: 0, product: 0, discounts: 0, customers: 0 };
+                    staffData[key] = { store: d.store, staff: d.staff, total: 0, product: 0, nomination: 0, nominationDays: 0, discounts: 0, customers: 0 };
                 }
                 const s = staffData[key];
                 s.total += (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
                 s.product += (d.sales.product || 0);
+                const nomFee = d.sales.nomination || 0;
+                s.nomination += nomFee;
+                if (nomFee > 0) s.nominationDays += 1;
                 s.discounts += (d.discounts?.hpbPoints || 0) + (d.discounts?.hpbGift || 0) + (d.discounts?.other || 0) + (d.discounts?.refund || 0);
                 s.customers += (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0) + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
             });
@@ -7235,20 +7704,51 @@
             const roleBody = document.getElementById('sales-role-tbody');
             if (roleBody) {
                 const rows = Object.values(staffData).sort((a, b) => b.total - a.total);
-                roleBody.innerHTML = rows.map(r => {
+                let memberTotal = 0, memberService = 0, memberProduct = 0, memberNom = 0, memberNomDays = 0, memberCustomers = 0;
+                let directorTotal = 0;
+
+                const rowsHtml = rows.map(r => {
                     const role = getStaffRole(r.store, r.staff);
                     const service = r.total - r.product;
-                    const net = r.total - r.discounts;
+                    const net = r.total - r.nomination - r.product;
+                    if (role === 'director') {
+                        directorTotal += r.total;
+                    } else {
+                        memberTotal += r.total;
+                        memberService += service;
+                        memberProduct += r.product;
+                        memberNom += r.nomination;
+                        memberNomDays += r.nominationDays;
+                        memberCustomers += r.customers;
+                    }
                     return `<tr class="hover:bg-kadomori-50">
                         <td class="px-4 py-3 text-sm"><span class="px-2 py-1 rounded-full text-xs font-bold ${role === 'director' ? 'bg-rose-100 text-rose-700' : 'bg-primary-50 text-primary-700'}">${getRoleLabel(role)}</span></td>
                         <td class="px-4 py-3 text-sm font-medium text-accent-900">${r.staff} <span class="text-xs text-surface-500">(${storeNames[r.store] || r.store})</span></td>
                         <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(r.total)}</td>
                         <td class="px-4 py-3 text-sm text-right">¥${fmt(service)}</td>
                         <td class="px-4 py-3 text-sm text-right">¥${fmt(r.product)}</td>
-                        <td class="px-4 py-3 text-sm text-right">¥${fmt(net)}</td>
+                        <td class="px-4 py-3 text-sm text-right">¥${fmt(r.nomination)}</td>
+                        <td class="px-4 py-3 text-sm text-right">${r.nominationDays}件</td>
+                        <td class="px-4 py-3 text-sm text-right font-bold text-primary-700">¥${fmt(net)}</td>
                         <td class="px-4 py-3 text-sm text-right">${r.customers}名</td>
                     </tr>`;
                 }).join('');
+
+                // メンバー合計行
+                const memberNet = memberTotal - memberNom - memberProduct;
+                const memberRow = `<tr class="bg-primary-50 font-bold border-t-2 border-primary-300">
+                    <td class="px-4 py-3 text-sm"><span class="px-2 py-1 rounded-full text-xs font-bold bg-primary-500 text-white">メンバー合計</span></td>
+                    <td class="px-4 py-3 text-sm text-primary-800">院長売上を除く</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">¥${fmt(memberTotal)}</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">¥${fmt(memberService)}</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">¥${fmt(memberProduct)}</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">¥${fmt(memberNom)}</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">${memberNomDays}件</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">¥${fmt(memberNet)}</td>
+                    <td class="px-4 py-3 text-sm text-right text-primary-800">${memberCustomers}名</td>
+                </tr>`;
+
+                roleBody.innerHTML = rowsHtml + memberRow;
             }
 
             // Annual Sales
@@ -8721,6 +9221,9 @@
 
             // Update Blog Progress
             updateBlogProgress();
+
+            // Update Member Sales KPI (excluding director)
+            updateMemberSalesKPI(filtered);
         }
 
         function updateStaffDashboard(staffName, personalMetrics, incentiveData) {
@@ -9249,6 +9752,35 @@
         }
 
         // ブログ・SNS更新進捗を更新
+        // ========== MEMBER SALES KPI (院長除外) ==========
+        function updateMemberSalesKPI(filtered) {
+            const fmt = n => n.toLocaleString();
+            let memberSales = 0, memberCustomers = 0;
+            let directorSales = 0, directorCustomers = 0;
+
+            filtered.forEach(d => {
+                const role = getStaffRole(d.store, d.staff);
+                const sales = (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
+                const cust = (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0) + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
+
+                if (role === 'director') {
+                    directorSales += sales;
+                    directorCustomers += cust;
+                } else {
+                    memberSales += sales;
+                    memberCustomers += cust;
+                }
+            });
+
+            const memberUnitPrice = memberCustomers > 0 ? Math.round(memberSales / memberCustomers) : 0;
+
+            const el = id => document.getElementById(id);
+            if (el('kpi-member-sales')) el('kpi-member-sales').textContent = `¥${fmt(memberSales)}`;
+            if (el('kpi-member-customers')) el('kpi-member-customers').textContent = `${fmt(memberCustomers)}名`;
+            if (el('kpi-member-unit-price')) el('kpi-member-unit-price').textContent = `¥${fmt(memberUnitPrice)}`;
+            if (el('kpi-director-sales')) el('kpi-director-sales').textContent = `¥${fmt(directorSales)}`;
+        }
+
         function updateBlogProgress() {
             const container = document.getElementById('blog-progress-container');
             if (!container) return;
@@ -10257,6 +10789,11 @@
             // Load advertising when switching
             if (id === 'advertising') {
                 updateAdvertisingDashboard();
+            }
+
+            // Load cancellation analytics when switching
+            if (id === 'cancellation') {
+                updateCancellationDashboard();
             }
 
             // Load LTV when switching
