@@ -6,14 +6,14 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)">
     <title>KADOMORI | 鍼灸サロンダッシュボード</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,89 +24,90 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Tailwind Config - Premium Color Palette -->
+    <!-- Tailwind Config - KADOMORI Black & Gold Premium Palette -->
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        // KADOMORI Theme - 鍼灸サロン (深緑 & 和紙ベージュ)
+                        // KADOMORI Theme - Black & Gold (高級感)
                         primary: {
-                            50: '#f0f7f2',
-                            100: '#d9ede0',
-                            200: '#b3dbc1',
-                            300: '#8dc9a2',
-                            400: '#5aab72',
-                            500: '#2d8a4e',  // 深緑 (鍼灸の落ち着き)
-                            600: '#247040',
-                            700: '#1c5732',
-                            800: '#154125',
-                            900: '#0e2c19',
+                            50: '#f7f7f7',
+                            100: '#e3e3e3',
+                            200: '#c8c8c8',
+                            300: '#a4a4a4',
+                            400: '#6b6b6b',
+                            500: '#1a1a1a',  // ブラック (洗練)
+                            600: '#141414',
+                            700: '#0f0f0f',
+                            800: '#0a0a0a',
+                            900: '#050505',
                         },
                         accent: {
-                            50: '#faf6f1',
-                            100: '#f0e6d6',
-                            200: '#e0cdae',
-                            300: '#c9ac7e',
-                            400: '#b08d55',
-                            500: '#8b6d3f',
-                            600: '#6b5330',
-                            700: '#503d23',  // ダークブラウン (木の温もり)
-                            800: '#3d2b1f',
-                            900: '#2a1c14',
+                            50: '#fdf9f0',
+                            100: '#f9f0d9',
+                            200: '#f2e0b3',
+                            300: '#e8cc85',
+                            400: '#d4b06a',
+                            500: '#c4a265',  // ゴールド (ロゴカラー)
+                            600: '#a8894e',
+                            700: '#8b6d3f',
+                            800: '#6b5330',
+                            900: '#4a3a21',
                         },
                         surface: {
-                            50: '#faf8f4',
-                            100: '#f5f0e8',
-                            200: '#ebe3d5',
-                            300: '#ddd3c0',
-                            400: '#c7b9a3',
-                            500: '#a89880',
-                            600: '#8a7b68',
-                            700: '#6d6154',
-                            800: '#544b40',
-                            900: '#3d3730',
+                            50: '#fafafa',
+                            100: '#f5f5f4',
+                            200: '#e8e8e6',
+                            300: '#d6d6d3',
+                            400: '#a8a8a3',
+                            500: '#73736e',
+                            600: '#535350',
+                            700: '#3d3d3a',
+                            800: '#282825',
+                            900: '#1a1a18',
                         },
                         // Harmonious accent colors
                         sage: {
-                            400: '#7da882',
-                            500: '#5e8f63',  // 抹茶グリーン
-                            600: '#4a7350',
+                            400: '#a8a8a3',
+                            500: '#73736e',
+                            600: '#535350',
                         },
                         rose: {
                             400: '#d4877a',
-                            500: '#c04040',  // 朱色 (アクセント)
+                            500: '#c04040',
                             600: '#a03535',
                         },
                         warmgold: {
                             400: '#d4b06a',
-                            500: '#b08d55',  // 金茶
-                            600: '#8b6d3f',
+                            500: '#c4a265',
+                            600: '#a8894e',
                         },
                         // Brand colors - kadomori
                         kadomori: {
-                            50: '#faf8f4',
-                            100: '#f5f0e8',
-                            200: '#ebe3d5',
-                            300: '#ddd3c0',
-                            400: '#2d8a4e',
-                            500: '#a89880',
-                            600: '#5e8f63',
-                            700: '#503d23',
-                            800: '#3d2b1f',
-                            900: '#2a1c14',
+                            50: '#fafafa',
+                            100: '#f5f5f4',
+                            200: '#e8e8e6',
+                            300: '#d6d6d3',
+                            400: '#c4a265',
+                            500: '#1a1a1a',
+                            600: '#a8894e',
+                            700: '#0f0f0f',
+                            800: '#0a0a0a',
+                            900: '#050505',
                         }
                     },
                     fontFamily: {
-                        display: ['"Zen Maru Gothic"', '"Hiragino Maru Gothic ProN"', 'sans-serif'],
+                        display: ['"Cormorant Garamond"', '"Zen Maru Gothic"', '"Hiragino Maru Gothic ProN"', 'serif'],
+                        body: ['"Zen Maru Gothic"', '"Hiragino Maru Gothic ProN"', 'sans-serif'],
                         sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
                     },
                     boxShadow: {
                         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
                         'soft-lg': '0 10px 40px -10px rgba(0, 0, 0, 0.1), 0 2px 10px -2px rgba(0, 0, 0, 0.04)',
-                        'glow': '0 0 20px rgba(45, 138, 78, 0.15)',
-                        'glow-accent': '0 0 20px rgba(80, 61, 35, 0.2)',
+                        'glow': '0 0 20px rgba(196, 162, 101, 0.2)',
+                        'glow-accent': '0 0 20px rgba(26, 26, 26, 0.15)',
                     }
                 }
             }
@@ -127,10 +128,10 @@
 
         body {
             background:
-                radial-gradient(ellipse at 15% 0%, rgba(45, 138, 78, 0.04) 0%, transparent 45%),
-                radial-gradient(ellipse at 85% 100%, rgba(139, 109, 63, 0.04) 0%, transparent 45%),
-                radial-gradient(ellipse at 50% 50%, rgba(94, 143, 99, 0.02) 0%, transparent 60%),
-                linear-gradient(180deg, #faf8f4 0%, #f5f0e8 40%, #ebe3d5 100%);
+                radial-gradient(ellipse at 15% 0%, rgba(196, 162, 101, 0.04) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 100%, rgba(26, 26, 26, 0.03) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(196, 162, 101, 0.02) 0%, transparent 60%),
+                linear-gradient(180deg, #ffffff 0%, #fafafa 40%, #f5f5f4 100%);
             min-height: 100vh;
             position: relative;
         }
@@ -143,7 +144,7 @@
             right: 0;
             bottom: 0;
             background:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d8a4e' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a265' fill-opacity='0.012'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 0;
             opacity: 0.4;
@@ -182,17 +183,17 @@
         .custom-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #2d8a4e, #5aab72);
+            background: linear-gradient(135deg, #c4a265, #d4b06a);
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #e9ecef; }
+        ::-webkit-scrollbar-track { background: #f0f0ee; }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #2d8a4e, #5aab72);
+            background: linear-gradient(135deg, #c4a265, #d4b06a);
             border-radius: 10px;
         }
-        ::-webkit-scrollbar-thumb:hover { background: #1c5732; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8894e; }
 
         /* Animations */
         @keyframes fadeIn {
@@ -280,7 +281,7 @@
         }
 
         select:focus, input:focus {
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 0 3px rgba(196, 162, 101, 0.15);
         }
 
         /* Edit Table Styles */
@@ -307,8 +308,8 @@
 
         .edit-input:focus {
             outline: none;
-            border-color: #2d8a4e;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            border-color: #c4a265;
+            box-shadow: 0 0 0 3px rgba(196, 162, 101, 0.15);
         }
 
         .edit-readonly {
@@ -335,7 +336,7 @@
         /* Mobile Accordion Styles */
         body.mobile-mode .mobile-accordion-header {
             cursor: pointer;
-            background: linear-gradient(135deg, #1a1f2e, #2d3748);
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
             color: white;
             padding: 1rem 1.25rem;
             border-radius: 12px;
@@ -344,7 +345,7 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(26, 31, 46, 0.3);
+            box-shadow: 0 4px 15px rgba(26, 26, 26, 0.3);
         }
 
         body.mobile-mode .mobile-accordion-content {
@@ -385,7 +386,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(45, 138, 78, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(196, 162, 101, 0.4), transparent);
         }
 
         .premium-card:hover {
@@ -396,32 +397,32 @@
             transform: translateY(-4px);
         }
 
-        /* Gradient Backgrounds - Harmonious Colors */
+        /* Gradient Backgrounds - Black & Gold */
         .gradient-primary {
-            background: linear-gradient(135deg, #2d8a4e 0%, #3a9d5e 50%, #5aab72 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #3d3d3d 100%);
             background-size: 200% 200%;
             animation: gradientShift 5s ease infinite;
-            box-shadow: 0 4px 15px rgba(45, 138, 78, 0.35);
+            box-shadow: 0 4px 15px rgba(26, 26, 26, 0.35);
         }
 
         .gradient-accent {
-            background: linear-gradient(135deg, #503d23 0%, #6b5330 50%, #8b6d3f 100%);
+            background: linear-gradient(135deg, #a8894e 0%, #c4a265 50%, #d4b06a 100%);
             background-size: 200% 200%;
             animation: gradientShift 5s ease infinite;
-            box-shadow: 0 4px 15px rgba(80, 61, 35, 0.35);
+            box-shadow: 0 4px 15px rgba(196, 162, 101, 0.35);
         }
 
         .gradient-surface {
-            background: linear-gradient(135deg, #faf8f4 0%, #ffffff 50%, #ebe3d5 100%);
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f5f5f4 100%);
             background-size: 200% 200%;
             animation: gradientShift 5s ease infinite;
         }
 
         .gradient-sage {
-            background: linear-gradient(135deg, #4a7350 0%, #5e8f63 50%, #7da882 100%);
+            background: linear-gradient(135deg, #535350 0%, #73736e 50%, #a8a8a3 100%);
             background-size: 200% 200%;
             animation: gradientShift 5s ease infinite;
-            box-shadow: 0 4px 15px rgba(94, 143, 99, 0.35);
+            box-shadow: 0 4px 15px rgba(115, 115, 110, 0.35);
         }
 
         .gradient-rose {
@@ -432,10 +433,10 @@
         }
 
         .gradient-warmgold {
-            background: linear-gradient(135deg, #8b6d3f 0%, #b08d55 50%, #d4b06a 100%);
+            background: linear-gradient(135deg, #a8894e 0%, #c4a265 50%, #d4b06a 100%);
             background-size: 200% 200%;
             animation: gradientShift 5s ease infinite;
-            box-shadow: 0 4px 15px rgba(139, 109, 63, 0.35);
+            box-shadow: 0 4px 15px rgba(196, 162, 101, 0.35);
         }
 
         @keyframes gradientShift {
@@ -449,15 +450,15 @@
         }
 
         .kpi-card:hover .gradient-primary {
-            box-shadow: 0 6px 20px rgba(45, 138, 78, 0.45);
+            box-shadow: 0 6px 20px rgba(26, 26, 26, 0.45);
         }
 
         .kpi-card:hover .gradient-accent {
-            box-shadow: 0 6px 20px rgba(80, 61, 35, 0.45);
+            box-shadow: 0 6px 20px rgba(196, 162, 101, 0.45);
         }
 
         .kpi-card:hover .gradient-sage {
-            box-shadow: 0 6px 20px rgba(94, 143, 99, 0.45);
+            box-shadow: 0 6px 20px rgba(115, 115, 110, 0.45);
         }
 
         .kpi-card:hover .gradient-rose {
@@ -465,15 +466,15 @@
         }
 
         .kpi-card:hover .gradient-warmgold {
-            box-shadow: 0 6px 20px rgba(139, 109, 63, 0.45);
+            box-shadow: 0 6px 20px rgba(196, 162, 101, 0.45);
         }
 
         /* KPI Card Accents */
-        .kpi-accent-1 { border-left: 4px solid #2d8a4e; }
-        .kpi-accent-2 { border-left: 4px solid #1a1f2e; }
-        .kpi-accent-3 { border-left: 4px solid #2d3748; }
-        .kpi-accent-4 { border-left: 4px solid #5aab72; }
-        .kpi-accent-5 { border-left: 4px solid #d97706; }
+        .kpi-accent-1 { border-left: 4px solid #c4a265; }
+        .kpi-accent-2 { border-left: 4px solid #1a1a1a; }
+        .kpi-accent-3 { border-left: 4px solid #2d2d2d; }
+        .kpi-accent-4 { border-left: 4px solid #d4b06a; }
+        .kpi-accent-5 { border-left: 4px solid #a8894e; }
 
         /* Tab Styles - Elegant & Harmonious */
         .tab-btn {
@@ -488,7 +489,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(45, 138, 78, 0.08) 0%, rgba(94, 143, 99, 0.04) 100%);
+            background: linear-gradient(135deg, rgba(196, 162, 101, 0.08) 0%, rgba(212, 176, 106, 0.04) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -505,7 +506,7 @@
             transform: translateX(-50%);
             width: 0;
             height: 3px;
-            background: linear-gradient(90deg, #2d8a4e, #3a9d5e, #5aab72);
+            background: linear-gradient(90deg, #a8894e, #c4a265, #d4b06a);
             border-radius: 3px 3px 0 0;
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -522,7 +523,7 @@
         .tab-btn.active::after {
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #2d8a4e, #3a9d5e, #5aab72, #3a9d5e, #2d8a4e);
+            background: linear-gradient(90deg, #a8894e, #c4a265, #d4b06a, #c4a265, #a8894e);
             background-size: 200% 100%;
             animation: tabGradient 4s ease infinite;
         }
@@ -541,12 +542,12 @@
         }
 
         .tab-btn.active i {
-            color: #2d8a4e;
+            color: #c4a265;
         }
 
-        /* Premium Buttons - Elegant & Harmonious */
+        /* Premium Buttons - Black & Gold */
         .btn-primary {
-            background: linear-gradient(135deg, #2d8a4e 0%, #3a9d5e 50%, #1c5732 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #0f0f0f 100%);
             background-size: 200% 200%;
             color: white;
             border: none;
@@ -555,8 +556,8 @@
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
-                0 4px 20px rgba(45, 138, 78, 0.35),
-                inset 0 1px 0 rgba(255,255,255,0.2);
+                0 4px 20px rgba(26, 26, 26, 0.35),
+                inset 0 1px 0 rgba(255,255,255,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -571,7 +572,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 255, 255, 0.3),
+                rgba(196, 162, 101, 0.3),
                 transparent
             );
             transition: left 0.5s ease;
@@ -580,9 +581,9 @@
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 8px 30px rgba(45, 138, 78, 0.45),
-                0 0 20px rgba(45, 138, 78, 0.2),
-                inset 0 1px 0 rgba(255,255,255,0.3);
+                0 8px 30px rgba(26, 26, 26, 0.45),
+                0 0 20px rgba(196, 162, 101, 0.15),
+                inset 0 1px 0 rgba(255,255,255,0.15);
             background-position: 100% 100%;
         }
 
@@ -595,7 +596,7 @@
         }
 
         .btn-secondary {
-            background: linear-gradient(135deg, #503d23 0%, #6b5330 50%, #3d2b1f 100%);
+            background: linear-gradient(135deg, #a8894e 0%, #c4a265 50%, #8b6d3f 100%);
             background-size: 200% 200%;
             color: white;
             border: none;
@@ -604,8 +605,8 @@
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
-                0 4px 20px rgba(80, 61, 35, 0.35),
-                inset 0 1px 0 rgba(255,255,255,0.1);
+                0 4px 20px rgba(196, 162, 101, 0.35),
+                inset 0 1px 0 rgba(255,255,255,0.2);
             position: relative;
             overflow: hidden;
         }
@@ -629,9 +630,9 @@
         .btn-secondary:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 8px 30px rgba(80, 61, 35, 0.45),
-                0 0 20px rgba(107, 83, 48, 0.2),
-                inset 0 1px 0 rgba(255,255,255,0.15);
+                0 8px 30px rgba(196, 162, 101, 0.45),
+                0 0 20px rgba(196, 162, 101, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.25);
             background-position: 100% 100%;
         }
 
@@ -645,16 +646,16 @@
 
         /* Warm Gold Button Style */
         .btn-gold {
-            background: linear-gradient(135deg, #b08d55 0%, #d4b06a 50%, #8b6d3f 100%);
+            background: linear-gradient(135deg, #c4a265 0%, #d4b06a 50%, #a8894e 100%);
             background-size: 200% 200%;
-            color: #3d2b1f;
+            color: #1a1a1a;
             border: none;
             padding: 12px 24px;
             border-radius: 12px;
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
-                0 4px 20px rgba(139, 109, 63, 0.35),
+                0 4px 20px rgba(196, 162, 101, 0.35),
                 inset 0 1px 0 rgba(255,255,255,0.4);
             position: relative;
             overflow: hidden;
@@ -663,14 +664,14 @@
         .btn-gold:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 8px 30px rgba(139, 109, 63, 0.5),
-                0 0 25px rgba(139, 109, 63, 0.3),
+                0 8px 30px rgba(196, 162, 101, 0.5),
+                0 0 25px rgba(196, 162, 101, 0.3),
                 inset 0 1px 0 rgba(255,255,255,0.5);
         }
 
-        /* Sage Button Style */
+        /* Sage Button Style (now neutral/charcoal) */
         .btn-sage {
-            background: linear-gradient(135deg, #4a7350 0%, #5e8f63 50%, #7da882 100%);
+            background: linear-gradient(135deg, #3d3d3a 0%, #535350 50%, #73736e 100%);
             background-size: 200% 200%;
             color: white;
             border: none;
@@ -679,8 +680,8 @@
             font-weight: 600;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow:
-                0 4px 20px rgba(115, 153, 119, 0.35),
-                inset 0 1px 0 rgba(255,255,255,0.2);
+                0 4px 20px rgba(61, 61, 58, 0.35),
+                inset 0 1px 0 rgba(255,255,255,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -688,9 +689,9 @@
         .btn-sage:hover {
             transform: translateY(-3px) scale(1.02);
             box-shadow:
-                0 8px 30px rgba(115, 153, 119, 0.45),
-                0 0 20px rgba(115, 153, 119, 0.2),
-                inset 0 1px 0 rgba(255,255,255,0.3);
+                0 8px 30px rgba(61, 61, 58, 0.45),
+                0 0 20px rgba(61, 61, 58, 0.2),
+                inset 0 1px 0 rgba(255,255,255,0.15);
         }
 
         /* Glass Effect */
@@ -707,31 +708,31 @@
 
         .dark body {
             background:
-                radial-gradient(ellipse at 15% 0%, rgba(184, 149, 106, 0.06) 0%, transparent 45%),
-                radial-gradient(ellipse at 85% 100%, rgba(176, 143, 138, 0.04) 0%, transparent 45%),
-                radial-gradient(ellipse at 50% 50%, rgba(71, 86, 107, 0.03) 0%, transparent 60%),
-                linear-gradient(180deg, #1e1f23 0%, #18191c 50%, #121315 100%) !important;
-            color: #f3ede3 !important;
+                radial-gradient(ellipse at 15% 0%, rgba(196, 162, 101, 0.04) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 100%, rgba(196, 162, 101, 0.03) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(196, 162, 101, 0.02) 0%, transparent 60%),
+                linear-gradient(180deg, #141414 0%, #0f0f0f 50%, #0a0a0a 100%) !important;
+            color: #f0ece4 !important;
         }
 
         .dark body::before {
             background:
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8956a' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a265' fill-opacity='0.012'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             opacity: 0.25;
         }
 
         /* Background Colors - New Palette */
         .dark .bg-surface-50,
         .dark .bg-white {
-            background-color: #1e2024 !important;
+            background-color: #1a1a1a !important;
         }
 
         .dark .bg-surface-100 {
-            background-color: #262a2e !important;
+            background-color: #222222 !important;
         }
 
         .dark .bg-surface-200 {
-            background-color: #2e3236 !important;
+            background-color: #2a2a2a !important;
         }
 
         /* Text Colors - New Palette */
@@ -746,7 +747,7 @@
         }
 
         .dark .text-primary-500 {
-            color: #db9179 !important;
+            color: #d4b06a !important;
         }
 
         .dark .text-gray-500 {
@@ -760,85 +761,85 @@
         /* Border Colors - New Palette */
         .dark .border-surface-200,
         .dark .border-surface-300 {
-            border-color: #3a3e42 !important;
+            border-color: #333333 !important;
         }
 
         /* Premium Cards in Dark Mode - Elegant */
         .dark .premium-card {
-            background: linear-gradient(145deg, rgba(30, 31, 35, 0.98) 0%, rgba(36, 37, 41, 0.95) 100%) !important;
-            border: 1px solid rgba(55, 56, 60, 0.4) !important;
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.98) 0%, rgba(34, 34, 34, 0.95) 100%) !important;
+            border: 1px solid rgba(50, 50, 50, 0.5) !important;
             box-shadow:
-                0 4px 32px -8px rgba(0, 0, 0, 0.25),
-                0 8px 24px -12px rgba(0, 0, 0, 0.15),
+                0 4px 32px -8px rgba(0, 0, 0, 0.3),
+                0 8px 24px -12px rgba(0, 0, 0, 0.2),
                 inset 0 1px 0 rgba(255,255,255,0.04);
         }
 
         .dark .premium-card::before {
-            background: linear-gradient(90deg, transparent, rgba(184, 149, 106, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(196, 162, 101, 0.15), transparent);
         }
 
         .dark .premium-card:hover {
             box-shadow:
-                0 20px 60px -15px rgba(0, 0, 0, 0.35),
-                0 8px 32px -8px rgba(0, 0, 0, 0.25),
-                0 0 20px rgba(184, 149, 106, 0.04),
+                0 20px 60px -15px rgba(0, 0, 0, 0.4),
+                0 8px 32px -8px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(196, 162, 101, 0.06),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         /* KPI Cards in Dark Mode - Elegant */
         .dark .kpi-card {
-            background: linear-gradient(145deg, rgba(30, 31, 35, 0.95) 0%, rgba(36, 37, 41, 0.9) 100%) !important;
-            border: 1px solid rgba(55, 56, 60, 0.5) !important;
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.95) 0%, rgba(34, 34, 34, 0.9) 100%) !important;
+            border: 1px solid rgba(50, 50, 50, 0.5) !important;
             box-shadow:
-                0 4px 24px -4px rgba(0, 0, 0, 0.3),
-                0 8px 32px -8px rgba(0, 0, 0, 0.2),
+                0 4px 24px -4px rgba(0, 0, 0, 0.35),
+                0 8px 32px -8px rgba(0, 0, 0, 0.25),
                 inset 0 1px 0 rgba(255,255,255,0.04);
         }
 
         .dark .kpi-card:hover {
             box-shadow:
-                0 20px 40px -12px rgba(0, 0, 0, 0.4),
-                0 8px 24px -8px rgba(0, 0, 0, 0.3),
+                0 20px 40px -12px rgba(0, 0, 0, 0.45),
+                0 8px 24px -8px rgba(0, 0, 0, 0.35),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         .dark .kpi-card.accent-primary:hover {
             box-shadow:
-                0 20px 40px -12px rgba(184, 149, 106, 0.15),
-                0 0 25px rgba(184, 149, 106, 0.08),
+                0 20px 40px -12px rgba(196, 162, 101, 0.15),
+                0 0 25px rgba(196, 162, 101, 0.08),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         .dark .kpi-card.accent-navy:hover {
             box-shadow:
-                0 20px 40px -12px rgba(86, 104, 130, 0.15),
-                0 0 25px rgba(86, 104, 130, 0.08),
+                0 20px 40px -12px rgba(26, 26, 26, 0.2),
+                0 0 25px rgba(26, 26, 26, 0.1),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         .dark .kpi-card.accent-success:hover {
             box-shadow:
-                0 20px 40px -12px rgba(115, 153, 119, 0.15),
-                0 0 25px rgba(115, 153, 119, 0.08),
+                0 20px 40px -12px rgba(196, 162, 101, 0.12),
+                0 0 25px rgba(196, 162, 101, 0.06),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         .dark .kpi-card.accent-purple:hover {
             box-shadow:
-                0 20px 40px -12px rgba(176, 143, 138, 0.15),
-                0 0 25px rgba(176, 143, 138, 0.08),
+                0 20px 40px -12px rgba(196, 162, 101, 0.12),
+                0 0 25px rgba(196, 162, 101, 0.06),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         .dark .kpi-card.accent-gold:hover {
             box-shadow:
-                0 20px 40px -12px rgba(139, 109, 63, 0.15),
-                0 0 25px rgba(139, 109, 63, 0.08),
+                0 20px 40px -12px rgba(196, 162, 101, 0.15),
+                0 0 25px rgba(196, 162, 101, 0.08),
                 inset 0 1px 0 rgba(255,255,255,0.06);
         }
 
         .dark .kpi-card h2 {
-            background: linear-gradient(135deg, #f3ede3 0%, #3a9d5e 50%, #f3ede3 100%);
+            background: linear-gradient(135deg, #f0ece4 0%, #d4b06a 50%, #f0ece4 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
@@ -861,35 +862,35 @@
         /* Header - Dark Mode Elegant */
         .dark header,
         .dark .header-premium {
-            background: linear-gradient(135deg, rgba(24, 25, 28, 0.98) 0%, rgba(30, 31, 35, 0.98) 100%) !important;
-            border-bottom: 1px solid rgba(184, 149, 106, 0.08) !important;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%) !important;
+            border-bottom: 1px solid rgba(196, 162, 101, 0.1) !important;
             box-shadow:
-                0 4px 30px rgba(0, 0, 0, 0.15),
-                inset 0 -1px 0 rgba(184, 149, 106, 0.06);
+                0 4px 30px rgba(0, 0, 0, 0.2),
+                inset 0 -1px 0 rgba(196, 162, 101, 0.08);
         }
 
         .dark .header-premium::after {
-            background: linear-gradient(90deg, transparent, rgba(184, 149, 106, 0.15), transparent);
+            background: linear-gradient(90deg, transparent, rgba(196, 162, 101, 0.15), transparent);
         }
 
         /* Form Elements */
         .dark select,
         .dark input,
         .dark textarea {
-            background-color: #262a2e !important;
-            border-color: #3a3e42 !important;
+            background-color: #222222 !important;
+            border-color: #333333 !important;
             color: #e8e6e1 !important;
         }
 
         .dark select:focus,
         .dark input:focus,
         .dark textarea:focus {
-            border-color: #c97458 !important;
-            box-shadow: 0 0 0 3px rgba(201, 116, 88, 0.2) !important;
+            border-color: #c4a265 !important;
+            box-shadow: 0 0 0 3px rgba(196, 162, 101, 0.2) !important;
         }
 
         .dark select:disabled {
-            background-color: #1a1c20 !important;
+            background-color: #181818 !important;
             color: #666 !important;
         }
 
@@ -899,45 +900,45 @@
         }
 
         .dark .tab-btn::before {
-            background: linear-gradient(135deg, rgba(45, 138, 78, 0.08) 0%, rgba(94, 143, 99, 0.04) 100%);
+            background: linear-gradient(135deg, rgba(196, 162, 101, 0.06) 0%, rgba(212, 176, 106, 0.03) 100%);
         }
 
         .dark .tab-btn.active,
         .dark .tab-btn:hover {
-            color: #f3ede3 !important;
+            color: #f0ece4 !important;
         }
 
         .dark .tab-btn.active {
-            background: linear-gradient(180deg, rgba(36, 37, 41, 0.9) 0%, rgba(30, 31, 35, 0.7) 100%);
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(180deg, rgba(34, 34, 34, 0.9) 0%, rgba(26, 26, 26, 0.7) 100%);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .dark .tab-btn::after {
-            background: linear-gradient(90deg, #2d8a4e, #3a9d5e, #5aab72) !important;
+            background: linear-gradient(90deg, #a8894e, #c4a265, #d4b06a) !important;
         }
 
         .dark .tab-btn.active::after {
-            background: linear-gradient(90deg, #2d8a4e, #3a9d5e, #5aab72, #3a9d5e, #2d8a4e) !important;
+            background: linear-gradient(90deg, #a8894e, #c4a265, #d4b06a, #c4a265, #a8894e) !important;
         }
 
         .dark .tab-btn.active i {
-            color: #3a9d5e;
+            color: #d4b06a;
         }
 
         /* Edit Table */
         .dark .edit-input {
-            background-color: #262a2e !important;
-            border-color: #3a3e42 !important;
+            background-color: #222222 !important;
+            border-color: #333333 !important;
             color: #e8e6e1 !important;
         }
 
         .dark .edit-readonly {
-            background-color: #1a1c20 !important;
+            background-color: #181818 !important;
             color: #888 !important;
         }
 
         .dark .changed-row {
-            background: linear-gradient(90deg, rgba(201, 116, 88, 0.15), rgba(201, 116, 88, 0.05)) !important;
+            background: linear-gradient(90deg, rgba(196, 162, 101, 0.15), rgba(196, 162, 101, 0.05)) !important;
         }
 
         /* Alert Colors */
@@ -1000,32 +1001,32 @@
 
         /* Mobile Accordion in Dark Mode */
         .dark body.mobile-mode .mobile-accordion-header {
-            background: linear-gradient(135deg, #334e68, #243b53) !important;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a) !important;
         }
 
         /* Scrollbar in Dark Mode */
         .dark::-webkit-scrollbar-track,
         .dark .custom-scroll::-webkit-scrollbar-track {
-            background: #1e2024 !important;
+            background: #1a1a1a !important;
         }
 
         .dark::-webkit-scrollbar-thumb,
         .dark .custom-scroll::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #c97458, #994a35) !important;
+            background: linear-gradient(135deg, #c4a265, #a8894e) !important;
         }
 
         /* Hover States */
         .dark .hover\:bg-surface-100:hover {
-            background-color: #2e3236 !important;
+            background-color: #2a2a2a !important;
         }
 
         /* Staff Dashboard Cards in Dark Mode */
         .dark .border-2.border-primary-500 {
-            border-color: #c97458 !important;
+            border-color: #c4a265 !important;
         }
 
         .dark .border-2.border-accent-700 {
-            border-color: #486581 !important;
+            border-color: #a8894e !important;
         }
 
         /* Transition for smooth dark mode toggle */
@@ -1070,22 +1071,22 @@
         }
 
         .period-btn.active {
-            background: linear-gradient(135deg, #c97458 0%, #b85d42 100%) !important;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
             color: white !important;
-            box-shadow: 0 2px 8px rgba(201, 116, 88, 0.3);
+            box-shadow: 0 2px 8px rgba(26, 26, 26, 0.3);
         }
 
         .dark .period-btn {
-            color: #9fb3c8 !important;
+            color: #a8a8a3 !important;
         }
 
         .dark .period-btn.active {
-            background: linear-gradient(135deg, #c97458 0%, #b85d42 100%) !important;
-            color: white !important;
+            background: linear-gradient(135deg, #c4a265 0%, #a8894e 100%) !important;
+            color: #1a1a1a !important;
         }
 
         .dark .period-btn:hover:not(.active) {
-            background-color: #2e3236 !important;
+            background-color: #2a2a2a !important;
         }
 
         /* Calendar Styles */
@@ -1175,14 +1176,14 @@
         button:focus-visible,
         select:focus-visible,
         input:focus-visible {
-            outline: 2px solid #c97458;
+            outline: 2px solid #c4a265;
             outline-offset: 2px;
         }
 
         .dark button:focus-visible,
         .dark select:focus-visible,
         .dark input:focus-visible {
-            outline-color: #db9179;
+            outline-color: #d4b06a;
         }
 
         /* KPI Card Styles - Enhanced with Glass Morphism */
@@ -1243,79 +1244,79 @@
             left: 100%;
         }
 
-        /* Champagne Gold - 総売上 */
+        /* Gold - 総売上 */
         .kpi-card.accent-primary {
-            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(250,248,245,0.9) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,249,240,0.9) 100%);
         }
         .kpi-card.accent-primary::before {
-            background: linear-gradient(90deg, #2d8a4e, #3a9d5e, #5aab72);
+            background: linear-gradient(90deg, #a8894e, #c4a265, #d4b06a);
         }
         .kpi-card.accent-primary:hover {
             box-shadow:
-                0 20px 40px -12px rgba(184, 149, 106, 0.25),
-                0 8px 24px -8px rgba(184, 149, 106, 0.15),
+                0 20px 40px -12px rgba(196, 162, 101, 0.25),
+                0 8px 24px -8px rgba(196, 162, 101, 0.15),
                 inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
-        /* Slate Blue - 総来店数 */
+        /* Black - 総来店数 */
         .kpi-card.accent-navy {
-            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(245,246,248,0.9) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,248,248,0.9) 100%);
         }
         .kpi-card.accent-navy::before {
-            background: linear-gradient(90deg, #503d23, #6b5330, #8b6d3f);
+            background: linear-gradient(90deg, #1a1a1a, #2d2d2d, #3d3d3d);
         }
         .kpi-card.accent-navy:hover {
             box-shadow:
-                0 20px 40px -12px rgba(71, 86, 107, 0.25),
-                0 8px 24px -8px rgba(71, 86, 107, 0.15),
+                0 20px 40px -12px rgba(26, 26, 26, 0.2),
+                0 8px 24px -8px rgba(26, 26, 26, 0.1),
                 inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
         /* Warm Gold - 総次回予約率 */
         .kpi-card.accent-gold {
-            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(252,249,243,0.9) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,249,240,0.9) 100%);
         }
         .kpi-card.accent-gold::before {
-            background: linear-gradient(90deg, #3a9d5e, #5aab72, #f2dbb4);
+            background: linear-gradient(90deg, #c4a265, #d4b06a, #e8cc85);
         }
         .kpi-card.accent-gold:hover {
             box-shadow:
-                0 20px 40px -12px rgba(139, 109, 63, 0.25),
-                0 8px 24px -8px rgba(139, 109, 63, 0.15),
+                0 20px 40px -12px rgba(196, 162, 101, 0.25),
+                0 8px 24px -8px rgba(196, 162, 101, 0.15),
                 inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
-        /* Sage Green - 平均客単価 */
+        /* Charcoal - 平均客単価 */
         .kpi-card.accent-success {
-            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(247,250,247,0.9) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(250,250,249,0.9) 100%);
         }
         .kpi-card.accent-success::before {
-            background: linear-gradient(90deg, #5d7d60, #739977, #8ba88e);
+            background: linear-gradient(90deg, #535350, #73736e, #a8a8a3);
         }
         .kpi-card.accent-success:hover {
             box-shadow:
-                0 20px 40px -12px rgba(115, 153, 119, 0.25),
-                0 8px 24px -8px rgba(115, 153, 119, 0.15),
+                0 20px 40px -12px rgba(115, 115, 110, 0.25),
+                0 8px 24px -8px rgba(115, 115, 110, 0.15),
                 inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
-        /* Dusty Rose - 新規次回予約率 */
+        /* Deep Gold - 新規次回予約率 */
         .kpi-card.accent-purple {
-            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(250,247,247,0.9) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(253,250,243,0.9) 100%);
         }
         .kpi-card.accent-purple::before {
-            background: linear-gradient(90deg, #c08078, #d49890, #e0b0a8);
+            background: linear-gradient(90deg, #8b6d3f, #a8894e, #c4a265);
         }
         .kpi-card.accent-purple:hover {
             box-shadow:
-                0 20px 40px -12px rgba(176, 143, 138, 0.25),
-                0 8px 24px -8px rgba(176, 143, 138, 0.15),
+                0 20px 40px -12px rgba(168, 137, 78, 0.25),
+                0 8px 24px -8px rgba(168, 137, 78, 0.15),
                 inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
-        /* KPI Value Animation - Elegant */
+        /* KPI Value Animation - Elegant Black & Gold */
         .kpi-card h2 {
-            background: linear-gradient(135deg, #503d23 0%, #8b6d3f 50%, #503d23 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #c4a265 50%, #1a1a1a 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
@@ -1339,14 +1340,14 @@
 
         /* Header Styles - Elegant & Harmonious */
         .header-premium {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(250, 249, 247, 0.96) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 250, 249, 0.98) 100%);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(184, 149, 106, 0.12) !important;
+            border-bottom: 1px solid rgba(196, 162, 101, 0.15) !important;
             box-shadow:
-                0 4px 30px rgba(0, 0, 0, 0.025),
-                0 1px 3px rgba(0, 0, 0, 0.015),
-                inset 0 -1px 0 rgba(184, 149, 106, 0.08);
+                0 4px 30px rgba(0, 0, 0, 0.03),
+                0 1px 3px rgba(0, 0, 0, 0.02),
+                inset 0 -1px 0 rgba(196, 162, 101, 0.1);
         }
 
         .header-premium::after {
@@ -1356,7 +1357,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(184, 149, 106, 0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(196, 162, 101, 0.3), transparent);
         }
 
         /* Logo Styles */
@@ -1385,45 +1386,45 @@
         }
 
         .select-premium:hover {
-            border-color: rgba(212, 175, 55, 0.4);
+            border-color: rgba(196, 162, 101, 0.4);
             box-shadow:
                 0 4px 12px rgba(0, 0, 0, 0.06),
                 inset 0 1px 0 rgba(255,255,255,0.9);
         }
 
         .select-premium:focus {
-            border-color: #c97458;
+            border-color: #c4a265;
             box-shadow:
-                0 0 0 3px rgba(201, 116, 88, 0.15),
-                0 4px 12px rgba(201, 116, 88, 0.1);
+                0 0 0 3px rgba(196, 162, 101, 0.15),
+                0 4px 12px rgba(196, 162, 101, 0.1);
         }
 
         .dark .select-premium {
-            background: linear-gradient(145deg, rgba(38, 42, 46, 0.95) 0%, rgba(30, 32, 36, 0.9) 100%) !important;
-            border-color: rgba(58, 62, 66, 0.6) !important;
+            background: linear-gradient(145deg, rgba(34, 34, 34, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%) !important;
+            border-color: rgba(50, 50, 50, 0.6) !important;
             box-shadow:
-                0 2px 8px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255,255,255,0.05);
+                0 2px 8px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255,255,255,0.04);
         }
 
         .dark .select-premium:hover {
-            border-color: rgba(212, 175, 55, 0.3) !important;
+            border-color: rgba(196, 162, 101, 0.3) !important;
         }
 
         .dark .select-premium:focus {
-            border-color: #c97458 !important;
+            border-color: #c4a265 !important;
             box-shadow:
-                0 0 0 3px rgba(201, 116, 88, 0.2),
-                0 4px 12px rgba(201, 116, 88, 0.1);
+                0 0 0 3px rgba(196, 162, 101, 0.2),
+                0 4px 12px rgba(196, 162, 101, 0.1);
         }
 
         /* Tab Container */
         .tab-container {
-            border-bottom: 1px solid #e8e6e1;
+            border-bottom: 1px solid #e8e8e6;
         }
 
         .dark .tab-container {
-            border-bottom-color: #3a3e42;
+            border-bottom-color: #333333;
         }
 
         /* Responsive Header Improvements */
@@ -1435,14 +1436,14 @@
         }
     </style>
 </head>
-<body class="bg-surface-50 text-accent-900 font-sans antialiased">
+<body class="bg-white text-accent-900 font-sans antialiased">
 
     <!-- Password Dialog -->
     <div id="password-dialog" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center">
         <div class="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4">
             <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i data-lucide="lock" class="w-8 h-8 text-primary-600"></i>
+                <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="lock" class="w-8 h-8 text-accent-600"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-accent-900" id="password-dialog-title">パスワード認証</h2>
                 <p class="text-sm text-surface-600 mt-2" id="password-dialog-message">このページへのアクセスにはパスワードが必要です</p>
@@ -1466,32 +1467,42 @@
     </div>
 
     <!-- Splash Screen / Loading Overlay -->
-    <div id="loading-overlay" class="fixed inset-0 bg-gradient-to-br from-surface-50 via-white to-primary-50 dark:from-accent-900 dark:via-accent-800 dark:to-accent-900 z-[100] flex items-center justify-center">
+    <div id="loading-overlay" class="fixed inset-0 bg-white dark:bg-[#0a0a0a] z-[100] flex items-center justify-center">
         <div class="text-center px-8">
             <!-- Logo -->
-            <div class="splash-logo mb-6">
-                <img src="assets/C055456988.jpg" alt="KADOMORI" class="h-[220px] w-auto mx-auto drop-shadow-lg"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <!-- Fallback if logo doesn't load -->
-                <div class="hidden w-32 h-32 mx-auto gradient-primary text-white rounded-2xl items-center justify-center text-5xl font-display tracking-widest shadow-xl">
-                    K
+            <div class="splash-logo mb-8">
+                <img src="assets/C055456988.jpg" alt="KADOMORI" class="h-[200px] w-auto mx-auto"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <!-- Fallback SVG Logo if image doesn't load -->
+                <div class="hidden">
+                    <svg viewBox="0 0 400 100" class="h-24 w-auto mx-auto" xmlns="http://www.w3.org/2000/svg">
+                        <text x="200" y="55" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="52" font-weight="400" letter-spacing="4">
+                            <tspan fill="#1a1a1a">KAD</tspan><tspan fill="#c4a265">O</tspan><tspan fill="#1a1a1a">M</tspan><tspan fill="#c4a265">O</tspan><tspan fill="#1a1a1a">RI</tspan>
+                        </text>
+                        <text x="368" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1a1a1a">&#174;</text>
+                        <path d="M 120 80 Q 200 65 280 80" stroke="#c4a265" stroke-width="2" fill="none"/>
+                    </svg>
                 </div>
             </div>
 
             <!-- Brand Name -->
-            <h1 class="splash-text text-2xl font-display font-bold text-accent-800 dark:text-white tracking-wide mb-1">
+            <h1 class="splash-text text-3xl font-display font-light text-[#1a1a1a] dark:text-white tracking-[0.2em] mb-2">
                 KADOMORI
             </h1>
-            <p class="splash-subtext text-xs text-surface-500 dark:text-surface-400 font-medium uppercase tracking-widest mb-8">
-                鍼灸サロンダッシュボード
-            </p>
+            <div class="splash-subtext flex items-center justify-center gap-4 mb-10">
+                <span class="h-[1px] w-8 bg-[#c4a265]"></span>
+                <p class="text-xs text-surface-500 dark:text-surface-400 font-medium uppercase tracking-[0.25em]">
+                    鍼灸サロンダッシュボード
+                </p>
+                <span class="h-[1px] w-8 bg-[#c4a265]"></span>
+            </div>
 
             <!-- Progress Bar -->
             <div class="w-48 mx-auto">
-                <div class="h-1 bg-surface-200 dark:bg-accent-700 rounded-full overflow-hidden">
-                    <div id="splash-progress-bar" class="h-full bg-gradient-to-r from-primary-400 to-primary-600 rounded-full splash-progress"></div>
+                <div class="h-[2px] bg-surface-200 dark:bg-[#222] rounded-full overflow-hidden">
+                    <div id="splash-progress-bar" class="h-full bg-gradient-to-r from-[#c4a265] to-[#d4b06a] rounded-full splash-progress"></div>
                 </div>
-                <p class="text-xs text-surface-400 dark:text-surface-500 mt-3" id="loading-text">読み込み中...</p>
+                <p class="text-xs text-surface-400 dark:text-surface-500 mt-3 tracking-wider" id="loading-text">読み込み中...</p>
             </div>
         </div>
     </div>
@@ -1505,14 +1516,14 @@
 
                 <!-- Logo -->
                 <div class="flex items-center gap-3">
-                    <img src="assets/C055456988.jpg" alt="KADOMORI Logo" class="h-12 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="w-10 h-10 gradient-primary text-white rounded-xl items-center justify-center text-xl font-display tracking-widest hidden shadow-glow">K</div>
+                    <img src="assets/C055456988.jpg" alt="KADOMORI Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hidden w-10 h-10 bg-[#1a1a1a] text-[#c4a265] rounded-xl items-center justify-center text-xl font-display tracking-widest shadow-glow">K</div>
                     <div>
-                        <h1 class="logo-text text-xl text-accent-900 flex items-center gap-3">
+                        <h1 class="logo-text text-xl text-[#1a1a1a] dark:text-white flex items-center gap-3" style="letter-spacing: 0.15em;">
                             KADOMORI
-                            <span id="staff-mode-badge" class="hidden text-xs bg-primary-500 text-white px-3 py-1 rounded-full font-sans normal-case tracking-normal shadow-sm">専用モード</span>
+                            <span id="staff-mode-badge" class="hidden text-xs bg-[#1a1a1a] text-[#c4a265] px-3 py-1 rounded-full font-sans normal-case tracking-normal shadow-sm">専用モード</span>
                         </h1>
-                        <p class="logo-subtitle text-[10px] text-surface-500 font-medium uppercase">鍼灸サロンダッシュボード</p>
+                        <p class="logo-subtitle text-[10px] text-[#c4a265] font-medium uppercase tracking-[0.2em]">鍼灸サロンダッシュボード</p>
                     </div>
                 </div>
 
@@ -1589,7 +1600,8 @@
                 <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-fade-in">
                     <!-- Logo / Header -->
                     <div class="text-center mb-8">
-                        <div class="w-20 h-20 mx-auto mb-4 rounded-full gradient-primary flex items-center justify-center">
+                        <img src="assets/C055456988.jpg" alt="KADOMORI" class="h-16 w-auto mx-auto mb-4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-20 h-20 mx-auto mb-4 rounded-full gradient-primary items-center justify-center">
                             <i data-lucide="lock" class="w-10 h-10 text-white"></i>
                         </div>
                         <h2 class="text-2xl font-display font-bold text-accent-800 dark:text-white">スタッフログイン</h2>
@@ -1931,7 +1943,7 @@
                             <!-- Unit Price Ranking -->
                             <div class="bg-surface-50 rounded-xl p-4">
                                 <h4 class="text-sm font-semibold text-accent-800 mb-3 flex items-center gap-2">
-                                    <i data-lucide="wallet" class="w-4 h-4 text-[#2d8a4e]"></i>
+                                    <i data-lucide="wallet" class="w-4 h-4 text-[#c4a265]"></i>
                                     客単価ランキング
                                 </h4>
                                 <div id="unit-price-ranking-list" class="space-y-2">
@@ -1961,7 +1973,7 @@
                 <!-- Admin Only: Staff Incentive Summary -->
                 <div id="staff-incentive-section" class="premium-card p-6">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2d8a4e] to-[#3a9d5e] flex items-center justify-center">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] flex items-center justify-center">
                             <i data-lucide="coins" class="w-5 h-5 text-white"></i>
                         </div>
                         <div>
@@ -1972,7 +1984,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm">
                             <thead>
-                                <tr class="border-b-2 border-[#2d8a4e] bg-[#f0f7f2]">
+                                <tr class="border-b-2 border-[#c4a265] bg-[#fdf9f0]">
                                     <th class="text-left py-3 px-4 font-semibold text-accent-800">店舗</th>
                                     <th class="text-left py-3 px-4 font-semibold text-accent-800">スタッフ</th>
                                     <th class="text-right py-3 px-4 font-semibold text-accent-800">基本給</th>
@@ -1980,21 +1992,21 @@
                                     <th class="text-right py-3 px-4 font-semibold text-accent-800">施術インセンティブ</th>
                                     <th class="text-right py-3 px-4 font-semibold text-accent-800">物販売上</th>
                                     <th class="text-right py-3 px-4 font-semibold text-accent-800">物販インセンティブ</th>
-                                    <th class="text-right py-3 px-4 font-semibold text-[#2d8a4e] text-base">推定報酬合計</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-[#c4a265] text-base">推定報酬合計</th>
                                 </tr>
                             </thead>
                             <tbody id="staff-incentive-table-body" class="divide-y divide-surface-100">
                                 <!-- Rows will be dynamically generated -->
                             </tbody>
                             <tfoot>
-                                <tr class="bg-[#f0f7f2] border-t-2 border-[#2d8a4e]">
+                                <tr class="bg-[#fdf9f0] border-t-2 border-[#c4a265]">
                                     <td class="py-3 px-4 font-bold text-accent-800" colspan="2">合計</td>
                                     <td class="py-3 px-4 text-right font-bold text-accent-800" id="incentive-total-base">¥0</td>
                                     <td class="py-3 px-4 text-right font-bold text-accent-800" id="incentive-total-service-sales">¥0</td>
                                     <td class="py-3 px-4 text-right font-bold text-accent-800" id="incentive-total-service">¥0</td>
                                     <td class="py-3 px-4 text-right font-bold text-accent-800" id="incentive-total-retail-sales">¥0</td>
                                     <td class="py-3 px-4 text-right font-bold text-accent-800" id="incentive-total-retail">¥0</td>
-                                    <td class="py-3 px-4 text-right font-bold text-[#2d8a4e] text-lg" id="incentive-grand-total">¥0</td>
+                                    <td class="py-3 px-4 text-right font-bold text-[#c4a265] text-lg" id="incentive-grand-total">¥0</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -2577,7 +2589,7 @@
                     <!-- Eyebrow Preferences -->
                     <div class="premium-card p-6">
                         <h3 class="text-lg font-display font-bold text-accent-900 mb-4 flex items-center gap-2">
-                            <i data-lucide="eye" class="w-5 h-5 text-[#d49890]"></i>
+                            <i data-lucide="eye" class="w-5 h-5 text-[#a8894e]"></i>
                             眉毛メニュー希望分析
                         </h3>
                         <div class="space-y-4">
@@ -2595,7 +2607,7 @@
                     <!-- Menu Preferences -->
                     <div class="premium-card p-6">
                         <h3 class="text-lg font-display font-bold text-accent-900 mb-4 flex items-center gap-2">
-                            <i data-lucide="sparkles" class="w-5 h-5 text-[#2d8a4e]"></i>
+                            <i data-lucide="sparkles" class="w-5 h-5 text-[#c4a265]"></i>
                             メニュー希望分析
                         </h3>
                         <div class="space-y-4">
@@ -5090,34 +5102,34 @@
             fukushima: ['aoi']
         };
 
-        // KADOMORI Color Palette - 深緑 & 和紙ベージュ (鍼灸サロン)
+        // KADOMORI Color Palette - Black & Gold (高級感)
         const BrandColors = {
-            // Primary - 深緑 (鍼灸の落ち着き)
-            primary: '#2d8a4e',
-            primaryLight: '#5aab72',
-            primaryDark: '#1c5732',
-            // Accent - ダークブラウン (木の温もり)
-            accent: '#8b6d3f',
-            accentLight: '#c9ac7e',
-            accentDark: '#503d23',
-            // Surface - 和紙ベージュ
-            surface: '#faf8f4',
-            surfaceAlt: '#ebe3d5',
-            surfaceDark: '#ddd3c0',
+            // Primary - ブラック (洗練)
+            primary: '#1a1a1a',
+            primaryLight: '#3d3d3d',
+            primaryDark: '#0a0a0a',
+            // Accent - ゴールド (ロゴカラー)
+            accent: '#c4a265',
+            accentLight: '#d4b06a',
+            accentDark: '#a8894e',
+            // Surface - クリーンホワイト
+            surface: '#fafafa',
+            surfaceAlt: '#f5f5f4',
+            surfaceDark: '#e8e8e6',
             // Charts (統一感のある配色)
-            gold: '#b08d55',      // 金茶
-            brown: '#503d23',     // ダークブラウン
-            beige: '#ebe3d5',     // 和紙ベージュ
-            light: '#f5f0e8',     // ライトベージュ
+            gold: '#c4a265',      // ゴールド
+            brown: '#8b6d3f',     // ダークゴールド
+            beige: '#f5f5f4',     // ライトグレー
+            light: '#fafafa',     // ホワイト
             white: '#ffffff',
-            darkBrown: '#3d2b1f', // 濃茶
+            darkBrown: '#1a1a1a', // ブラック
             // Harmonious accent colors
-            sage: '#5e8f63',      // 抹茶グリーン
+            sage: '#73736e',      // チャコールグレー
             rose: '#c04040',      // 朱色
-            warmgold: '#d4b06a',  // 金茶ライト
-            success: '#2d8a4e',   // 深緑
-            warning: '#b08d55',   // 金茶
-            purple: '#3d5a80'     // 藍色
+            warmgold: '#d4b06a',  // ライトゴールド
+            success: '#c4a265',   // ゴールド
+            warning: '#a8894e',   // ディープゴールド
+            purple: '#535350'     // ダークグレー
         };
 
         let rawData = [];
@@ -6407,18 +6419,18 @@
             const data = sorted.map(([, v]) => v);
             // Elegant harmonious color palette
             const colors = [
-                '#2d8a4e', // Champagne Gold
-                '#503d23', // Slate Blue
-                '#739977', // Sage Green
-                '#d49890', // Dusty Rose
-                '#3a9d5e', // Warm Gold
-                '#8b6d3f', // Light Slate
-                '#8ba88e', // Light Sage
-                '#e0b0a8', // Light Rose
-                '#5aab72', // Light Gold
-                '#6b5330', // Medium Slate
-                '#5d7d60', // Deep Sage
-                '#c08078'  // Deep Rose
+                '#c4a265', // Gold
+                '#1a1a1a', // Black
+                '#d4b06a', // Light Gold
+                '#73736e', // Charcoal
+                '#a8894e', // Deep Gold
+                '#3d3d3d', // Dark Gray
+                '#e8cc85', // Pale Gold
+                '#a8a8a3', // Medium Gray
+                '#8b6d3f', // Bronze
+                '#535350', // Slate
+                '#f2e0b3', // Cream Gold
+                '#2d2d2d'  // Near Black
             ];
 
             if (charts.visitReason) charts.visitReason.destroy();
@@ -6472,12 +6484,12 @@
 
             // Gradient colors for age groups
             const ageColors = [
-                '#5aab72', // 10代 - Light Gold
-                '#3a9d5e', // 20代 - Warm Gold
-                '#2d8a4e', // 30代 - Champagne Gold (peak)
-                '#739977', // 40代 - Sage Green
-                '#8b6d3f', // 50代 - Light Slate
-                '#503d23'  // 60代以上 - Slate Blue
+                '#e8cc85', // 10代 - Pale Gold
+                '#d4b06a', // 20代 - Light Gold
+                '#c4a265', // 30代 - Gold (peak)
+                '#a8894e', // 40代 - Deep Gold
+                '#3d3d3d', // 50代 - Dark Gray
+                '#1a1a1a'  // 60代以上 - Black
             ];
 
             if (charts.ageDistribution) charts.ageDistribution.destroy();
@@ -6498,7 +6510,7 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        y: { beginAtZero: true, grid: { color: '#f3ede3' } },
+                        y: { beginAtZero: true, grid: { color: '#f0f0ee' } },
                         x: { grid: { display: false } }
                     }
                 }
@@ -6517,14 +6529,14 @@
             const sorted = Object.entries(occCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
             // Elegant harmonious color palette for occupation
             const colors = [
-                '#2d8a4e', // Champagne Gold
-                '#503d23', // Slate Blue
-                '#739977', // Sage Green
-                '#d49890', // Dusty Rose
-                '#3a9d5e', // Warm Gold
-                '#8b6d3f', // Light Slate
-                '#8ba88e', // Light Sage
-                '#e0b0a8'  // Light Rose
+                '#c4a265', // Gold
+                '#1a1a1a', // Black
+                '#d4b06a', // Light Gold
+                '#73736e', // Charcoal
+                '#a8894e', // Deep Gold
+                '#3d3d3d', // Dark Gray
+                '#e8cc85', // Pale Gold
+                '#a8a8a3'  // Medium Gray
             ];
 
             if (charts.occupation) charts.occupation.destroy();
@@ -6595,7 +6607,7 @@
             document.getElementById('eyebrow-concerns-list').innerHTML = sortedConcerns.map(([concern, count]) => `
                 <div class="flex items-center gap-2">
                     <div class="flex-1 bg-surface-200 h-2 rounded-full overflow-hidden">
-                        <div class="h-full bg-[#d49890] rounded-full" style="width: ${(count / maxConcern) * 100}%"></div>
+                        <div class="h-full bg-[#a8894e] rounded-full" style="width: ${(count / maxConcern) * 100}%"></div>
                     </div>
                     <span class="text-xs text-accent-700 w-24 truncate">${concern}</span>
                     <span class="text-xs font-semibold text-accent-800">${count}</span>
@@ -6611,7 +6623,7 @@
             });
             document.getElementById('eyebrow-impression-list').innerHTML = Object.entries(impressions)
                 .sort((a, b) => b[1] - a[1]).slice(0, 6)
-                .map(([imp, count]) => `<span class="px-3 py-1 bg-[#faf0ed] text-[#d49890] rounded-full text-xs">${imp} (${count})</span>`).join('') || '<p class="text-xs text-surface-500">データなし</p>';
+                .map(([imp, count]) => `<span class="px-3 py-1 bg-[#fdf9f0] text-[#a8894e] rounded-full text-xs">${imp} (${count})</span>`).join('') || '<p class="text-xs text-surface-500">データなし</p>';
 
             // まつ毛デザイン (lashDesign(Code.gs) または eyelashDesign の両方に対応)
             const eyelashDesigns = {};
@@ -6626,7 +6638,7 @@
             document.getElementById('eyelash-design-list').innerHTML = sortedDesigns.map(([design, count]) => `
                 <div class="flex items-center gap-2">
                     <div class="flex-1 bg-surface-200 h-2 rounded-full overflow-hidden">
-                        <div class="h-full bg-[#2d8a4e] rounded-full" style="width: ${(count / maxDesign) * 100}%"></div>
+                        <div class="h-full bg-[#c4a265] rounded-full" style="width: ${(count / maxDesign) * 100}%"></div>
                     </div>
                     <span class="text-xs text-accent-700 w-24 truncate">${design}</span>
                     <span class="text-xs font-semibold text-accent-800">${count}</span>
@@ -6643,7 +6655,7 @@
             });
             document.getElementById('eyelash-eyelook-list').innerHTML = Object.entries(eyeLooks)
                 .sort((a, b) => b[1] - a[1]).slice(0, 6)
-                .map(([look, count]) => `<span class="px-3 py-1 bg-[#f0f7f2] text-[#2d8a4e] rounded-full text-xs">${look} (${count})</span>`).join('') || '<p class="text-xs text-surface-500">データなし</p>';
+                .map(([look, count]) => `<span class="px-3 py-1 bg-[#fdf9f0] text-[#c4a265] rounded-full text-xs">${look} (${count})</span>`).join('') || '<p class="text-xs text-surface-500">データなし</p>';
         }
 
         function updateCustomerList() {
@@ -6918,8 +6930,8 @@
                             <!-- 眉毛・まつ毛メニュー情報 -->
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                                 ${hasEyebrowInfo ? `
-                                <div class="bg-[#fdf5f2] p-4 rounded-lg border border-[#f0d5ce]">
-                                    <h5 class="text-sm font-bold text-[#d49890] mb-3 flex items-center gap-2 pb-2 border-b border-[#f0d5ce]">
+                                <div class="bg-[#fdf9f0] p-4 rounded-lg border border-[#f2e0b3]">
+                                    <h5 class="text-sm font-bold text-[#a8894e] mb-3 flex items-center gap-2 pb-2 border-b border-[#f2e0b3]">
                                         <i data-lucide="eye" class="w-4 h-4"></i>眉毛メニュー
                                     </h5>
                                     <div class="space-y-2 text-sm">
@@ -6933,8 +6945,8 @@
                                 </div>
                                 ` : ''}
                                 ${hasLashInfo ? `
-                                <div class="bg-[#f0f7f2] p-4 rounded-lg border border-[#d9ede0]">
-                                    <h5 class="text-sm font-bold text-[#2d8a4e] mb-3 flex items-center gap-2 pb-2 border-b border-[#d9ede0]">
+                                <div class="bg-[#fdf9f0] p-4 rounded-lg border border-[#f2e0b3]">
+                                    <h5 class="text-sm font-bold text-[#c4a265] mb-3 flex items-center gap-2 pb-2 border-b border-[#f2e0b3]">
                                         <i data-lucide="sparkles" class="w-4 h-4"></i>まつ毛メニュー
                                     </h5>
                                     <div class="space-y-2 text-sm">
@@ -7379,7 +7391,7 @@
             filtered.forEach(d => { reasonCounts[d.reason] = (reasonCounts[d.reason] || 0) + 1; });
             const reasonLabels = Object.keys(reasonCounts);
             const reasonData = Object.values(reasonCounts);
-            const reasonColors = ['#c04040', '#b08d55', '#2d8a4e', '#5e8f63', '#503d23', '#d4b06a', '#3d5a80'];
+            const reasonColors = ['#c4a265', '#1a1a1a', '#d4b06a', '#73736e', '#a8894e', '#3d3d3d', '#535350'];
 
             if (charts.cancelReason) charts.cancelReason.destroy();
             const ctx3 = document.getElementById('cancelReasonChart')?.getContext('2d');
@@ -8055,9 +8067,9 @@
                     data: {
                         labels: monthKeys.map(k => k + '月'),
                         datasets: [
-                            { label: '売上', data: monthKeys.map(k => monthlyData[k].sales), backgroundColor: 'rgba(45, 138, 78, 0.7)', borderRadius: 4, order: 2 },
-                            { label: '利益', data: monthKeys.map(k => monthlyData[k].profit), backgroundColor: 'rgba(139, 109, 63, 0.5)', borderRadius: 4, order: 2 },
-                            { label: '件数', data: monthKeys.map(k => monthlyData[k].count), type: 'line', borderColor: '#e8927c', backgroundColor: 'transparent', yAxisID: 'y1', tension: 0.3, pointRadius: 4, order: 1 }
+                            { label: '売上', data: monthKeys.map(k => monthlyData[k].sales), backgroundColor: 'rgba(196, 162, 101, 0.7)', borderRadius: 4, order: 2 },
+                            { label: '利益', data: monthKeys.map(k => monthlyData[k].profit), backgroundColor: 'rgba(26, 26, 26, 0.5)', borderRadius: 4, order: 2 },
+                            { label: '件数', data: monthKeys.map(k => monthlyData[k].count), type: 'line', borderColor: '#1a1a1a', backgroundColor: 'transparent', yAxisID: 'y1', tension: 0.3, pointRadius: 4, order: 1 }
                         ]
                     },
                     options: {
@@ -8077,7 +8089,7 @@
                 catData[cat] = (catData[cat] || 0) + s.amount;
             });
             const catKeys = Object.keys(catData).sort((a, b) => catData[b] - catData[a]);
-            const catColors = ['#2d8a4e', '#8b6d3f', '#e8927c', '#6b9080', '#d4a574', '#7c9cb0', '#b5838d'];
+            const catColors = ['#c4a265', '#1a1a1a', '#d4b06a', '#73736e', '#a8894e', '#3d3d3d', '#a8a8a3'];
             if (retailCategoryChart) retailCategoryChart.destroy();
             const catCtx = document.getElementById('retail-category-chart')?.getContext('2d');
             if (catCtx) {
@@ -8106,7 +8118,7 @@
                     type: 'line',
                     data: {
                         labels: last30.map(k => { const d = new Date(k); return `${d.getMonth()+1}/${d.getDate()}`; }),
-                        datasets: [{ label: '日別物販売上', data: last30.map(k => dailyData[k]), borderColor: '#2d8a4e', backgroundColor: 'rgba(45,138,78,0.1)', fill: true, tension: 0.3, pointRadius: 3 }]
+                        datasets: [{ label: '日別物販売上', data: last30.map(k => dailyData[k]), borderColor: '#c4a265', backgroundColor: 'rgba(196,162,101,0.1)', fill: true, tension: 0.3, pointRadius: 3 }]
                     },
                     options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥' + v.toLocaleString() } } } }
                 });
@@ -8331,7 +8343,7 @@
             const rankCtx = document.getElementById('retail-ranking-chart')?.getContext('2d');
             if (rankCtx && prodRank.length > 0) {
                 const top10 = prodRank.slice(0, 10);
-                const barColors = ['#2d8a4e', '#3da55e', '#4db86e', '#6b9080', '#8b6d3f', '#d4a574', '#e8927c', '#b5838d', '#7c9cb0', '#a0aec0'];
+                const barColors = ['#c4a265', '#d4b06a', '#e8cc85', '#1a1a1a', '#a8894e', '#3d3d3d', '#73736e', '#a8a8a3', '#8b6d3f', '#535350'];
                 retailRankingChart = new Chart(rankCtx, {
                     type: 'bar',
                     data: {
@@ -8783,7 +8795,7 @@
                         labels: classified.map(c => c.name.length > 6 ? c.name.slice(0, 6) + '..' : c.name),
                         datasets: [
                             { label: '売上', data: classified.map(c => c.sales), backgroundColor: barBg, borderRadius: 4, order: 2 },
-                            { label: '累積構成比', data: classified.map(c => c.cumPct), type: 'line', borderColor: '#e8927c', backgroundColor: 'transparent', yAxisID: 'y1', tension: 0.3, pointRadius: 3, order: 1 }
+                            { label: '累積構成比', data: classified.map(c => c.cumPct), type: 'line', borderColor: '#1a1a1a', backgroundColor: 'transparent', yAxisID: 'y1', tension: 0.3, pointRadius: 3, order: 1 }
                         ]
                     },
                     options: {
@@ -9642,10 +9654,10 @@
             const maxPrice = priceRanking[0]?.unitPrice || 1;
             document.getElementById('unit-price-ranking-list').innerHTML = priceRanking.map((s, i) => `
                 <div class="flex items-center gap-2">
-                    <span class="w-5 h-5 rounded-full ${i === 0 ? 'bg-[#2d8a4e]' : i === 1 ? 'bg-[#3a9d5e]' : i === 2 ? 'bg-[#5aab72]' : 'bg-surface-300'} text-white text-xs flex items-center justify-center font-bold">${i + 1}</span>
+                    <span class="w-5 h-5 rounded-full ${i === 0 ? 'bg-[#c4a265]' : i === 1 ? 'bg-[#a8894e]' : i === 2 ? 'bg-[#d4b06a]' : 'bg-surface-300'} text-white text-xs flex items-center justify-center font-bold">${i + 1}</span>
                     <span class="flex-shrink-0 w-16 text-sm text-accent-700 dark:text-surface-200 truncate">${s.name}</span>
                     <div class="flex-1 bg-surface-200 dark:bg-accent-700 h-2 rounded-full overflow-hidden">
-                        <div class="h-full bg-[#2d8a4e] rounded-full" style="width: ${(s.unitPrice / maxPrice) * 100}%"></div>
+                        <div class="h-full bg-[#c4a265] rounded-full" style="width: ${(s.unitPrice / maxPrice) * 100}%"></div>
                     </div>
                     <span class="text-xs text-accent-600 dark:text-surface-300 w-16 text-right">¥${fmt(s.unitPrice)}</span>
                 </div>
@@ -9737,7 +9749,7 @@
                         <td class="py-3 px-4 text-right text-emerald-600">¥${fmt(Math.round(s.serviceIncentive))}</td>
                         <td class="py-3 px-4 text-right text-surface-600">¥${fmt(Math.round(s.retailSales))}</td>
                         <td class="py-3 px-4 text-right text-emerald-600">¥${fmt(Math.round(s.retailIncentive))}</td>
-                        <td class="py-3 px-4 text-right font-bold text-[#2d8a4e] text-base">¥${fmt(Math.round(s.totalIncentive))}</td>
+                        <td class="py-3 px-4 text-right font-bold text-[#c4a265] text-base">¥${fmt(Math.round(s.totalIncentive))}</td>
                     </tr>
                 `;
             }).join('');
@@ -9898,7 +9910,7 @@
                         y1: { 
                             type: 'linear', position: 'right', stacked: true,
                             title: { display: true, text: '来店数 (名)' },
-                            grid: { borderDash: [4, 4], color: '#e8e6e1' } 
+                            grid: { borderDash: [4, 4], color: '#e8e8e6' } 
                         }
                     }
                 }
@@ -12169,8 +12181,8 @@
 
             // Chart.js グローバルデフォルトを更新 - 新しいカラーパレット
             if (window.Chart) {
-                const textColor = isDark ? '#e8e6e1' : '#334e68';
-                const gridColor = isDark ? '#3a3e42' : '#e8e6e1';
+                const textColor = isDark ? '#e8e6e1' : '#1a1a1a';
+                const gridColor = isDark ? '#333333' : '#e8e8e6';
 
                 Chart.defaults.color = textColor;
                 Chart.defaults.borderColor = gridColor;
