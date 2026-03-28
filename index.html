@@ -4080,7 +4080,7 @@
                                     <label class="block text-sm font-bold text-amber-900 mb-2 flex items-center gap-2">
                                         <span>🎯</span> 月間目標金額 (円)
                                     </label>
-                                    <input type="number" id="goal-monthly-target" value="1100000" min="0" step="10000"
+                                    <input type="number" id="goal-monthly-target" value="0" min="0" step="10000"
                                            class="w-full px-4 py-3 border border-amber-300 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 text-lg font-bold bg-white"
                                            onchange="calculateGoalFromMonthlyTarget()">
                                     <p class="text-xs text-amber-700 mt-1">達成したい月間売上目標を入力</p>
@@ -4089,7 +4089,7 @@
                                 <!-- Weekday Days -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">平日出勤日数</label>
-                                    <input type="number" id="goal-weekdays" value="20" min="0" max="31"
+                                    <input type="number" id="goal-weekdays" value="0" min="0" max="31"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoalFromMonthlyTarget()">
                                     <p class="text-xs text-kadomori-500 mt-1">月間の平日出勤日数</p>
@@ -4098,7 +4098,7 @@
                                 <!-- Weekend Days -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">休日出勤日数</label>
-                                    <input type="number" id="goal-weekends" value="6" min="0" max="31"
+                                    <input type="number" id="goal-weekends" value="0" min="0" max="31"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoalFromMonthlyTarget()">
                                     <p class="text-xs text-kadomori-500 mt-1">月間の休日出勤日数</p>
@@ -4131,9 +4131,9 @@
                                         <span>🔄</span> 平日の1日あたり目標売上 (円)
                                     </label>
                                     <div class="w-full px-4 py-3 border border-emerald-300 rounded bg-white text-lg font-bold text-emerald-700" id="goal-weekday-target-display">
-                                        ¥40,000
+                                        ¥0
                                     </div>
-                                    <input type="hidden" id="goal-weekday-target" value="40000">
+                                    <input type="hidden" id="goal-weekday-target" value="0">
                                     <p class="text-xs text-emerald-600 mt-1">過去の実績から自動計算</p>
                                 </div>
 
@@ -4143,16 +4143,16 @@
                                         <span>🔄</span> 休日の1日あたり目標売上 (円)
                                     </label>
                                     <div class="w-full px-4 py-3 border border-purple-300 rounded bg-white text-lg font-bold text-purple-700" id="goal-weekend-target-display">
-                                        ¥50,000
+                                        ¥0
                                     </div>
-                                    <input type="hidden" id="goal-weekend-target" value="50000">
+                                    <input type="hidden" id="goal-weekend-target" value="0">
                                     <p class="text-xs text-purple-600 mt-1">過去の実績から自動計算</p>
                                 </div>
 
                                 <!-- Retail Sales Target -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">月間物販目標 (円)</label>
-                                    <input type="number" id="goal-retail" value="50000" min="0" step="1000"
+                                    <input type="number" id="goal-retail" value="0" min="0" step="1000"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoal()">
                                     <p class="text-xs text-kadomori-500 mt-1">月間の物販売上目標</p>
@@ -4168,7 +4168,7 @@
                                     <label class="block text-sm font-bold text-green-800 mb-2 flex items-center gap-2">
                                         <span>💰</span> 基本給 (円)
                                     </label>
-                                    <input type="number" id="goal-base-salary" value="200000" min="0" step="1000"
+                                    <input type="number" id="goal-base-salary" value="0" min="0" step="1000"
                                            class="w-full px-4 py-3 border border-green-300 rounded focus:outline-none focus:ring-2 focus:ring-green-400 text-lg font-medium"
                                            onchange="saveBaseSalaryAndCalculate()">
                                     <p class="text-xs text-green-600 mt-1">インセンティブ計算に使用</p>
@@ -4177,7 +4177,7 @@
                                 <!-- New Customers Target -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">月間新規数目標 (名)</label>
-                                    <input type="number" id="goal-new-customers" value="30" min="0"
+                                    <input type="number" id="goal-new-customers" value="0" min="0"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoal()">
                                     <p class="text-xs text-kadomori-500 mt-1">月間の新規顧客目標数</p>
@@ -4186,7 +4186,7 @@
                                 <!-- Existing Customers Target -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">月間既存数目標 (名)</label>
-                                    <input type="number" id="goal-existing-customers" value="90" min="0"
+                                    <input type="number" id="goal-existing-customers" value="0" min="0"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoal()">
                                     <p class="text-xs text-kadomori-500 mt-1">月間の既存顧客目標数</p>
@@ -4195,7 +4195,7 @@
                                 <!-- Unit Price Target -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">目標客単価 (円)</label>
-                                    <input type="number" id="goal-unit-price" value="9000" min="0" step="100"
+                                    <input type="number" id="goal-unit-price" value="0" min="0" step="100"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoal()">
                                     <p class="text-xs text-kadomori-500 mt-1">目標とする平均客単価</p>
@@ -4204,7 +4204,7 @@
                                 <!-- New Customer Next Reservation Rate Target -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">目標新規次回予約率 (%)</label>
-                                    <input type="number" id="goal-new-reservation-rate" value="50" min="0" max="100"
+                                    <input type="number" id="goal-new-reservation-rate" value="0" min="0" max="100"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoal()">
                                     <p class="text-xs text-kadomori-500 mt-1">新規顧客の次回予約率目標</p>
@@ -4213,7 +4213,7 @@
                                 <!-- Overall Reservation Rate Target -->
                                 <div class="bg-white p-4 rounded border border-kadomori-200">
                                     <label class="block text-sm font-bold text-kadomori-800 mb-2">目標次回予約率 (%)</label>
-                                    <input type="number" id="goal-reservation-rate" value="70" min="0" max="100"
+                                    <input type="number" id="goal-reservation-rate" value="0" min="0" max="100"
                                            class="w-full px-4 py-3 border border-kadomori-300 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 text-lg font-medium"
                                            onchange="calculateGoal()">
                                     <p class="text-xs text-kadomori-500 mt-1">全体の次回予約率目標</p>
@@ -5092,14 +5092,14 @@
 
         // スタッフ名簿（スプレッドシートから読み込み、未設定時はデフォルト値）
         let STAFF_ROSTER = {
-            ebisu: ['yuki', 'ren'],
-            kadomori: ['sora', 'hina'],
-            fukushima: ['aoi']
+            ebisu: [],
+            kadomori: [],
+            fukushima: []
         };
         const DEFAULT_STAFF_ROSTER = {
-            ebisu: ['yuki', 'ren'],
-            kadomori: ['sora', 'hina'],
-            fukushima: ['aoi']
+            ebisu: [],
+            kadomori: [],
+            fukushima: []
         };
 
         // KADOMORI Color Palette - Black & Gold (高級感)
@@ -5145,7 +5145,7 @@
         let lockedStaff = null;
         let isStaffAuthenticated = false; // スタッフ認証済みフラグ
         let changedRows = new Set();
-        let monthlyGoal = 1100000; // Default goal
+        let monthlyGoal = 0; // Default goal
 
         // --- STAFF PASSWORD FUNCTIONS ---
         const STAFF_PASSWORD_STORAGE_KEY = 'kadomori_staff_passwords';
@@ -5919,7 +5919,7 @@
                             storeName: storeKey === 'ebisu' ? '恵比寿駅前店' : storeKey === 'kadomori' ? '大阪KADOMORI店' : storeKey === 'fukushima' ? '福島店' : storeKey,
                             staff: staffName,
                             sales: { cash: salesCash, credit: salesCredit, qr: salesQr, product: salesProduct },
-                            discounts: { hpbPoints: Math.random()>0.9?500:0, hpbGift: 0, other: 0, refund: Math.random()>0.98?3000:0 },
+                            discounts: { hpbPoints: 0, hpbGift: 0, other: 0, refund: 0 },
                             customers: { newHPB, newMiniNai, existing, acquaintance },
                             nextRes: { newHPB: nextResNewHPB, newMiniNai: nextResMiniNai, existing: nextResExisting },
                             reviews5Star: 0,
@@ -10518,9 +10518,9 @@
                 }
             });
 
-            const weekdayAvg = weekdayCount > 0 ? Math.round(weekdayTotal / weekdayCount) : 40000;
-            const weekendAvg = weekendCount > 0 ? Math.round(weekendTotal / weekendCount) : 50000;
-            const ratio = weekdayAvg > 0 ? (weekendAvg / weekdayAvg).toFixed(2) : 1.25;
+            const weekdayAvg = weekdayCount > 0 ? Math.round(weekdayTotal / weekdayCount) : 0;
+            const weekendAvg = weekendCount > 0 ? Math.round(weekendTotal / weekendCount) : 0;
+            const ratio = weekdayAvg > 0 ? (weekendAvg / weekdayAvg).toFixed(2) : 0;
 
             return {
                 weekdayAvg,
@@ -12706,45 +12706,8 @@
         // ========================================
 
         function initDemoData() {
-            // サブスクデータ
-            if (Object.keys(loadSubscriptionData()).length === 0) {
-                const now = new Date();
-                const subData = {};
-                for (let i = 5; i >= 0; i--) {
-                    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-                    const ym = `${d.getFullYear()}/${d.getMonth() + 1}`;
-                    subData[ym] = {
-                        ebisu: { startCount: 32 + i * 2, newMembers: 5 + Math.floor(Math.random() * 4), cancelled: 1 + Math.floor(Math.random() * 3), monthlyFee: 9800 },
-                        kadomori: { startCount: 24 + i, newMembers: 3 + Math.floor(Math.random() * 3), cancelled: 1 + Math.floor(Math.random() * 2), monthlyFee: 9800 },
-                        fukushima: { startCount: 15 + Math.floor(i / 2), newMembers: 2 + Math.floor(Math.random() * 3), cancelled: Math.floor(Math.random() * 2), monthlyFee: 8800 }
-                    };
-                }
-                saveSubscriptionStorage(subData);
-            }
-
-            // 回数券データ
-            if (loadTicketData().length === 0) {
-                const today = new Date();
-                const fmt = d => d.toISOString().split('T')[0];
-                const addDays = (d, n) => { const r = new Date(d); r.setDate(r.getDate() + n); return r; };
-                const addMonths = (d, n) => { const r = new Date(d); r.setMonth(r.getMonth() + n); return r; };
-
-                const demoTickets = [
-                    { id: 'T-D001', customerName: '佐藤 美咲', store: 'ebisu', ticketName: '整体5回コース', purchaseDate: fmt(addDays(today, -90)), totalCount: 5, usedCount: 3, price: 45000, expiryDate: fmt(addMonths(today, 3)), status: 'active' },
-                    { id: 'T-D002', customerName: '鈴木 健太', store: 'ebisu', ticketName: '整体10回コース', purchaseDate: fmt(addDays(today, -150)), totalCount: 10, usedCount: 7, price: 80000, expiryDate: fmt(addDays(today, 15)), status: 'active' },
-                    { id: 'T-D003', customerName: '田中 愛', store: 'kadomori', ticketName: '睡眠改善5回コース', purchaseDate: fmt(addDays(today, -60)), totalCount: 5, usedCount: 1, price: 50000, expiryDate: fmt(addMonths(today, 4)), status: 'active' },
-                    { id: 'T-D004', customerName: '高橋 翔', store: 'kadomori', ticketName: '整体5回コース', purchaseDate: fmt(addDays(today, -200)), totalCount: 5, usedCount: 5, price: 45000, expiryDate: fmt(addDays(today, -20)), status: 'completed' },
-                    { id: 'T-D005', customerName: '渡辺 結衣', store: 'fukushima', ticketName: '整体10回コース', purchaseDate: fmt(addDays(today, -120)), totalCount: 10, usedCount: 4, price: 80000, expiryDate: fmt(addDays(today, 25)), status: 'active' },
-                    { id: 'T-D006', customerName: '伊藤 大輝', store: 'ebisu', ticketName: '睡眠改善5回コース', purchaseDate: fmt(addDays(today, -30)), totalCount: 5, usedCount: 0, price: 50000, expiryDate: fmt(addMonths(today, 5)), status: 'active' },
-                    { id: 'T-D007', customerName: '山本 さくら', store: 'fukushima', ticketName: '整体5回コース', purchaseDate: fmt(addDays(today, -180)), totalCount: 5, usedCount: 3, price: 45000, expiryDate: fmt(addDays(today, -5)), status: 'active' },
-                    { id: 'T-D008', customerName: '中村 蓮', store: 'kadomori', ticketName: '整体10回コース', purchaseDate: fmt(addDays(today, -45)), totalCount: 10, usedCount: 2, price: 80000, expiryDate: fmt(addMonths(today, 5)), status: 'active' },
-                ];
-                saveTicketStorage(demoTickets);
-            }
+            // ダミーデータは削除済み - 実データのみ使用
         }
-
-        // ページ読み込み時にダミーデータを初期化
-        initDemoData();
 
         // ========================================
         // 回数券 有効期限ポップアップ通知
