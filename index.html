@@ -5164,6 +5164,95 @@
 
         const CHANNEL_KEYS = Object.keys(CHANNEL_NAMES);
 
+        // ========== GAS API ヘルパー ==========
+        // GASからGETでデータ取得（localStorageをキャッシュとして使用）
+        async function gasGet(action, cacheKey) {
+            if (!API_URL) {
+                // API未設定時はlocalStorageフォールバック
+                if (cacheKey) { try { return JSON.parse(localStorage.getItem(cacheKey)) || null; } catch(e) { return null; } }
+                return null;
+            }
+            try {
+                const res = await fetch(`${API_URL}?action=${action}`);
+                const json = await res.json();
+                if (json.status === 'success') {
+                    // キャッシュに保存
+                    if (cacheKey) {
+                        const { status, ...rest } = json;
+                        localStorage.setItem(cacheKey, JSON.stringify(rest));
+                    }
+                    return json;
+                }
+                console.warn(`GAS ${action} エラー:`, json.message);
+            } catch(e) {
+                console.warn(`GAS ${action} 通信エラー:`, e.message);
+            }
+            // フォールバック: localStorageから読み込み
+            if (cacheKey) { try { return JSON.parse(localStorage.getItem(cacheKey)) || null; } catch(e) {} }
+            return null;
+        }
+
+        // GASにPOSTでデータ保存（localStorageにもキャッシュ保存）
+        async function gasPost(action, payload, cacheKey) {
+            // localStorageにキャッシュ保存
+            if (cacheKey) {
+                try { localStorage.setItem(cacheKey, JSON.stringify(payload)); } catch(e) {}
+            }
+            if (!API_URL) {
+                console.log(`API未設定: ${action} はローカルのみに保存`);
+                return { status: 'success', local: true };
+            }
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action, ...payload })
+                });
+                return await res.json();
+            } catch(e) {
+                console.warn(`GAS ${action} 保存エラー:`, e.message);
+                return { status: 'error', message: e.message };
+            }
+        }
+
+        // GASから全ビジネスデータを一括読み込みしてlocalStorageキャッシュを更新
+        async function loadAllBusinessDataFromGAS() {
+            if (!API_URL) return;
+            try {
+                const res = await fetch(`${API_URL}?action=load_all`);
+                const json = await res.json();
+                if (json.status !== 'success') return;
+
+                // 各データをlocalStorageにキャッシュ
+                if (json.goals && Object.keys(json.goals).length > 0)
+                    localStorage.setItem('kadomori_staff_goals_v2', JSON.stringify(json.goals));
+                if (json.salaries && Object.keys(json.salaries).length > 0)
+                    localStorage.setItem('kadomori_staff_base_salary', JSON.stringify(json.salaries));
+                if (json.roles && Object.keys(json.roles).length > 0)
+                    localStorage.setItem('kadomori_staff_roles', JSON.stringify(json.roles));
+                if (json.cancellations && json.cancellations.length > 0)
+                    localStorage.setItem('kadomori_cancellation_data', JSON.stringify(json.cancellations));
+                if (json.inventory && json.inventory.length > 0)
+                    localStorage.setItem('kadomori_inventory', JSON.stringify(json.inventory));
+                if (json.inventoryHistory && json.inventoryHistory.length > 0)
+                    localStorage.setItem('kadomori_inventory_history', JSON.stringify(json.inventoryHistory));
+                if (json.retailSales && json.retailSales.length > 0)
+                    localStorage.setItem('kadomori_retail_sales', JSON.stringify(json.retailSales));
+                if (json.adData && json.adData.length > 0)
+                    localStorage.setItem('kadomori_ad_data', JSON.stringify(json.adData));
+                if (json.subPlans && json.subPlans.length > 0)
+                    localStorage.setItem('kadomori_sub_plans', JSON.stringify(json.subPlans));
+                if (json.subData && Object.keys(json.subData).length > 0)
+                    localStorage.setItem('kadomori_subscription_data', JSON.stringify(json.subData));
+                if (json.tickets && json.tickets.length > 0)
+                    localStorage.setItem('kadomori_ticket_data', JSON.stringify(json.tickets));
+
+                console.log('✓ GASから全ビジネスデータを読み込みました');
+            } catch(e) {
+                console.warn('GAS全データ読み込みエラー:', e.message);
+            }
+        }
+
         // KADOMORI Color Palette - Black & Gold (高級感)
         const BrandColors = {
             // Primary - ブラック (洗練)
@@ -5555,6 +5644,8 @@
 
         function saveGoalsToStorage(goals) {
             localStorage.setItem(GOAL_STORAGE_KEY, JSON.stringify(goals));
+            // 非同期でGASにも保存
+            gasPost('save_goals', { goals }).catch(e => console.warn('目標GAS保存エラー:', e));
         }
 
         // デバッグ用: localStorageの目標データを確認
@@ -5769,6 +5860,7 @@
 
         function saveBaseSalariesToStorage(salaries) {
             localStorage.setItem(BASE_SALARY_STORAGE_KEY, JSON.stringify(salaries));
+            gasPost('save_salaries', { salaries }).catch(e => console.warn('基本給GAS保存エラー:', e));
         }
 
         function getStaffBaseSalary(store, staff) {
@@ -7325,6 +7417,7 @@
             if (!settings[store]) settings[store] = {};
             settings[store][staff] = role;
             localStorage.setItem('kadomori_staff_roles', JSON.stringify(settings));
+            gasPost('save_roles', { roles: settings }).catch(e => console.warn('役割GAS保存エラー:', e));
         }
 
         function getRoleLabel(role) {
@@ -7341,6 +7434,7 @@
 
         function saveCancellationData(data) {
             localStorage.setItem(CANCEL_STORAGE_KEY, JSON.stringify(data));
+            gasPost('save_cancellations', { cancellations: data }).catch(e => console.warn('キャンセルGAS保存エラー:', e));
         }
 
         function openCancellationModal() {
@@ -8016,15 +8110,24 @@
         function loadInventory() {
             try { return JSON.parse(localStorage.getItem(INV_STORAGE_KEY)) || []; } catch { return []; }
         }
-        function saveInventory(data) { localStorage.setItem(INV_STORAGE_KEY, JSON.stringify(data)); }
+        function saveInventory(data) {
+            localStorage.setItem(INV_STORAGE_KEY, JSON.stringify(data));
+            gasPost('save_inventory', { inventory: data }).catch(e => console.warn('在庫GAS保存エラー:', e));
+        }
         function loadInventoryHistory() {
             try { return JSON.parse(localStorage.getItem(INV_HISTORY_KEY)) || []; } catch { return []; }
         }
-        function saveInventoryHistory(data) { localStorage.setItem(INV_HISTORY_KEY, JSON.stringify(data)); }
+        function saveInventoryHistory(data) {
+            localStorage.setItem(INV_HISTORY_KEY, JSON.stringify(data));
+            gasPost('save_inventory_history', { history: data }).catch(e => console.warn('在庫履歴GAS保存エラー:', e));
+        }
         function loadRetailSales() {
             try { return JSON.parse(localStorage.getItem(RETAIL_SALES_KEY)) || []; } catch { return []; }
         }
-        function saveRetailSales(data) { localStorage.setItem(RETAIL_SALES_KEY, JSON.stringify(data)); }
+        function saveRetailSales(data) {
+            localStorage.setItem(RETAIL_SALES_KEY, JSON.stringify(data));
+            gasPost('save_retail_sales', { retailSales: data }).catch(e => console.warn('物販売上GAS保存エラー:', e));
+        }
 
         // Sub-tab switching
         function switchRetailSubTab(id) {
@@ -8888,7 +8991,10 @@
         const AD_STORAGE_KEY = 'kadomori_ad_data';
 
         function loadAdData() { try { return JSON.parse(localStorage.getItem(AD_STORAGE_KEY)) || []; } catch { return []; } }
-        function saveAdStorage(data) { localStorage.setItem(AD_STORAGE_KEY, JSON.stringify(data)); }
+        function saveAdStorage(data) {
+            localStorage.setItem(AD_STORAGE_KEY, JSON.stringify(data));
+            gasPost('save_ad_data', { adData: data }).catch(e => console.warn('広告費GAS保存エラー:', e));
+        }
 
         function openAdModal() {
             const now = new Date();
@@ -9050,7 +9156,10 @@
         function getSubscriptionPlanData() {
             try { return JSON.parse(localStorage.getItem('kadomori_sub_plans')) || []; } catch { return []; }
         }
-        function saveSubscriptionPlanData(data) { localStorage.setItem('kadomori_sub_plans', JSON.stringify(data)); }
+        function saveSubscriptionPlanData(data) {
+            localStorage.setItem('kadomori_sub_plans', JSON.stringify(data));
+            gasPost('save_sub_plans', { subPlans: data }).catch(e => console.warn('サブスクプランGAS保存エラー:', e));
+        }
 
         // ========================================
         // プラン別分析
@@ -12355,6 +12464,9 @@
                 console.error('目標データ読み込みエラー:', e);
             }
 
+            // GASから全ビジネスデータを非同期で読み込み（localStorageキャッシュを更新）
+            loadAllBusinessDataFromGAS().catch(e => console.warn('GAS全データ読み込みエラー:', e));
+
             // ダークモードでチャートを初期化した後に更新
             setTimeout(() => updateChartsForDarkMode(), 100);
 
@@ -12397,6 +12509,7 @@
         }
         function saveSubscriptionStorage(data) {
             localStorage.setItem(SUB_STORAGE_KEY, JSON.stringify(data));
+            gasPost('save_sub_data', { subData: data }).catch(e => console.warn('サブスクデータGAS保存エラー:', e));
         }
 
         function openSubscriptionEditModal(yearMonth, storeId) {
@@ -12577,6 +12690,7 @@
         }
         function saveTicketStorage(data) {
             localStorage.setItem(TICKET_STORAGE_KEY, JSON.stringify(data));
+            gasPost('save_tickets', { tickets: data }).catch(e => console.warn('回数券GAS保存エラー:', e));
         }
 
         function openTicketModal(ticketId) {
