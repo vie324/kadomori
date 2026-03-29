@@ -1551,9 +1551,12 @@
                     <div class="relative">
                         <select id="store-selector" onchange="handleStoreChange()" class="select-premium appearance-none text-accent-800 text-sm cursor-pointer min-w-[140px]">
                             <option value="all">全店舗</option>
-                            <option value="ebisu">恵比寿駅前店</option>
-                            <option value="kadomori">大阪KADOMORI店</option>
-                            <option value="fukushima">福島店</option>
+                            <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                            <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                            <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                            <option value="osaka_kadomori">大阪KADOMORI</option>
+                            <option value="osaka_sleepy">大阪SLEEPY</option>
+                            <option value="fukushima_sleepy">福島SLEEPY</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-surface-500">
                             <i data-lucide="chevron-down" class="w-4 h-4"></i>
@@ -2306,9 +2309,12 @@
                         <div class="flex flex-wrap items-center gap-2">
                             <select id="counseling-store-filter" onchange="renderCounselingResults()" class="px-3 py-2 text-sm border border-emerald-400 bg-emerald-500/50 text-white rounded focus:outline-none focus:ring-2 focus:ring-white/50">
                                 <option value="all">全店</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                             <select id="counseling-date-filter" onchange="renderCounselingResults()" class="px-3 py-2 text-sm border border-emerald-400 bg-emerald-500/50 text-white rounded focus:outline-none focus:ring-2 focus:ring-white/50">
                                 <option value="all">全期間</option>
@@ -2489,9 +2495,12 @@
                             <!-- 店舗フィルター -->
                             <select id="marketing-store-filter" onchange="updateMarketingDashboard()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
                                 <option value="all">全店</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                             <button onclick="refreshCustomerData()" id="refresh-customer-btn" class="btn-secondary py-2 px-4 flex items-center gap-2">
                                 <i data-lucide="refresh-cw" class="w-4 h-4" id="refresh-customer-icon"></i>
@@ -2681,9 +2690,12 @@
                         <div class="flex flex-wrap gap-2">
                             <select id="admin-counseling-store-filter" onchange="renderAdminCounselingResults()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
                                 <option value="all">全店</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                             <select id="admin-counseling-date-filter" onchange="renderAdminCounselingResults()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
                                 <option value="week">今週</option>
@@ -3067,9 +3079,12 @@
                             <div>
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="cancel-input-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -3250,9 +3265,12 @@
                             <input type="date" id="rc-date" onchange="updateRegisterClose()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg bg-white">
                             <select id="rc-store" onchange="updateRegisterClose()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg bg-white">
                                 <option value="all">全店舗</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                     </div>
@@ -4051,9 +4069,12 @@
                                 <div class="relative">
                                     <select id="goal-store-selector" onchange="handleGoalStoreChange()" class="appearance-none bg-kadomori-900 border border-kadomori-700 text-white py-2 pl-4 pr-8 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 font-medium text-sm cursor-pointer min-w-[140px]">
                                         <option value="all">全店舗</option>
-                                        <option value="ebisu">恵比寿駅前店</option>
-                                        <option value="kadomori">大阪KADOMORI店</option>
-                                        <option value="fukushima">福島店</option>
+                                        <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                        <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                        <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                        <option value="osaka_kadomori">大阪KADOMORI</option>
+                                        <option value="osaka_sleepy">大阪SLEEPY</option>
+                                        <option value="fukushima_sleepy">福島SLEEPY</option>
                                     </select>
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">▼</div>
                                 </div>
@@ -4496,9 +4517,12 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="sub-store-selector" onchange="renderSubscriptionDashboard()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
                                     <option value="all">全店舗</option>
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -4582,9 +4606,12 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="ticket-store-selector" onchange="renderTicketDashboard()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
                                     <option value="all">全店舗</option>
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -4661,9 +4688,12 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="plan-store-selector" onchange="updatePlanAnalysis()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
                                     <option value="all">全店舗</option>
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -4749,9 +4779,12 @@
                             <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                             <select id="plan-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
                                 <option value="all">全店舗共通</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                         <div>
@@ -4792,9 +4825,12 @@
                         <div>
                             <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                             <select id="sub-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                         <div>
@@ -4834,9 +4870,12 @@
                         <div>
                             <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                             <select id="ticket-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                         <div>
@@ -5085,7 +5124,9 @@
         const SPREADSHEET_API_KEY = 'kadomori_spreadsheet_api_url';
 
         // デフォルトのAPI URL（コードに埋め込み）
-        const DEFAULT_API_URL = 'https://script.google.com/macros/s/AKfycbwrz7LgQb2uH9VTtmalZxIEcJnHc-Ae53UNMnDi0MM5eLdP7XmZKOlDPTaOL5pmsFwf/exec';
+        // GAS APIのURL（設定画面から入力、またはlocalStorageから読み込み）
+        // デプロイ手順: gas/Code.gs を Google Apps Script に貼り付けてデプロイ
+        const DEFAULT_API_URL = '';
 
         // API URL（デフォルトURLを使用）
         let API_URL = DEFAULT_API_URL;
@@ -5366,7 +5407,7 @@
             const header = document.querySelector('header');
 
             // スタッフ名を表示
-            const storeName = store === 'ebisu' ? '恵比寿駅前店' : store === 'kadomori' ? '大阪KADOMORI店' : store === 'fukushima' ? '福島店' : store;
+            const storeName = STORE_NAMES[store] || store;
             nameEl.textContent = `${storeName} / ${staff}`;
 
             // エラーメッセージを非表示
@@ -6377,7 +6418,7 @@
 
             const filtered = getFilteredCustomerData();
             const storeFilter = document.getElementById('marketing-store-filter')?.value || 'all';
-            const storeName = storeFilter === 'all' ? '全店' : storeFilter === 'ebisu' ? '恵比寿駅前店' : storeFilter === 'kadomori' ? '大阪KADOMORI店' : storeFilter === 'fukushima' ? '福島店' : storeFilter;
+            const storeName = storeFilter === 'all' ? '全店' : STORE_NAMES[storeFilter] || storeFilter;
 
             const fmt = n => n.toLocaleString();
             const now = new Date();
@@ -6858,7 +6899,7 @@
 
             container.innerHTML = filtered.map(c => {
                 const regDate = c.timestamp ? new Date(c.timestamp).toLocaleDateString('ja-JP', {year: 'numeric', month: 'short', day: 'numeric'}) : '-';
-                const storeName = c.store === 'ebisu' ? '恵比寿駅前店' : c.store === 'kadomori' ? '大阪KADOMORI店' : c.store === 'fukushima' ? '福島店' : c.storeName || '-';
+                const storeName = STORE_NAMES[c.store] || c.storeName || '-';
                 const birthVal = c.birthday || c.birthDate;
                 let age = '-';
                 if (birthVal) {
@@ -6880,10 +6921,10 @@
                 return `
                     <div class="bg-white border border-kadomori-200 rounded-lg shadow-sm hover:shadow-md transition overflow-hidden">
                         <!-- ヘッダー: 名前・日付・店舗 -->
-                        <div class="bg-gradient-to-r ${c.store === 'ebisu' ? 'from-blue-50 to-blue-100' : 'from-purple-50 to-purple-100'} px-4 py-3 border-b border-kadomori-200">
+                        <div class="bg-gradient-to-r from-kadomori-50 to-kadomori-100 px-4 py-3 border-b border-kadomori-200">
                             <div class="flex flex-wrap items-center justify-between gap-2">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-full ${c.store === 'ebisu' ? 'bg-blue-200 text-blue-700' : 'bg-purple-200 text-purple-700'} flex items-center justify-center font-bold text-lg">
+                                    <div class="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-lg">
                                         ${c.name ? c.name.charAt(0) : '?'}
                                     </div>
                                     <div>
@@ -6892,7 +6933,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="px-3 py-1 text-sm font-semibold rounded-full ${c.store === 'ebisu' ? 'bg-blue-500 text-white' : 'bg-purple-500 text-white'}">${storeName}</span>
+                                    <span class="px-3 py-1 text-sm font-semibold rounded-full bg-primary-500 text-white">${storeName}</span>
                                     <span class="text-sm text-kadomori-500 bg-white px-2 py-1 rounded">${regDate}</span>
                                 </div>
                             </div>
@@ -7448,7 +7489,7 @@
             }
 
             // Table
-            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const storeNames = STORE_NAMES;
             const tbody = document.getElementById('cancel-table-body');
             if (tbody) {
                 const sorted = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -8357,7 +8398,7 @@
 
             // Store Ranking
             const storeMap = {};
-            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const storeNames = STORE_NAMES;
             sales.forEach(s => {
                 const store = s.store || '不明';
                 if (!storeMap[store]) storeMap[store] = { sales: 0, count: 0 };
@@ -8649,9 +8690,12 @@
                             <input type="date" id="retail-sale-date" value="${todayStr}" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
                         <div><label class="block text-sm font-medium text-surface-600 mb-1">店舗</label>
                             <select id="retail-sale-store" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
-                                <option value="ebisu" ${currentStore === 'ebisu' ? 'selected' : ''}>恵比寿駅前店</option>
-                                <option value="kadomori" ${currentStore === 'kadomori' ? 'selected' : ''}>大阪KADOMORI店</option>
-                                <option value="fukushima" ${currentStore === 'fukushima' ? 'selected' : ''}>福島店</option>
+                                <option value="daikanyama_kadomori" ${currentStore === 'daikanyama_kadomori' ? 'selected' : ''}>代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy" ${currentStore === 'daikanyama_sleepy' ? 'selected' : ''}>代官山SLEEPY</option>
+                                <option value="ebisu_sleepy" ${currentStore === 'ebisu_sleepy' ? 'selected' : ''}>恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori" ${currentStore === 'osaka_kadomori' ? 'selected' : ''}>大阪KADOMORI</option>
+                                <option value="osaka_sleepy" ${currentStore === 'osaka_sleepy' ? 'selected' : ''}>大阪SLEEPY</option>
+                                <option value="fukushima_sleepy" ${currentStore === 'fukushima_sleepy' ? 'selected' : ''}>福島SLEEPY</option>
                             </select></div>
                     </div>
                     <div><label class="block text-sm font-medium text-surface-600 mb-1">担当スタッフ</label>
@@ -9120,7 +9164,7 @@
             // Table
             const tbody = document.getElementById('plan-table-body');
             if (tbody) {
-                const storeLabels = { ebisu: '恵比寿', kadomori: 'KADOMORI', fukushima: '福島', all: '全店舗' };
+                const storeLabels = { ...STORE_NAMES, all: '全店舗' };
                 tbody.innerHTML = plans.map(p => {
                     const churn = p.members > 0 ? ((p.cancelled / p.members) * 100).toFixed(1) : '0.0';
                     const revenue = (p.members || 0) * (p.fee || 0);
@@ -9780,7 +9824,7 @@
 
             // Generate table rows
             tableBody.innerHTML = allIncentives.map(s => {
-                const storeName = s.store === 'ebisu' ? '恵比寿駅前店' : s.store === 'kadomori' ? '大阪KADOMORI店' : s.store === 'fukushima' ? '福島店' : s.store;
+                const storeName = STORE_NAMES[s.store] || s.store;
                 return `
                     <tr class="hover:bg-surface-50 transition">
                         <td class="py-3 px-4 text-surface-600">${storeName}</td>
@@ -10433,7 +10477,7 @@
                 const titleEl = document.getElementById('goal-summary-title');
                 const descEl = document.getElementById('goal-summary-description');
                 if (context.type === 'store') {
-                    const storeName = context.store === 'ebisu' ? '恵比寿駅前店' : context.store === 'kadomori' ? '大阪KADOMORI店' : context.store === 'fukushima' ? '福島店' : context.store;
+                    const storeName = STORE_NAMES[context.store] || context.store;
                     titleEl.innerText = `${storeName} 目標サマリー`;
                     descEl.innerText = 'この目標は所属スタッフの目標の合算値です。個別のスタッフを選択すると、個人目標を編集できます。';
                 } else {
@@ -10482,7 +10526,7 @@
                 // 全店舗のスタッフ
                 Object.keys(STAFF_ROSTER).forEach(store => {
                     const staffList = STAFF_ROSTER[store] || [];
-                    const storeName = store === 'ebisu' ? '恵比寿駅前店' : store === 'kadomori' ? '大阪KADOMORI店' : store === 'fukushima' ? '福島店' : store;
+                    const storeName = STORE_NAMES[store] || store;
                     staffList.forEach(staff => {
                         const staffGoal = getStaffGoal(store, staff, yearMonth);
                         const monthlyTarget = ((staffGoal.weekdays || 0) * (staffGoal.weekdayTarget || 0)) +
@@ -11203,7 +11247,7 @@
             staffList.innerHTML = '';
             const baseUrl = window.location.origin + window.location.pathname;
             Object.keys(STAFF_ROSTER).forEach(storeId => {
-                const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                const storeName = STORE_NAMES[storeId] || storeId;
                 STAFF_ROSTER[storeId].forEach(staffName => {
                     const staffDiv = document.createElement('div');
                     staffDiv.className = 'bg-kadomori-50 p-3 rounded';
@@ -11440,7 +11484,7 @@
             let html = '';
 
             Object.keys(STAFF_ROSTER).forEach(storeId => {
-                const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                const storeName = STORE_NAMES[storeId] || storeId;
                 const staffList = STAFF_ROSTER[storeId];
 
                 staffList.forEach(staff => {
@@ -11476,7 +11520,7 @@
             // 店舗セレクタを初期化
             storeSel.innerHTML = '<option value="">店舗を選択</option>';
             Object.keys(STAFF_ROSTER).forEach(storeId => {
-                const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                const storeName = STORE_NAMES[storeId] || storeId;
                 const opt = document.createElement('option');
                 opt.value = storeId;
                 opt.text = storeName;
@@ -11561,7 +11605,7 @@
                 message.textContent = '管理ページへのアクセスにはパスワードが必要です';
             } else {
                 title.textContent = 'スタッフページ認証';
-                message.textContent = `${store === 'ebisu' ? '恵比寿駅前店' : store === 'kadomori' ? '大阪KADOMORI店' : store === 'fukushima' ? '福島店' : store} / ${staff} のページへのアクセスにはパスワードが必要です`;
+                message.textContent = `${STORE_NAMES[store] || store} / ${staff} のページへのアクセスにはパスワードが必要です`;
             }
 
             dialog.classList.remove('hidden');
@@ -11935,7 +11979,7 @@
 
             // スタッフ専用ページの場合、所属店舗のみ表示
             if (lockedStore) {
-                const storeName = lockedStore === 'ebisu' ? '恵比寿駅前店' : lockedStore === 'kadomori' ? '大阪KADOMORI店' : lockedStore === 'fukushima' ? '福島店' : lockedStore;
+                const storeName = STORE_NAMES[lockedStore] || lockedStore;
                 storeSel.innerHTML = `<option value="${lockedStore}">${storeName}</option>`;
                 storeSel.disabled = true;
                 storeSel.parentElement.style.display = 'none';
@@ -11950,7 +11994,7 @@
                 // 通常ページの場合、全店舗を表示
                 storeSel.innerHTML = '<option value="all">全店舗</option>';
                 Object.keys(STAFF_ROSTER).forEach(storeId => {
-                    const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                    const storeName = STORE_NAMES[storeId] || storeId;
                     const opt = document.createElement('option');
                     opt.value = storeId;
                     opt.text = storeName;
@@ -12368,7 +12412,7 @@
                 monthInput.value = `${y}-${m.padStart(2, '0')}`;
                 const data = loadSubscriptionData();
                 const record = data[yearMonth]?.[storeId] || {};
-                document.getElementById('sub-edit-store').value = storeId || 'ebisu';
+                document.getElementById('sub-edit-store').value = storeId || Object.keys(STORE_NAMES)[0];
                 document.getElementById('sub-edit-start').value = record.startCount || 0;
                 document.getElementById('sub-edit-new').value = record.newMembers || 0;
                 document.getElementById('sub-edit-cancelled').value = record.cancelled || 0;
@@ -12376,7 +12420,7 @@
             } else {
                 monthInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
                 const selectedStore = document.getElementById('sub-store-selector').value;
-                document.getElementById('sub-edit-store').value = selectedStore === 'all' ? 'ebisu' : selectedStore;
+                document.getElementById('sub-edit-store').value = selectedStore === 'all' ? Object.keys(STORE_NAMES)[0] : selectedStore;
                 document.getElementById('sub-edit-start').value = 0;
                 document.getElementById('sub-edit-new').value = 0;
                 document.getElementById('sub-edit-cancelled').value = 0;
@@ -12432,7 +12476,7 @@
         }
 
         function getStoreNameById(id) {
-            const map = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const map = STORE_NAMES;
             return map[id] || id;
         }
 
@@ -12456,7 +12500,7 @@
             }
 
             let currentMembers = 0, newMembers = 0, cancelled = 0, revenue = 0;
-            const stores = storeFilter === 'all' ? ['ebisu', 'kadomori', 'fukushima'] : [storeFilter];
+            const stores = storeFilter === 'all' ? Object.keys(STORE_NAMES) : [storeFilter];
 
             if (selectedYM && data[selectedYM]) {
                 stores.forEach(s => {
@@ -12563,7 +12607,7 @@
                 titleEl.textContent = '回数券登録';
                 document.getElementById('ticket-edit-id').value = '';
                 document.getElementById('ticket-edit-customer').value = '';
-                document.getElementById('ticket-edit-store').value = document.getElementById('ticket-store-selector').value === 'all' ? 'ebisu' : document.getElementById('ticket-store-selector').value;
+                document.getElementById('ticket-edit-store').value = document.getElementById('ticket-store-selector').value === 'all' ? Object.keys(STORE_NAMES)[0] : document.getElementById('ticket-store-selector').value;
                 document.getElementById('ticket-edit-name').value = '';
                 document.getElementById('ticket-edit-date').value = new Date().toISOString().split('T')[0];
                 document.getElementById('ticket-edit-total').value = 5;
