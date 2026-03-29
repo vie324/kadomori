@@ -1859,9 +1859,9 @@
                     <div class="bg-white rounded p-6 shadow-sm border border-kadomori-100">
                         <h3 class="text-lg font-serif font-bold text-kadomori-800 mb-4">新規媒体シェア</h3>
                         <div class="chart-container h-64"><canvas id="channelShareChart"></canvas></div>
-                        <div class="mt-4 flex justify-center gap-4 text-xs text-kadomori-500">
+                        <div class="mt-4 flex flex-wrap justify-center gap-3 text-xs text-kadomori-500" id="channel-share-legend">
                              <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-kadomori-400"></span>HPB: <span id="hpb-count" class="font-bold ml-1">0</span>名</div>
-                             <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-kadomori-300"></span>minimo/Nailie: <span id="mininai-count" class="font-bold ml-1">0</span>名</div>
+                             <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-kadomori-300"></span>その他: <span id="mininai-count" class="font-bold ml-1">0</span>名</div>
                         </div>
                     </div>
                 </div>
@@ -1964,8 +1964,8 @@
                             <i data-lucide="file-edit" class="w-5 h-5 text-white"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-display font-bold text-accent-900">ブログ・SNS更新進捗</h3>
-                            <p class="text-xs text-surface-500">今月の目標: ブログ10件/月</p>
+                            <h3 class="text-lg font-display font-bold text-accent-900">媒体別契約状況</h3>
+                            <p class="text-xs text-surface-500">各媒体の新規・契約数</p>
                         </div>
                     </div>
                     <div id="blog-progress-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -2427,13 +2427,12 @@
                 <!-- Charts -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-white rounded p-6 shadow-sm border border-kadomori-100">
-                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">決済方法</h3>
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">売上種別内訳</h3>
                         <div class="chart-container"><canvas id="paymentChart"></canvas></div>
                     </div>
                     <div class="bg-white rounded p-6 shadow-sm border border-kadomori-100">
-                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">割引・損失分析</h3>
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">媒体別新規チャネル</h3>
                         <div class="chart-container"><canvas id="lossChart"></canvas></div>
-                        <p class="mt-4 text-right text-sm text-surface-500">損失合計: <span class="font-bold text-accent-800 text-lg" id="val-total-loss">¥0</span></p>
                     </div>
                 </div>
 
@@ -2892,13 +2891,13 @@
                             予約経路分析
                         </h3>
                         <div class="chart-container h-64"><canvas id="ncChannelChart"></canvas></div>
-                        <div class="mt-4 grid grid-cols-2 gap-3" id="nc-channel-stats">
+                        <div class="mt-4 grid grid-cols-3 gap-3" id="nc-channel-stats">
                             <div class="bg-kadomori-50 p-3 rounded-lg">
-                                <p class="text-xs text-surface-500">HPB経由</p>
+                                <p class="text-xs text-surface-500">HPB</p>
                                 <p class="text-lg font-bold text-accent-800" id="nc-hpb-count">0名</p>
                             </div>
                             <div class="bg-kadomori-50 p-3 rounded-lg">
-                                <p class="text-xs text-surface-500">minimo/Nailie経由</p>
+                                <p class="text-xs text-surface-500">その他媒体</p>
                                 <p class="text-lg font-bold text-accent-800" id="nc-mininai-count">0名</p>
                             </div>
                         </div>
@@ -3097,10 +3096,11 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">媒体</label>
                                 <select id="cancel-input-channel" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
                                     <option value="HPB">HPB</option>
-                                    <option value="minimo">minimo</option>
-                                    <option value="Nailie">Nailie</option>
-                                    <option value="電話">電話</option>
-                                    <option value="LINE">LINE</option>
+                                    <option value="meta">meta</option>
+                                    <option value="TikTok">TikTok</option>
+                                    <option value="インバウンド">インバウンド</option>
+                                    <option value="HP">HP</option>
+                                    <option value="紹介">紹介</option>
                                     <option value="その他">その他</option>
                                 </select>
                             </div>
@@ -3258,7 +3258,7 @@
                             </div>
                             <div>
                                 <h2 class="text-xl font-display font-bold text-accent-900">レジ締め</h2>
-                                <p class="text-xs text-surface-500">決済方法別の日次集計・日報</p>
+                                <p class="text-xs text-surface-500">売上種別の日次集計・日報</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
@@ -3305,38 +3305,30 @@
                     <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
                         <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
                             <i data-lucide="wallet" class="w-4 h-4"></i>
-                            決済方法別内訳
+                            売上種別内訳
                         </h3>
                     </div>
                     <div class="p-6">
-                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4" id="rc-payment-grid">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="rc-payment-grid">
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">現金</p>
+                                <p class="text-xs text-surface-500 mb-1">新規売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-cash">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">クレジット</p>
+                                <p class="text-xs text-surface-500 mb-1">既存売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-credit">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">Square</p>
+                                <p class="text-xs text-surface-500 mb-1">技術売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-square">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">PayPay</p>
+                                <p class="text-xs text-surface-500 mb-1">店販売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-paypay">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">HPBポイント</p>
+                                <p class="text-xs text-surface-500 mb-1">指名料金</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-hpbpoints">¥0</p>
-                            </div>
-                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">Alipay</p>
-                                <p class="text-lg font-bold text-accent-800" id="rc-pay-alipay">¥0</p>
-                            </div>
-                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">UnionPay</p>
-                                <p class="text-lg font-bold text-accent-800" id="rc-pay-unionpay">¥0</p>
                             </div>
                         </div>
                     </div>
@@ -4465,25 +4457,27 @@
                                     <th class="px-4 py-3 text-left text-xs font-medium text-kadomori-800 whitespace-nowrap">日付</th>
                                     <th id="edit-th-store" class="px-4 py-3 text-left text-xs font-medium text-kadomori-800 whitespace-nowrap">店舗</th>
                                     <th id="edit-th-staff" class="px-4 py-3 text-left text-xs font-medium text-kadomori-800 whitespace-nowrap">スタッフ</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(現金)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(クレカ)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(QR)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">物販</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名料</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPBポイント</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPBギフト</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">その他割引</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">返金</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">新規売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">技術売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">店販売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名料金</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名数</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存数</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">新規次回予約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存次回予約</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPB新規</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">Mini/Nailie新規</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">知り合い価格</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">次回予約(HPB新規)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">次回予約(Mini新規)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">次回予約(既存)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">★5口コミ</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">ブログ</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">SNS</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPB契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">meta新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">meta契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">TikTok新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">TikTok契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">インバウンド新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">インバウンド契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HP新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HP契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">紹介新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">紹介契約</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-kadomori-100" id="edit-table-body">
@@ -7632,7 +7626,7 @@
 
             const mediaTables = document.getElementById('nc-media-tables');
             if (mediaTables) {
-                mediaTables.innerHTML = buildMediaTable('HPB', mediaData.HPB) + buildMediaTable('sattou (minimo/Nailie)', mediaData.sattou);
+                mediaTables.innerHTML = CHANNEL_KEYS.map(ch => buildMediaTable(CHANNEL_NAMES[ch], mediaData[ch])).join('');
             }
 
             // 全体合計テーブル
@@ -9995,7 +9989,7 @@
             charts.share = new Chart(document.getElementById('channelShareChart'), { type: 'pie', data: {}, options: common });
             charts.trend = new Chart(document.getElementById('channelTrendChart'), { type: 'bar', data: {}, options: { ...common, scales: { x:{stacked:true}, y:{stacked:true} } } });
             charts.payment = new Chart(document.getElementById('paymentChart'), { type: 'doughnut', data: {}, options: { ...common, cutout: '60%' } });
-            charts.loss = new Chart(document.getElementById('lossChart'), { type: 'bar', indexAxis: 'y', data: {}, options: common });
+            charts.loss = new Chart(document.getElementById('lossChart'), { type: 'bar', data: {}, options: common });
         }
 
         function updateCharts(metrics) {
@@ -10061,6 +10055,11 @@
             }))}; charts.trend.update();
             // 売上種別チャート（旧: 決済方法別）
             charts.payment.data = { labels: ['新規売上', '既存売上', '技術売上', '店販売上', '指名料金'], datasets: [{ data: [metrics.salesNew, metrics.salesExisting, metrics.salesTreatment, metrics.salesRetail, metrics.salesNomination], backgroundColor: [BrandColors.beige, BrandColors.gold, BrandColors.brown, BrandColors.sage, BrandColors.accent], borderWidth:0 }] }; charts.payment.update();
+            // 媒体別新規チャネルチャート
+            charts.loss.data = { labels: channelLabels, datasets: [
+                { label: '新規数', data: CHANNEL_KEYS.map(ch => metrics.newByChannel[ch] || 0), backgroundColor: channelColors },
+                { label: '契約数', data: CHANNEL_KEYS.map(ch => metrics.contractByChannel[ch] || 0), backgroundColor: channelColors.map(c => c + '80') }
+            ]}; charts.loss.update();
         }
 
         // --- 5. EDIT & SAVE LOGIC ---
