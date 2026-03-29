@@ -1551,9 +1551,12 @@
                     <div class="relative">
                         <select id="store-selector" onchange="handleStoreChange()" class="select-premium appearance-none text-accent-800 text-sm cursor-pointer min-w-[140px]">
                             <option value="all">全店舗</option>
-                            <option value="ebisu">恵比寿駅前店</option>
-                            <option value="kadomori">大阪KADOMORI店</option>
-                            <option value="fukushima">福島店</option>
+                            <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                            <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                            <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                            <option value="osaka_kadomori">大阪KADOMORI</option>
+                            <option value="osaka_sleepy">大阪SLEEPY</option>
+                            <option value="fukushima_sleepy">福島SLEEPY</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-surface-500">
                             <i data-lucide="chevron-down" class="w-4 h-4"></i>
@@ -1856,9 +1859,9 @@
                     <div class="bg-white rounded p-6 shadow-sm border border-kadomori-100">
                         <h3 class="text-lg font-serif font-bold text-kadomori-800 mb-4">新規媒体シェア</h3>
                         <div class="chart-container h-64"><canvas id="channelShareChart"></canvas></div>
-                        <div class="mt-4 flex justify-center gap-4 text-xs text-kadomori-500">
+                        <div class="mt-4 flex flex-wrap justify-center gap-3 text-xs text-kadomori-500" id="channel-share-legend">
                              <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-kadomori-400"></span>HPB: <span id="hpb-count" class="font-bold ml-1">0</span>名</div>
-                             <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-kadomori-300"></span>minimo/Nailie: <span id="mininai-count" class="font-bold ml-1">0</span>名</div>
+                             <div class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-kadomori-300"></span>その他: <span id="mininai-count" class="font-bold ml-1">0</span>名</div>
                         </div>
                     </div>
                 </div>
@@ -1961,8 +1964,8 @@
                             <i data-lucide="file-edit" class="w-5 h-5 text-white"></i>
                         </div>
                         <div>
-                            <h3 class="text-lg font-display font-bold text-accent-900">ブログ・SNS更新進捗</h3>
-                            <p class="text-xs text-surface-500">今月の目標: ブログ10件/月</p>
+                            <h3 class="text-lg font-display font-bold text-accent-900">媒体別契約状況</h3>
+                            <p class="text-xs text-surface-500">各媒体の新規・契約数</p>
                         </div>
                     </div>
                     <div id="blog-progress-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -2306,9 +2309,12 @@
                         <div class="flex flex-wrap items-center gap-2">
                             <select id="counseling-store-filter" onchange="renderCounselingResults()" class="px-3 py-2 text-sm border border-emerald-400 bg-emerald-500/50 text-white rounded focus:outline-none focus:ring-2 focus:ring-white/50">
                                 <option value="all">全店</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                             <select id="counseling-date-filter" onchange="renderCounselingResults()" class="px-3 py-2 text-sm border border-emerald-400 bg-emerald-500/50 text-white rounded focus:outline-none focus:ring-2 focus:ring-white/50">
                                 <option value="all">全期間</option>
@@ -2421,13 +2427,12 @@
                 <!-- Charts -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-white rounded p-6 shadow-sm border border-kadomori-100">
-                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">決済方法</h3>
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">売上種別内訳</h3>
                         <div class="chart-container"><canvas id="paymentChart"></canvas></div>
                     </div>
                     <div class="bg-white rounded p-6 shadow-sm border border-kadomori-100">
-                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">割引・損失分析</h3>
+                        <h3 class="text-lg font-display font-bold text-accent-900 mb-4">媒体別新規チャネル</h3>
                         <div class="chart-container"><canvas id="lossChart"></canvas></div>
-                        <p class="mt-4 text-right text-sm text-surface-500">損失合計: <span class="font-bold text-accent-800 text-lg" id="val-total-loss">¥0</span></p>
                     </div>
                 </div>
 
@@ -2489,9 +2494,12 @@
                             <!-- 店舗フィルター -->
                             <select id="marketing-store-filter" onchange="updateMarketingDashboard()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
                                 <option value="all">全店</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                             <button onclick="refreshCustomerData()" id="refresh-customer-btn" class="btn-secondary py-2 px-4 flex items-center gap-2">
                                 <i data-lucide="refresh-cw" class="w-4 h-4" id="refresh-customer-icon"></i>
@@ -2681,9 +2689,12 @@
                         <div class="flex flex-wrap gap-2">
                             <select id="admin-counseling-store-filter" onchange="renderAdminCounselingResults()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
                                 <option value="all">全店</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                             <select id="admin-counseling-date-filter" onchange="renderAdminCounselingResults()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white">
                                 <option value="week">今週</option>
@@ -2880,13 +2891,13 @@
                             予約経路分析
                         </h3>
                         <div class="chart-container h-64"><canvas id="ncChannelChart"></canvas></div>
-                        <div class="mt-4 grid grid-cols-2 gap-3" id="nc-channel-stats">
+                        <div class="mt-4 grid grid-cols-3 gap-3" id="nc-channel-stats">
                             <div class="bg-kadomori-50 p-3 rounded-lg">
-                                <p class="text-xs text-surface-500">HPB経由</p>
+                                <p class="text-xs text-surface-500">HPB</p>
                                 <p class="text-lg font-bold text-accent-800" id="nc-hpb-count">0名</p>
                             </div>
                             <div class="bg-kadomori-50 p-3 rounded-lg">
-                                <p class="text-xs text-surface-500">minimo/Nailie経由</p>
+                                <p class="text-xs text-surface-500">その他媒体</p>
                                 <p class="text-lg font-bold text-accent-800" id="nc-mininai-count">0名</p>
                             </div>
                         </div>
@@ -3067,9 +3078,12 @@
                             <div>
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="cancel-input-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -3082,10 +3096,11 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">媒体</label>
                                 <select id="cancel-input-channel" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
                                     <option value="HPB">HPB</option>
-                                    <option value="minimo">minimo</option>
-                                    <option value="Nailie">Nailie</option>
-                                    <option value="電話">電話</option>
-                                    <option value="LINE">LINE</option>
+                                    <option value="meta">meta</option>
+                                    <option value="TikTok">TikTok</option>
+                                    <option value="インバウンド">インバウンド</option>
+                                    <option value="HP">HP</option>
+                                    <option value="紹介">紹介</option>
                                     <option value="その他">その他</option>
                                 </select>
                             </div>
@@ -3243,16 +3258,19 @@
                             </div>
                             <div>
                                 <h2 class="text-xl font-display font-bold text-accent-900">レジ締め</h2>
-                                <p class="text-xs text-surface-500">決済方法別の日次集計・日報</p>
+                                <p class="text-xs text-surface-500">売上種別の日次集計・日報</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
                             <input type="date" id="rc-date" onchange="updateRegisterClose()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg bg-white">
                             <select id="rc-store" onchange="updateRegisterClose()" class="px-3 py-2 text-sm border border-surface-300 rounded-lg bg-white">
                                 <option value="all">全店舗</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                     </div>
@@ -3287,38 +3305,30 @@
                     <div class="px-6 py-4 bg-kadomori-50 border-b border-kadomori-200">
                         <h3 class="text-sm font-bold text-accent-800 uppercase flex items-center gap-2">
                             <i data-lucide="wallet" class="w-4 h-4"></i>
-                            決済方法別内訳
+                            売上種別内訳
                         </h3>
                     </div>
                     <div class="p-6">
-                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4" id="rc-payment-grid">
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4" id="rc-payment-grid">
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">現金</p>
+                                <p class="text-xs text-surface-500 mb-1">新規売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-cash">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">クレジット</p>
+                                <p class="text-xs text-surface-500 mb-1">既存売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-credit">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">Square</p>
+                                <p class="text-xs text-surface-500 mb-1">技術売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-square">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">PayPay</p>
+                                <p class="text-xs text-surface-500 mb-1">店販売上</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-paypay">¥0</p>
                             </div>
                             <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">HPBポイント</p>
+                                <p class="text-xs text-surface-500 mb-1">指名料金</p>
                                 <p class="text-lg font-bold text-accent-800" id="rc-pay-hpbpoints">¥0</p>
-                            </div>
-                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">Alipay</p>
-                                <p class="text-lg font-bold text-accent-800" id="rc-pay-alipay">¥0</p>
-                            </div>
-                            <div class="bg-kadomori-50 p-4 rounded-lg text-center">
-                                <p class="text-xs text-surface-500 mb-1">UnionPay</p>
-                                <p class="text-lg font-bold text-accent-800" id="rc-pay-unionpay">¥0</p>
                             </div>
                         </div>
                     </div>
@@ -4051,9 +4061,12 @@
                                 <div class="relative">
                                     <select id="goal-store-selector" onchange="handleGoalStoreChange()" class="appearance-none bg-kadomori-900 border border-kadomori-700 text-white py-2 pl-4 pr-8 rounded focus:outline-none focus:ring-2 focus:ring-kadomori-400 font-medium text-sm cursor-pointer min-w-[140px]">
                                         <option value="all">全店舗</option>
-                                        <option value="ebisu">恵比寿駅前店</option>
-                                        <option value="kadomori">大阪KADOMORI店</option>
-                                        <option value="fukushima">福島店</option>
+                                        <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                        <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                        <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                        <option value="osaka_kadomori">大阪KADOMORI</option>
+                                        <option value="osaka_sleepy">大阪SLEEPY</option>
+                                        <option value="fukushima_sleepy">福島SLEEPY</option>
                                     </select>
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">▼</div>
                                 </div>
@@ -4444,25 +4457,27 @@
                                     <th class="px-4 py-3 text-left text-xs font-medium text-kadomori-800 whitespace-nowrap">日付</th>
                                     <th id="edit-th-store" class="px-4 py-3 text-left text-xs font-medium text-kadomori-800 whitespace-nowrap">店舗</th>
                                     <th id="edit-th-staff" class="px-4 py-3 text-left text-xs font-medium text-kadomori-800 whitespace-nowrap">スタッフ</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(現金)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(クレカ)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">売上(QR)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">物販</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名料</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPBポイント</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPBギフト</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">その他割引</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">返金</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">新規売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">技術売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">店販売上</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名料金</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">指名数</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存数</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">新規次回予約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存次回予約</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPB新規</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">Mini/Nailie新規</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">既存</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">知り合い価格</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">次回予約(HPB新規)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">次回予約(Mini新規)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">次回予約(既存)</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">★5口コミ</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">ブログ</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">SNS</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HPB契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">meta新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">meta契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">TikTok新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">TikTok契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">インバウンド新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">インバウンド契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HP新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">HP契約</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">紹介新規</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-kadomori-800 whitespace-nowrap">紹介契約</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-kadomori-100" id="edit-table-body">
@@ -4496,9 +4511,12 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="sub-store-selector" onchange="renderSubscriptionDashboard()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
                                     <option value="all">全店舗</option>
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -4582,9 +4600,12 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="ticket-store-selector" onchange="renderTicketDashboard()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
                                     <option value="all">全店舗</option>
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -4661,9 +4682,12 @@
                                 <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                                 <select id="plan-store-selector" onchange="updatePlanAnalysis()" class="px-3 py-2 border border-kadomori-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-400">
                                     <option value="all">全店舗</option>
-                                    <option value="ebisu">恵比寿駅前店</option>
-                                    <option value="kadomori">大阪KADOMORI店</option>
-                                    <option value="fukushima">福島店</option>
+                                    <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                    <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                    <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                    <option value="osaka_kadomori">大阪KADOMORI</option>
+                                    <option value="osaka_sleepy">大阪SLEEPY</option>
+                                    <option value="fukushima_sleepy">福島SLEEPY</option>
                                 </select>
                             </div>
                             <div>
@@ -4749,9 +4773,12 @@
                             <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                             <select id="plan-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
                                 <option value="all">全店舗共通</option>
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                         <div>
@@ -4792,9 +4819,12 @@
                         <div>
                             <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                             <select id="sub-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                         <div>
@@ -4834,9 +4864,12 @@
                         <div>
                             <label class="block text-xs font-medium text-surface-600 mb-1">店舗</label>
                             <select id="ticket-edit-store" class="w-full px-3 py-2 border border-kadomori-300 rounded-lg text-sm">
-                                <option value="ebisu">恵比寿駅前店</option>
-                                <option value="kadomori">大阪KADOMORI店</option>
-                                <option value="fukushima">福島店</option>
+                                <option value="daikanyama_kadomori">代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy">代官山SLEEPY</option>
+                                <option value="ebisu_sleepy">恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori">大阪KADOMORI</option>
+                                <option value="osaka_sleepy">大阪SLEEPY</option>
+                                <option value="fukushima_sleepy">福島SLEEPY</option>
                             </select>
                         </div>
                         <div>
@@ -5085,22 +5118,52 @@
         const SPREADSHEET_API_KEY = 'kadomori_spreadsheet_api_url';
 
         // デフォルトのAPI URL（コードに埋め込み）
-        const DEFAULT_API_URL = 'https://script.google.com/macros/s/AKfycbwrz7LgQb2uH9VTtmalZxIEcJnHc-Ae53UNMnDi0MM5eLdP7XmZKOlDPTaOL5pmsFwf/exec';
+        // GAS APIのURL（設定画面から入力、またはlocalStorageから読み込み）
+        // デプロイ手順: gas/Code.gs を Google Apps Script に貼り付けてデプロイ
+        const DEFAULT_API_URL = '';
 
         // API URL（デフォルトURLを使用）
         let API_URL = DEFAULT_API_URL;
 
+        // 店舗名マッピング
+        const STORE_NAMES = {
+            daikanyama_kadomori: '代官山KADOMORI',
+            daikanyama_sleepy: '代官山SLEEPY',
+            ebisu_sleepy: '恵比寿SLEEPY',
+            osaka_kadomori: '大阪KADOMORI',
+            osaka_sleepy: '大阪SLEEPY',
+            fukushima_sleepy: '福島SLEEPY'
+        };
+
         // スタッフ名簿（スプレッドシートから読み込み、未設定時はデフォルト値）
         let STAFF_ROSTER = {
-            ebisu: [],
-            kadomori: [],
-            fukushima: []
+            daikanyama_kadomori: [],
+            daikanyama_sleepy: [],
+            ebisu_sleepy: [],
+            osaka_kadomori: [],
+            osaka_sleepy: [],
+            fukushima_sleepy: []
         };
         const DEFAULT_STAFF_ROSTER = {
-            ebisu: [],
-            kadomori: [],
-            fukushima: []
+            daikanyama_kadomori: [],
+            daikanyama_sleepy: [],
+            ebisu_sleepy: [],
+            osaka_kadomori: [],
+            osaka_sleepy: [],
+            fukushima_sleepy: []
         };
+
+        // チャネル（媒体）名マッピング
+        const CHANNEL_NAMES = {
+            hpb: 'HPB',
+            meta: 'meta',
+            tiktok: 'TikTok',
+            inbound: 'インバウンド',
+            hp: 'HP',
+            referral: '紹介'
+        };
+
+        const CHANNEL_KEYS = Object.keys(CHANNEL_NAMES);
 
         // KADOMORI Color Palette - Black & Gold (高級感)
         const BrandColors = {
@@ -5338,7 +5401,7 @@
             const header = document.querySelector('header');
 
             // スタッフ名を表示
-            const storeName = store === 'ebisu' ? '恵比寿駅前店' : store === 'kadomori' ? '大阪KADOMORI店' : store === 'fukushima' ? '福島店' : store;
+            const storeName = STORE_NAMES[store] || store;
             nameEl.textContent = `${storeName} / ${staff}`;
 
             // エラーメッセージを非表示
@@ -5822,7 +5885,7 @@
             // Get base salary
             const baseSalary = getStaffBaseSalary(store, staff);
 
-            // Calculate service sales (cash + credit + qr)
+            // Calculate service sales and retail sales
             let serviceSales = 0;
             let retailSales = 0;
 
@@ -5832,8 +5895,8 @@
             dataArray.forEach(d => {
                 if (!d) return;
                 const sales = d.sales || {};
-                serviceSales += (sales.cash || 0) + (sales.credit || 0) + (sales.qr || 0);
-                retailSales += sales.product || 0;
+                serviceSales += (sales.newSales || 0) + (sales.existingSales || 0) + (sales.treatment || 0) + (sales.nomination || 0);
+                retailSales += sales.retail || 0;
             });
 
             // Incentive from service sales (5%)
@@ -5896,35 +5959,22 @@
                     for (let i = 1; i <= daysInMonth; i++) {
                         if (Math.random() > 0.8) continue;
 
-                        // All values set to 0
-                        const salesCash = 0;
-                        const salesCredit = 0;
-                        const salesQr = 0;
-                        const salesProduct = 0;
-
-                        // All customer values set to 0
-                        let newHPB = 0;
-                        let newMiniNai = 0;
-                        const acquaintance = 0;
-                        const existing = 0;
-
-                        const nextResNewHPB = 0;
-                        const nextResMiniNai = 0;
-                        const nextResExisting = 0;
-
                         data.push({
                             id: idCounter++,
                             date: `${year}/${month}/${i}`,
                             store: storeKey,
-                            storeName: storeKey === 'ebisu' ? '恵比寿駅前店' : storeKey === 'kadomori' ? '大阪KADOMORI店' : storeKey === 'fukushima' ? '福島店' : storeKey,
+                            storeName: STORE_NAMES[storeKey] || storeKey,
                             staff: staffName,
-                            sales: { cash: salesCash, credit: salesCredit, qr: salesQr, product: salesProduct },
-                            discounts: { hpbPoints: 0, hpbGift: 0, other: 0, refund: 0 },
-                            customers: { newHPB, newMiniNai, existing, acquaintance },
-                            nextRes: { newHPB: nextResNewHPB, newMiniNai: nextResMiniNai, existing: nextResExisting },
-                            reviews5Star: 0,
-                            blogUpdates: 0,
-                            snsUpdates: 0
+                            sales: { newSales: 0, existingSales: 0, treatment: 0, retail: 0, nomination: 0 },
+                            customers: { nominationCount: 0, existingCount: 0, newNextRes: 0, existingNextRes: 0 },
+                            channels: {
+                                hpb: { newCount: 0, contractCount: 0 },
+                                meta: { newCount: 0, contractCount: 0 },
+                                tiktok: { newCount: 0, contractCount: 0 },
+                                inbound: { newCount: 0, contractCount: 0 },
+                                hp: { newCount: 0, contractCount: 0 },
+                                referral: { newCount: 0, contractCount: 0 }
+                            }
                         });
                     }
                 });
@@ -6104,40 +6154,52 @@
                     // idが欠けているレコードにのみidを付与し、データ構造を正規化
                     rawData = data.map((d, i) => {
                         const normalized = d.id ? {...d} : {...d, id: i+1};
-                        // nextResオブジェクトが存在しない場合は作成
-                        if (!normalized.nextRes) {
-                            normalized.nextRes = {
-                                newHPB: normalized.nextResNewHPB || normalized['nextRes.newHPB'] || 0,
-                                newMiniNai: normalized.nextResNewMiniNai || normalized['nextRes.newMiniNai'] || 0,
-                                existing: normalized.nextResExisting || normalized['nextRes.existing'] || 0
+                        // salesオブジェクトが存在しない場合は作成
+                        if (!normalized.sales) {
+                            normalized.sales = {
+                                newSales: parseFloat(normalized['新規売上 (円)']) || 0,
+                                existingSales: parseFloat(normalized['既存売上 (円)']) || 0,
+                                treatment: parseFloat(normalized['技術売上 (円)']) || 0,
+                                retail: parseFloat(normalized['店販売上 (円)']) || 0,
+                                nomination: parseFloat(normalized['指名料金 (円)']) || 0
                             };
                         }
                         // customersオブジェクトが存在しない場合は作成
                         if (!normalized.customers) {
                             normalized.customers = {
-                                newHPB: normalized.customersNewHPB || normalized['customers.newHPB'] || 0,
-                                newMiniNai: normalized.customersNewMiniNai || normalized['customers.newMiniNai'] || 0,
-                                existing: normalized.customersExisting || normalized['customers.existing'] || 0,
-                                acquaintance: normalized.customersAcquaintance || normalized['customers.acquaintance'] || 0
+                                nominationCount: parseInt(normalized['指名数']) || 0,
+                                existingCount: parseInt(normalized['既存数']) || 0,
+                                newNextRes: parseInt(normalized['新規次回予約数']) || 0,
+                                existingNextRes: parseInt(normalized['既存次回予約数']) || 0
                             };
                         }
-                        // salesオブジェクトが存在しない場合は作成
-                        if (!normalized.sales) {
-                            normalized.sales = {
-                                cash: normalized.salesCash || normalized['sales.cash'] || 0,
-                                credit: normalized.salesCredit || normalized['sales.credit'] || 0,
-                                qr: normalized.salesQr || normalized['sales.qr'] || 0,
-                                product: normalized.salesProduct || normalized['sales.product'] || 0
+                        // channelsオブジェクトが存在しない場合は作成
+                        if (!normalized.channels) {
+                            normalized.channels = {
+                                hpb: { newCount: parseInt(normalized['HPB 新規数']) || 0, contractCount: parseInt(normalized['HPB 契約数']) || 0 },
+                                meta: { newCount: parseInt(normalized['meta 新規数']) || 0, contractCount: parseInt(normalized['meta 契約数']) || 0 },
+                                tiktok: { newCount: parseInt(normalized['TikTok 新規数']) || 0, contractCount: parseInt(normalized['TikTok 契約数']) || 0 },
+                                inbound: { newCount: parseInt(normalized['インバウンド 新規数']) || 0, contractCount: parseInt(normalized['インバウンド 契約数']) || 0 },
+                                hp: { newCount: parseInt(normalized['HP 新規数']) || 0, contractCount: parseInt(normalized['HP 契約数']) || 0 },
+                                referral: { newCount: parseInt(normalized['紹介 新規数']) || 0, contractCount: parseInt(normalized['紹介 契約数']) || 0 }
                             };
                         }
-                        // discountsオブジェクトが存在しない場合は作成
-                        if (!normalized.discounts) {
-                            normalized.discounts = {
-                                hpbPoints: normalized.discountsHpbPoints || normalized['discounts.hpbPoints'] || 0,
-                                hpbGift: normalized.discountsHpbGift || normalized['discounts.hpbGift'] || 0,
-                                other: normalized.discountsOther || normalized['discounts.other'] || 0,
-                                refund: normalized.discountsRefund || normalized['discounts.refund'] || 0
-                            };
+                        // storeが日本語店舗名の場合、キーに変換
+                        if (!normalized.store && normalized['出勤店舗']) {
+                            const storeName = normalized['出勤店舗'];
+                            normalized.store = Object.keys(STORE_NAMES).find(k => STORE_NAMES[k] === storeName) || storeName;
+                            normalized.storeName = storeName;
+                        }
+                        if (!normalized.storeName && normalized.store) {
+                            normalized.storeName = STORE_NAMES[normalized.store] || normalized.store;
+                        }
+                        // dateフィールドの正規化
+                        if (!normalized.date && normalized['出勤日']) {
+                            normalized.date = normalized['出勤日'];
+                        }
+                        // staffフィールドの正規化
+                        if (!normalized.staff && normalized['入力者']) {
+                            normalized.staff = normalized['入力者'];
                         }
                         return normalized;
                     });
@@ -6350,7 +6412,7 @@
 
             const filtered = getFilteredCustomerData();
             const storeFilter = document.getElementById('marketing-store-filter')?.value || 'all';
-            const storeName = storeFilter === 'all' ? '全店' : storeFilter === 'ebisu' ? '恵比寿駅前店' : storeFilter === 'kadomori' ? '大阪KADOMORI店' : storeFilter === 'fukushima' ? '福島店' : storeFilter;
+            const storeName = storeFilter === 'all' ? '全店' : STORE_NAMES[storeFilter] || storeFilter;
 
             const fmt = n => n.toLocaleString();
             const now = new Date();
@@ -6831,7 +6893,7 @@
 
             container.innerHTML = filtered.map(c => {
                 const regDate = c.timestamp ? new Date(c.timestamp).toLocaleDateString('ja-JP', {year: 'numeric', month: 'short', day: 'numeric'}) : '-';
-                const storeName = c.store === 'ebisu' ? '恵比寿駅前店' : c.store === 'kadomori' ? '大阪KADOMORI店' : c.store === 'fukushima' ? '福島店' : c.storeName || '-';
+                const storeName = STORE_NAMES[c.store] || c.storeName || '-';
                 const birthVal = c.birthday || c.birthDate;
                 let age = '-';
                 if (birthVal) {
@@ -6853,10 +6915,10 @@
                 return `
                     <div class="bg-white border border-kadomori-200 rounded-lg shadow-sm hover:shadow-md transition overflow-hidden">
                         <!-- ヘッダー: 名前・日付・店舗 -->
-                        <div class="bg-gradient-to-r ${c.store === 'ebisu' ? 'from-blue-50 to-blue-100' : 'from-purple-50 to-purple-100'} px-4 py-3 border-b border-kadomori-200">
+                        <div class="bg-gradient-to-r from-kadomori-50 to-kadomori-100 px-4 py-3 border-b border-kadomori-200">
                             <div class="flex flex-wrap items-center justify-between gap-2">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-12 h-12 rounded-full ${c.store === 'ebisu' ? 'bg-blue-200 text-blue-700' : 'bg-purple-200 text-purple-700'} flex items-center justify-center font-bold text-lg">
+                                    <div class="w-12 h-12 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center font-bold text-lg">
                                         ${c.name ? c.name.charAt(0) : '?'}
                                     </div>
                                     <div>
@@ -6865,7 +6927,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="px-3 py-1 text-sm font-semibold rounded-full ${c.store === 'ebisu' ? 'bg-blue-500 text-white' : 'bg-purple-500 text-white'}">${storeName}</span>
+                                    <span class="px-3 py-1 text-sm font-semibold rounded-full bg-primary-500 text-white">${storeName}</span>
                                     <span class="text-sm text-kadomori-500 bg-white px-2 py-1 rounded">${regDate}</span>
                                 </div>
                             </div>
@@ -7142,14 +7204,20 @@
 
         function calculateMetrics(data) {
             let agg = {
-                salesTotal: 0, salesCash: 0, salesCredit: 0, salesQR: 0, salesProduct: 0,
+                salesTotal: 0, salesNew: 0, salesExisting: 0, salesTreatment: 0, salesRetail: 0,
                 salesNomination: 0, nominationCount: 0,
                 customersTotal: 0, customersNew: 0, customersExisting: 0,
-                newByChannel: { hpb: 0, mininai: 0 },
-                nextRes: { hpbNew: 0, mininaiNew: 0, existing: 0, total: 0 },
-                hpbNewCount: 0, lossTotal: 0, reviews5StarTotal: 0, daily: {},
-                discounts: { hpbPoints: 0, hpbGift: 0, other: 0, refund: 0 }
+                newByChannel: {},
+                contractByChannel: {},
+                nextRes: { new: 0, existing: 0, total: 0 },
+                daily: {}
             };
+
+            // チャネル別集計の初期化
+            CHANNEL_KEYS.forEach(ch => {
+                agg.newByChannel[ch] = 0;
+                agg.contractByChannel[ch] = 0;
+            });
 
             // dataが配列でない場合は空の結果を返す
             if (!Array.isArray(data)) {
@@ -7158,74 +7226,66 @@
             }
 
             data.forEach(d => {
-                if (!d || !d.date) return; // 無効なデータをスキップ
-                if (!agg.daily[d.date]) agg.daily[d.date] = { sales: 0, customers: 0, new: 0, existing: 0, hpb: 0, mininai: 0 };
+                if (!d || !d.date) return;
+                const dayInit = { sales: 0, customers: 0, new: 0, existing: 0 };
+                CHANNEL_KEYS.forEach(ch => { dayInit[ch] = 0; });
+                if (!agg.daily[d.date]) agg.daily[d.date] = dayInit;
             });
 
             data.forEach(d => {
-                // 無効なデータをスキップ
                 if (!d) return;
 
-                // オブジェクトの存在チェックとデフォルト値の設定
                 const sales = d.sales || {};
-                const discounts = d.discounts || {};
                 const customers = d.customers || {};
-                const nextRes = d.nextRes || {};
+                const channels = d.channels || {};
 
-                // 売上 = 現金 + クレジット + QR + HPBポイント + HPBギフト券
-                const salesCash = sales.cash || 0;
-                const salesCredit = sales.credit || 0;
-                const salesQR = sales.qr || 0;
-                const hpbPoints = discounts.hpbPoints || 0;
-                const hpbGift = discounts.hpbGift || 0;
-                const totalSales = salesCash + salesCredit + salesQR + hpbPoints + hpbGift;
+                // 売上 = 新規売上 + 既存売上 + 技術売上 + 店販売上 + 指名料金
+                const newSales = sales.newSales || 0;
+                const existingSales = sales.existingSales || 0;
+                const treatmentSales = sales.treatment || 0;
+                const retailSales = sales.retail || 0;
+                const nominationFee = sales.nomination || 0;
+                const totalSales = newSales + existingSales + treatmentSales + retailSales + nominationFee;
 
                 agg.salesTotal += totalSales;
-                agg.salesCash += salesCash;
-                agg.salesCredit += salesCredit;
-                agg.salesQR += salesQR;
-                agg.salesProduct += (sales.product || 0);
-                const nominationFee = sales.nomination || 0;
+                agg.salesNew += newSales;
+                agg.salesExisting += existingSales;
+                agg.salesTreatment += treatmentSales;
+                agg.salesRetail += retailSales;
                 agg.salesNomination += nominationFee;
-                if (nominationFee > 0) agg.nominationCount += 1;
-                // 損失 = その他割引 + 返金（HPBポイントとギフト券は売上に含まれるため除外）
-                agg.lossTotal += ((discounts.other || 0) + (discounts.refund || 0));
-                agg.discounts.hpbPoints += (discounts.hpbPoints || 0);
-                agg.discounts.hpbGift += (discounts.hpbGift || 0);
-                agg.discounts.other += (discounts.other || 0);
-                agg.discounts.refund += (discounts.refund || 0);
+                agg.nominationCount += (customers.nominationCount || 0);
 
-                // 既存客には知り合い価格も含める
-                const custNewHPB = customers.newHPB || 0;
-                const custNewMiniNai = customers.newMiniNai || 0;
-                const existingCount = (customers.existing || 0) + (customers.acquaintance || 0);
-                const totalCust = custNewHPB + custNewMiniNai + existingCount;
-                const newCust = custNewHPB + custNewMiniNai;
+                // 顧客数
+                const existingCount = customers.existingCount || 0;
+                let newCust = 0;
+                CHANNEL_KEYS.forEach(ch => {
+                    const chData = channels[ch] || {};
+                    const nc = chData.newCount || 0;
+                    newCust += nc;
+                    agg.newByChannel[ch] += nc;
+                    agg.contractByChannel[ch] += (chData.contractCount || 0);
+                });
+                const totalCust = newCust + existingCount;
 
                 agg.customersTotal += totalCust;
                 agg.customersNew += newCust;
                 agg.customersExisting += existingCount;
-                agg.newByChannel.hpb += custNewHPB;
-                agg.newByChannel.mininai += custNewMiniNai;
 
-                const nextResNewHPB = nextRes.newHPB || 0;
-                const nextResNewMiniNai = nextRes.newMiniNai || 0;
-                const nextResExisting = nextRes.existing || 0;
+                // 次回予約
+                const newNextRes = customers.newNextRes || 0;
+                const existingNextRes = customers.existingNextRes || 0;
+                agg.nextRes.new += newNextRes;
+                agg.nextRes.existing += existingNextRes;
+                agg.nextRes.total += (newNextRes + existingNextRes);
 
-                agg.nextRes.hpbNew += nextResNewHPB;
-                agg.nextRes.mininaiNew += nextResNewMiniNai;
-                agg.nextRes.existing += nextResExisting;
-                agg.nextRes.total += (nextResNewHPB + nextResNewMiniNai + nextResExisting);
-                agg.hpbNewCount += custNewHPB;
-                agg.reviews5StarTotal += (d.reviews5Star || 0);
-
-                if(d.date && agg.daily[d.date]) {
+                if (d.date && agg.daily[d.date]) {
                     agg.daily[d.date].sales += totalSales;
                     agg.daily[d.date].customers += totalCust;
                     agg.daily[d.date].new += newCust;
                     agg.daily[d.date].existing += existingCount;
-                    agg.daily[d.date].hpb += custNewHPB;
-                    agg.daily[d.date].mininai += custNewMiniNai;
+                    CHANNEL_KEYS.forEach(ch => {
+                        agg.daily[d.date][ch] += (channels[ch]?.newCount || 0);
+                    });
                 }
             });
             return agg;
@@ -7423,7 +7483,7 @@
             }
 
             // Table
-            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const storeNames = STORE_NAMES;
             const tbody = document.getElementById('cancel-table-body');
             if (tbody) {
                 const sorted = [...filtered].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -7449,48 +7509,43 @@
             const convDef = document.getElementById('nc-conversion-def')?.value || 'nextRes';
 
             let totalNewCount = 0, totalNewSales = 0, totalNextRes = 0, totalConverted = 0;
-            let hpbCount = 0, mininaiCount = 0;
+            const channelCounts = {};
+            CHANNEL_KEYS.forEach(ch => { channelCounts[ch] = 0; });
 
             // 媒体別・担当別の集計
-            // channels: HPB, sattou(minimo/Nailie)
-            const mediaData = { HPB: {}, sattou: {} };
+            const mediaData = {};
+            CHANNEL_KEYS.forEach(ch => { mediaData[ch] = {}; });
             const totalByStaff = {};
 
             filtered.forEach(d => {
                 const staff = d.staff || 'unknown';
-                const newHPB = d.customers.newHPB || 0;
-                const newMini = d.customers.newMiniNai || 0;
-                const nextResHPB = d.nextRes?.newHPB || 0;
-                const nextResMini = d.nextRes?.newMiniNai || 0;
+                const channels = d.channels || {};
+                const customers = d.customers || {};
+                const sales = d.sales || {};
 
-                hpbCount += newHPB;
-                mininaiCount += newMini;
-                totalNewCount += newHPB + newMini;
-                totalNextRes += nextResHPB + nextResMini;
-                totalConverted += nextResHPB + nextResMini;
+                let recordNewCount = 0;
+                CHANNEL_KEYS.forEach(ch => {
+                    const nc = (channels[ch]?.newCount || 0);
+                    channelCounts[ch] += nc;
+                    recordNewCount += nc;
 
-                const allCustomers = newHPB + newMini + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
-                const totalSales = (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                const unitPrice = allCustomers > 0 ? totalSales / allCustomers : 0;
-                totalNewSales += Math.round(unitPrice * (newHPB + newMini));
+                    if (!mediaData[ch][staff]) mediaData[ch][staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
+                    mediaData[ch][staff].reservations += nc;
+                });
 
-                // HPB集計
-                if (!mediaData.HPB[staff]) mediaData.HPB[staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
-                mediaData.HPB[staff].reservations += newHPB;
-                mediaData.HPB[staff].nextRes += nextResHPB;
-                mediaData.HPB[staff].conversions += nextResHPB;
+                totalNewCount += recordNewCount;
+                const newNextRes = customers.newNextRes || 0;
+                totalNextRes += newNextRes;
+                totalConverted += newNextRes;
 
-                // sattou (minimo/Nailie) 集計
-                if (!mediaData.sattou[staff]) mediaData.sattou[staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
-                mediaData.sattou[staff].reservations += newMini;
-                mediaData.sattou[staff].nextRes += nextResMini;
-                mediaData.sattou[staff].conversions += nextResMini;
+                // 新規売上
+                totalNewSales += (sales.newSales || 0);
 
                 // 全体合計
                 if (!totalByStaff[staff]) totalByStaff[staff] = { reservations: 0, nextRes: 0, conversions: 0, subCount: 0, ticketCount: 0, prepaid: 0 };
-                totalByStaff[staff].reservations += newHPB + newMini;
-                totalByStaff[staff].nextRes += nextResHPB + nextResMini;
-                totalByStaff[staff].conversions += nextResHPB + nextResMini;
+                totalByStaff[staff].reservations += recordNewCount;
+                totalByStaff[staff].nextRes += newNextRes;
+                totalByStaff[staff].conversions += newNextRes;
             });
 
             const convRate = totalNewCount > 0 ? ((totalConverted / totalNewCount) * 100).toFixed(1) : '0.0';
@@ -7500,18 +7555,22 @@
             document.getElementById('nc-total-count').textContent = `${totalNewCount}名`;
             document.getElementById('nc-conversion-rate').textContent = `${convRate}%`;
             document.getElementById('nc-next-res-rate').textContent = `${nextResRate}%`;
-            document.getElementById('nc-hpb-count').textContent = `${hpbCount}名`;
-            document.getElementById('nc-mininai-count').textContent = `${mininaiCount}名`;
+            // チャネル別カウント表示（既存のHTML要素があれば更新）
+            const hpbCountEl = document.getElementById('nc-hpb-count');
+            if (hpbCountEl) hpbCountEl.textContent = `${channelCounts.hpb || 0}名`;
+            const mininaiCountEl = document.getElementById('nc-mininai-count');
+            if (mininaiCountEl) mininaiCountEl.textContent = `${Object.values(channelCounts).reduce((a,b) => a+b, 0) - (channelCounts.hpb || 0)}名`;
 
-            // Channel Chart
+            // Channel Chart - 6媒体対応
             if (charts.ncChannel) charts.ncChannel.destroy();
             const ctx = document.getElementById('ncChannelChart')?.getContext('2d');
             if (ctx) {
+                const channelColors = [BrandColors.primary, BrandColors.sage, BrandColors.brown, BrandColors.accent, BrandColors.gold, BrandColors.surface];
                 charts.ncChannel = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['HPB', 'minimo/Nailie'],
-                        datasets: [{ data: [hpbCount, mininaiCount], backgroundColor: [BrandColors.primary, BrandColors.sage], borderWidth: 0 }]
+                        labels: CHANNEL_KEYS.map(ch => CHANNEL_NAMES[ch]),
+                        datasets: [{ data: CHANNEL_KEYS.map(ch => channelCounts[ch]), backgroundColor: channelColors, borderWidth: 0 }]
                     },
                     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
                 });
@@ -7567,7 +7626,7 @@
 
             const mediaTables = document.getElementById('nc-media-tables');
             if (mediaTables) {
-                mediaTables.innerHTML = buildMediaTable('HPB', mediaData.HPB) + buildMediaTable('sattou (minimo/Nailie)', mediaData.sattou);
+                mediaTables.innerHTML = CHANNEL_KEYS.map(ch => buildMediaTable(CHANNEL_NAMES[ch], mediaData[ch])).join('');
             }
 
             // 全体合計テーブル
@@ -7606,43 +7665,46 @@
             const custFilter = document.getElementById('kpi-customer-filter')?.value || 'all';
 
             // Summary cards
-            const serviceSales = metrics.salesTotal - (metrics.salesProduct || 0);
+            const serviceSales = metrics.salesTotal - (metrics.salesRetail || 0);
             document.getElementById('kpi-service-sales').textContent = `¥${fmt(serviceSales)}`;
-            document.getElementById('kpi-retail-sales').textContent = `¥${fmt(metrics.salesProduct || 0)}`;
+            document.getElementById('kpi-retail-sales').textContent = `¥${fmt(metrics.salesRetail || 0)}`;
 
             const convRate = metrics.customersNew > 0
-                ? (((metrics.nextRes.hpbNew + metrics.nextRes.mininaiNew) / metrics.customersNew) * 100).toFixed(1)
+                ? ((metrics.nextRes.new / metrics.customersNew) * 100).toFixed(1)
                 : '0.0';
             document.getElementById('kpi-conversion-rate').textContent = `${convRate}%`;
 
             // Build detail rows
-            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
             const groupedData = {};
 
             filtered.forEach(d => {
                 let key, label;
                 if (viewFilter === 'store') {
                     key = d.store;
-                    label = storeNames[d.store] || d.store;
+                    label = STORE_NAMES[d.store] || d.store;
                 } else {
                     key = `${d.store}_${d.staff}`;
-                    label = `${d.staff} (${storeNames[d.store] || d.store})`;
+                    label = `${d.staff} (${STORE_NAMES[d.store] || d.store})`;
                 }
 
                 if (!groupedData[key]) {
-                    groupedData[key] = { label, totalSales: 0, productSales: 0, newCount: 0, existCount: 0, nextResNew: 0, nextResTotal: 0, totalCustomers: 0 };
+                    groupedData[key] = { label, totalSales: 0, retailSales: 0, newCount: 0, existCount: 0, nextResNew: 0, nextResTotal: 0, totalCustomers: 0 };
                 }
                 const g = groupedData[key];
-                const sales = (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                g.totalSales += sales;
-                g.productSales += (d.sales.product || 0);
-                const newC = (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0);
-                const existC = (d.customers.existing || 0) + (d.customers.acquaintance || 0);
+                const sales = d.sales || {};
+                const channels = d.channels || {};
+                const customers = d.customers || {};
+                const totalSales = (sales.newSales || 0) + (sales.existingSales || 0) + (sales.treatment || 0) + (sales.retail || 0) + (sales.nomination || 0);
+                g.totalSales += totalSales;
+                g.retailSales += (sales.retail || 0);
+                let newC = 0;
+                CHANNEL_KEYS.forEach(ch => { newC += (channels[ch]?.newCount || 0); });
+                const existC = customers.existingCount || 0;
                 g.newCount += newC;
                 g.existCount += existC;
                 g.totalCustomers += newC + existC;
-                g.nextResNew += (d.nextRes?.hpbNew || 0) + (d.nextRes?.mininaiNew || 0);
-                g.nextResTotal += (d.nextRes?.total || 0);
+                g.nextResNew += (customers.newNextRes || 0);
+                g.nextResTotal += (customers.newNextRes || 0) + (customers.existingNextRes || 0);
             });
 
             const title = viewFilter === 'store' ? '店舗別 KPI/KDI' : 'プレイヤー別 KPI/KDI';
@@ -7651,7 +7713,7 @@
             const tbody = document.getElementById('kpi-detail-tbody');
             const rows = Object.values(groupedData).sort((a, b) => b.totalSales - a.totalSales);
             tbody.innerHTML = rows.map(r => {
-                const serviceSales = r.totalSales - r.productSales;
+                const serviceSales = r.totalSales - r.retailSales;
                 const unitPrice = r.totalCustomers > 0 ? Math.round(r.totalSales / r.totalCustomers) : 0;
                 const newResRate = r.newCount > 0 ? ((r.nextResNew / r.newCount) * 100).toFixed(1) : '0.0';
                 const totalResRate = r.totalCustomers > 0 ? ((r.nextResTotal / r.totalCustomers) * 100).toFixed(1) : '0.0';
@@ -7660,7 +7722,7 @@
                     <td class="px-4 py-3 text-sm font-medium text-accent-900">${r.label}</td>
                     <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(r.totalSales)}</td>
                     <td class="px-4 py-3 text-sm text-right">¥${fmt(serviceSales)}</td>
-                    <td class="px-4 py-3 text-sm text-right">¥${fmt(r.productSales)}</td>
+                    <td class="px-4 py-3 text-sm text-right">¥${fmt(r.retailSales)}</td>
                     <td class="px-4 py-3 text-sm text-right font-bold">${r.totalCustomers}</td>
                     <td class="px-4 py-3 text-sm text-right">${r.newCount}</td>
                     <td class="px-4 py-3 text-sm text-right">${r.existCount}</td>
@@ -7681,11 +7743,11 @@
             const fmt = n => n.toLocaleString();
 
             const totalSales = metrics.salesTotal;
-            const retailSales = metrics.salesProduct || 0;
+            const retailSales = metrics.salesRetail || 0;
             const serviceSales = totalSales - retailSales;
             const nominationFee = metrics.salesNomination || 0;
             const nominationCount = metrics.nominationCount || 0;
-            // 純売上 = 総売上 − 指名料 − 物販（KADOMORIの定義）
+            // 純売上 = 総売上 − 指名料 − 物販
             const netSales = totalSales - nominationFee - retailSales;
 
             document.getElementById('sales-total').textContent = `¥${fmt(totalSales)}`;
@@ -7696,21 +7758,25 @@
             document.getElementById('sales-nomination-count').textContent = `${nominationCount}件`;
 
             // Role-based table
-            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
             const staffData = {};
             filtered.forEach(d => {
                 const key = `${d.store}_${d.staff}`;
                 if (!staffData[key]) {
-                    staffData[key] = { store: d.store, staff: d.staff, total: 0, product: 0, nomination: 0, nominationDays: 0, discounts: 0, customers: 0 };
+                    staffData[key] = { store: d.store, staff: d.staff, total: 0, retail: 0, nomination: 0, nominationDays: 0, customers: 0 };
                 }
                 const s = staffData[key];
-                s.total += (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                s.product += (d.sales.product || 0);
-                const nomFee = d.sales.nomination || 0;
+                const sales = d.sales || {};
+                const channels = d.channels || {};
+                const customers = d.customers || {};
+                const recordTotal = (sales.newSales || 0) + (sales.existingSales || 0) + (sales.treatment || 0) + (sales.retail || 0) + (sales.nomination || 0);
+                s.total += recordTotal;
+                s.retail += (sales.retail || 0);
+                const nomFee = sales.nomination || 0;
                 s.nomination += nomFee;
                 if (nomFee > 0) s.nominationDays += 1;
-                s.discounts += (d.discounts?.hpbPoints || 0) + (d.discounts?.hpbGift || 0) + (d.discounts?.other || 0) + (d.discounts?.refund || 0);
-                s.customers += (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0) + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
+                let newC = 0;
+                CHANNEL_KEYS.forEach(ch => { newC += (channels[ch]?.newCount || 0); });
+                s.customers += newC + (customers.existingCount || 0);
             });
 
             const roleBody = document.getElementById('sales-role-tbody');
@@ -7721,24 +7787,24 @@
 
                 const rowsHtml = rows.map(r => {
                     const role = getStaffRole(r.store, r.staff);
-                    const service = r.total - r.product;
-                    const net = r.total - r.nomination - r.product;
+                    const service = r.total - r.retail;
+                    const net = r.total - r.nomination - r.retail;
                     if (role === 'director') {
                         directorTotal += r.total;
                     } else {
                         memberTotal += r.total;
                         memberService += service;
-                        memberProduct += r.product;
+                        memberProduct += r.retail;
                         memberNom += r.nomination;
                         memberNomDays += r.nominationDays;
                         memberCustomers += r.customers;
                     }
                     return `<tr class="hover:bg-kadomori-50">
                         <td class="px-4 py-3 text-sm"><span class="px-2 py-1 rounded-full text-xs font-bold ${role === 'director' ? 'bg-rose-100 text-rose-700' : 'bg-primary-50 text-primary-700'}">${getRoleLabel(role)}</span></td>
-                        <td class="px-4 py-3 text-sm font-medium text-accent-900">${r.staff} <span class="text-xs text-surface-500">(${storeNames[r.store] || r.store})</span></td>
+                        <td class="px-4 py-3 text-sm font-medium text-accent-900">${r.staff} <span class="text-xs text-surface-500">(${STORE_NAMES[r.store] || r.store})</span></td>
                         <td class="px-4 py-3 text-sm text-right font-bold">¥${fmt(r.total)}</td>
                         <td class="px-4 py-3 text-sm text-right">¥${fmt(service)}</td>
-                        <td class="px-4 py-3 text-sm text-right">¥${fmt(r.product)}</td>
+                        <td class="px-4 py-3 text-sm text-right">¥${fmt(r.retail)}</td>
                         <td class="px-4 py-3 text-sm text-right">¥${fmt(r.nomination)}</td>
                         <td class="px-4 py-3 text-sm text-right">${r.nominationDays}件</td>
                         <td class="px-4 py-3 text-sm text-right font-bold text-primary-700">¥${fmt(net)}</td>
@@ -7780,19 +7846,22 @@
             for (let m = 1; m <= 12; m++) {
                 const prefix = `${year}/${m}`;
                 const monthData = allData.filter(d => d.date && d.date.startsWith(prefix + '/'));
-                let total = 0, product = 0, disc = 0, cust = 0, newC = 0;
+                let total = 0, retail = 0, cust = 0, newC = 0;
                 monthData.forEach(d => {
-                    total += (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                    product += (d.sales.product || 0);
-                    disc += (d.discounts?.hpbPoints || 0) + (d.discounts?.hpbGift || 0) + (d.discounts?.other || 0) + (d.discounts?.refund || 0);
-                    cust += (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0) + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
-                    newC += (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0);
+                    const s = d.sales || {};
+                    total += (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
+                    retail += (s.retail || 0);
+                    const ch = d.channels || {};
+                    let nc = 0;
+                    CHANNEL_KEYS.forEach(k => { nc += (ch[k]?.newCount || 0); });
+                    cust += nc + (d.customers?.existingCount || 0);
+                    newC += nc;
                 });
-                const service = total - product;
-                const net = total - disc;
+                const service = total - retail;
+                const net = total;
                 const unitPrice = cust > 0 ? Math.round(total / cust) : 0;
 
-                yearTotal += total; yearService += service; yearRetail += product; yearNet += net; yearCustomers += cust; yearNew += newC;
+                yearTotal += total; yearService += service; yearRetail += retail; yearNet += net; yearCustomers += cust; yearNew += newC;
 
                 const hasData = monthData.length > 0;
                 rowsHtml += `<tr class="${hasData ? 'hover:bg-kadomori-50' : 'opacity-40'}">
@@ -7830,18 +7899,21 @@
             for (let m = 1; m <= 12; m++) {
                 const prefix = `${year}/${m}`;
                 const monthData = allData.filter(d => d.date && d.date.startsWith(prefix + '/'));
-                let total = 0, product = 0, disc = 0, cust = 0, newC = 0;
+                let total = 0, retail = 0, cust = 0, newC = 0;
                 monthData.forEach(d => {
-                    total += (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                    product += (d.sales.product || 0);
-                    disc += (d.discounts?.hpbPoints || 0) + (d.discounts?.hpbGift || 0) + (d.discounts?.other || 0) + (d.discounts?.refund || 0);
-                    cust += (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0) + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
-                    newC += (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0);
+                    const s = d.sales || {};
+                    total += (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
+                    retail += (s.retail || 0);
+                    const ch = d.channels || {};
+                    let nc = 0;
+                    CHANNEL_KEYS.forEach(k => { nc += (ch[k]?.newCount || 0); });
+                    cust += nc + (d.customers?.existingCount || 0);
+                    newC += nc;
                 });
-                const service = total - product;
-                const net = total - disc;
+                const service = total - retail;
+                const net = total;
                 const unitPrice = cust > 0 ? Math.round(total / cust) : 0;
-                csv += `${m}月,${total},${service},${product},${net},${cust},${newC},${unitPrice}\n`;
+                csv += `${m}月,${total},${service},${retail},${net},${cust},${newC},${unitPrice}\n`;
             }
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
@@ -7867,32 +7939,30 @@
                 return storeFilter === 'all' || d.store === storeFilter;
             });
 
-            let totalSales = 0, cash = 0, credit = 0, newC = 0, existC = 0;
-            let square = 0, paypay = 0, hpbPoints = 0, alipay = 0, unionpay = 0;
+            let totalSales = 0, newC = 0, existC = 0;
             let nextResNew = 0, nextResExist = 0;
+            let salesNew = 0, salesExisting = 0, salesTreatment = 0, salesRetail = 0, salesNomination = 0;
             const staffSales = {};
 
             dayData.forEach(d => {
                 const s = d.sales || {};
                 const c = d.customers || {};
-                const nr = d.nextRes || {};
-                const disc = d.discounts || {};
-                const daySales = (s.cash || 0) + (s.credit || 0) + (s.qr || 0) + (disc.hpbPoints || 0) + (disc.hpbGift || 0);
+                const ch = d.channels || {};
+                const daySales = (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
                 totalSales += daySales;
-                cash += (s.cash || 0);
-                credit += (s.credit || 0);
-                square += (s.square || 0);
-                paypay += (s.paypay || 0);
-                hpbPoints += (disc.hpbPoints || 0);
-                alipay += (s.alipay || 0);
-                unionpay += (s.unionpay || 0);
+                salesNew += (s.newSales || 0);
+                salesExisting += (s.existingSales || 0);
+                salesTreatment += (s.treatment || 0);
+                salesRetail += (s.retail || 0);
+                salesNomination += (s.nomination || 0);
 
-                const nc = (c.newHPB || 0) + (c.newMiniNai || 0);
-                const ec = (c.existing || 0) + (c.acquaintance || 0);
+                let nc = 0;
+                CHANNEL_KEYS.forEach(k => { nc += (ch[k]?.newCount || 0); });
+                const ec = c.existingCount || 0;
                 newC += nc;
                 existC += ec;
-                nextResNew += (nr.hpbNew || 0) + (nr.mininaiNew || 0);
-                nextResExist += (nr.existing || 0);
+                nextResNew += (c.newNextRes || 0);
+                nextResExist += (c.existingNextRes || 0);
 
                 const key = d.staff || 'unknown';
                 if (!staffSales[key]) staffSales[key] = 0;
@@ -7904,13 +7974,16 @@
             document.getElementById('rc-new-customers').textContent = `${newC}名`;
             document.getElementById('rc-existing-customers').textContent = `${existC}名`;
 
-            document.getElementById('rc-pay-cash').textContent = `¥${fmt(cash)}`;
-            document.getElementById('rc-pay-credit').textContent = `¥${fmt(credit)}`;
-            document.getElementById('rc-pay-square').textContent = `¥${fmt(square)}`;
-            document.getElementById('rc-pay-paypay').textContent = `¥${fmt(paypay)}`;
-            document.getElementById('rc-pay-hpbpoints').textContent = `¥${fmt(hpbPoints)}`;
-            document.getElementById('rc-pay-alipay').textContent = `¥${fmt(alipay)}`;
-            document.getElementById('rc-pay-unionpay').textContent = `¥${fmt(unionpay)}`;
+            const rcPayCash = document.getElementById('rc-pay-cash');
+            if (rcPayCash) rcPayCash.textContent = `¥${fmt(salesNew)}`;
+            const rcPayCredit = document.getElementById('rc-pay-credit');
+            if (rcPayCredit) rcPayCredit.textContent = `¥${fmt(salesExisting)}`;
+            const rcPaySquare = document.getElementById('rc-pay-square');
+            if (rcPaySquare) rcPaySquare.textContent = `¥${fmt(salesTreatment)}`;
+            const rcPayPaypay = document.getElementById('rc-pay-paypay');
+            if (rcPayPaypay) rcPayPaypay.textContent = `¥${fmt(salesRetail)}`;
+            const rcPayHpb = document.getElementById('rc-pay-hpbpoints');
+            if (rcPayHpb) rcPayHpb.textContent = `¥${fmt(salesNomination)}`;
 
             const newResRate = newC > 0 ? ((nextResNew / newC) * 100).toFixed(1) : '0.0';
             const existResRate = existC > 0 ? ((nextResExist / existC) * 100).toFixed(1) : '0.0';
@@ -8319,7 +8392,7 @@
 
             // Store Ranking
             const storeMap = {};
-            const storeNames = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const storeNames = STORE_NAMES;
             sales.forEach(s => {
                 const store = s.store || '不明';
                 if (!storeMap[store]) storeMap[store] = { sales: 0, count: 0 };
@@ -8611,9 +8684,12 @@
                             <input type="date" id="retail-sale-date" value="${todayStr}" class="w-full px-3 py-2 border border-surface-300 rounded-lg"></div>
                         <div><label class="block text-sm font-medium text-surface-600 mb-1">店舗</label>
                             <select id="retail-sale-store" class="w-full px-3 py-2 border border-surface-300 rounded-lg">
-                                <option value="ebisu" ${currentStore === 'ebisu' ? 'selected' : ''}>恵比寿駅前店</option>
-                                <option value="kadomori" ${currentStore === 'kadomori' ? 'selected' : ''}>大阪KADOMORI店</option>
-                                <option value="fukushima" ${currentStore === 'fukushima' ? 'selected' : ''}>福島店</option>
+                                <option value="daikanyama_kadomori" ${currentStore === 'daikanyama_kadomori' ? 'selected' : ''}>代官山KADOMORI</option>
+                                <option value="daikanyama_sleepy" ${currentStore === 'daikanyama_sleepy' ? 'selected' : ''}>代官山SLEEPY</option>
+                                <option value="ebisu_sleepy" ${currentStore === 'ebisu_sleepy' ? 'selected' : ''}>恵比寿SLEEPY</option>
+                                <option value="osaka_kadomori" ${currentStore === 'osaka_kadomori' ? 'selected' : ''}>大阪KADOMORI</option>
+                                <option value="osaka_sleepy" ${currentStore === 'osaka_sleepy' ? 'selected' : ''}>大阪SLEEPY</option>
+                                <option value="fukushima_sleepy" ${currentStore === 'fukushima_sleepy' ? 'selected' : ''}>福島SLEEPY</option>
                             </select></div>
                     </div>
                     <div><label class="block text-sm font-medium text-surface-600 mb-1">担当スタッフ</label>
@@ -8944,10 +9020,11 @@
                 const key = d.staff || 'unknown';
                 if (!staffAgg[key]) staffAgg[key] = { id: key, totalSales: 0, visits: 0, firstDate: d.date, lastDate: d.date };
                 const s = d.sales || {};
-                const disc = d.discounts || {};
-                staffAgg[key].totalSales += (s.cash || 0) + (s.credit || 0) + (s.qr || 0) + (disc.hpbPoints || 0) + (disc.hpbGift || 0);
-                const cust = d.customers || {};
-                staffAgg[key].visits += (cust.newHPB || 0) + (cust.newMiniNai || 0) + (cust.existing || 0) + (cust.acquaintance || 0);
+                staffAgg[key].totalSales += (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
+                const ch = d.channels || {};
+                let nc = 0;
+                CHANNEL_KEYS.forEach(k => { nc += (ch[k]?.newCount || 0); });
+                staffAgg[key].visits += nc + (d.customers?.existingCount || 0);
                 if (d.date < staffAgg[key].firstDate) staffAgg[key].firstDate = d.date;
                 if (d.date > staffAgg[key].lastDate) staffAgg[key].lastDate = d.date;
             });
@@ -9081,7 +9158,7 @@
             // Table
             const tbody = document.getElementById('plan-table-body');
             if (tbody) {
-                const storeLabels = { ebisu: '恵比寿', kadomori: 'KADOMORI', fukushima: '福島', all: '全店舗' };
+                const storeLabels = { ...STORE_NAMES, all: '全店舗' };
                 tbody.innerHTML = plans.map(p => {
                     const churn = p.members > 0 ? ((p.cancelled / p.members) * 100).toFixed(1) : '0.0';
                     const revenue = (p.members || 0) * (p.fee || 0);
@@ -9180,15 +9257,14 @@
             const unitPrice = metrics.customersTotal > 0 ? Math.round(metrics.salesTotal / metrics.customersTotal) : 0;
             document.getElementById('kpi-unit-price').innerText = `¥${fmt(unitPrice)}`;
 
-            // New Customer Reservation Rate: (HPB new reservations + Mini/Nailie new reservations) / All new customers
+            // 新規次回予約率
             const allNewCustomers = metrics.customersNew;
-            const newResRate = allNewCustomers > 0 ? (((metrics.nextRes.hpbNew + metrics.nextRes.mininaiNew) / allNewCustomers)*100).toFixed(1) : 0;
+            const newResRate = allNewCustomers > 0 ? ((metrics.nextRes.new / allNewCustomers)*100).toFixed(1) : 0;
             document.getElementById('kpi-new-reservation-rate').innerText = `${newResRate}%`;
-            // Also update the large display in KPI tab
             const kpiRateHpbLg = document.getElementById('kpi-rate-hpb-lg');
             if (kpiRateHpbLg) kpiRateHpbLg.innerText = `${newResRate}%`;
 
-            // Existing Customer Reservation Rate
+            // 既存次回予約率
             const existingResRate = metrics.customersExisting > 0 ? ((metrics.nextRes.existing / metrics.customersExisting)*100).toFixed(1) : 0;
             // Update the large display in KPI tab
             const kpiRateExistLg = document.getElementById('kpi-rate-exist-lg');
@@ -9302,13 +9378,13 @@
 
             // Personal metrics
             const personalUnitPrice = personalMetrics.customersTotal > 0 ? Math.round(personalMetrics.salesTotal / personalMetrics.customersTotal) : 0;
-            const personalNewResRate = personalMetrics.hpbNewCount > 0 ? (((personalMetrics.nextRes.hpbNew + personalMetrics.nextRes.mininaiNew) / personalMetrics.hpbNewCount)*100).toFixed(1) : 0;
+            const personalNewResRate = personalMetrics.customersNew > 0 ? ((personalMetrics.nextRes.new / personalMetrics.customersNew)*100).toFixed(1) : 0;
             const personalResRate = personalMetrics.customersTotal > 0 ? ((personalMetrics.nextRes.total / personalMetrics.customersTotal)*100).toFixed(1) : 0;
             const personalSalesPercent = salesGoal > 0 ? Math.round((personalMetrics.salesTotal / salesGoal) * 100) : 0;
 
             // Store metrics
             const storeUnitPrice = storeMetrics.customersTotal > 0 ? Math.round(storeMetrics.salesTotal / storeMetrics.customersTotal) : 0;
-            const storeNewResRate = storeMetrics.hpbNewCount > 0 ? (((storeMetrics.nextRes.hpbNew + storeMetrics.nextRes.mininaiNew) / storeMetrics.hpbNewCount)*100).toFixed(1) : 0;
+            const storeNewResRate = storeMetrics.customersNew > 0 ? ((storeMetrics.nextRes.new / storeMetrics.customersNew)*100).toFixed(1) : 0;
             const storeResRate = storeMetrics.customersTotal > 0 ? ((storeMetrics.nextRes.total / storeMetrics.customersTotal)*100).toFixed(1) : 0;
             const storeSalesPercent = storeSalesGoal > 0 ? Math.round((storeMetrics.salesTotal / storeSalesGoal) * 100) : 0;
 
@@ -9327,8 +9403,10 @@
             document.getElementById('staff-personal-new-res-rate-goal').innerText = `${newResRateGoal}%`;
             document.getElementById('staff-personal-res-rate').innerText = `${personalResRate}%`;
             document.getElementById('staff-personal-res-rate-goal').innerText = `${resRateGoal}%`;
-            document.getElementById('staff-personal-reviews').innerText = fmt(personalMetrics.reviews5StarTotal);
-            document.getElementById('staff-personal-reviews-goal').innerText = staffGoalData.reviews5Star || 0;
+            const personalReviewsEl = document.getElementById('staff-personal-reviews');
+            if (personalReviewsEl) personalReviewsEl.innerText = '0';
+            const personalReviewsGoalEl = document.getElementById('staff-personal-reviews-goal');
+            if (personalReviewsGoalEl) personalReviewsGoalEl.innerText = '0';
 
             // Update Store Section
             document.getElementById('staff-store-sales').innerText = `¥${fmt(storeMetrics.salesTotal)}`;
@@ -9345,8 +9423,10 @@
             document.getElementById('staff-store-new-res-rate-goal').innerText = `${storeNewResRateGoal}%`;
             document.getElementById('staff-store-res-rate').innerText = `${storeResRate}%`;
             document.getElementById('staff-store-res-rate-goal').innerText = `${storeResRateGoal}%`;
-            document.getElementById('staff-store-reviews').innerText = fmt(storeMetrics.reviews5StarTotal);
-            document.getElementById('staff-store-reviews-goal').innerText = storeGoalData.reviews5Star || 0;
+            const storeReviewsEl = document.getElementById('staff-store-reviews');
+            if (storeReviewsEl) storeReviewsEl.innerText = '0';
+            const storeReviewsGoalEl = document.getElementById('staff-store-reviews-goal');
+            if (storeReviewsGoalEl) storeReviewsGoalEl.innerText = '0';
 
             // Update Progress Bars
             const newPercent = newGoal > 0 ? Math.min(Math.round((personalMetrics.customersNew / newGoal) * 100), 100) : 0;
@@ -9485,7 +9565,7 @@
                 const salesTrend = prevMetrics.salesTotal > 0 ? Math.round(((metrics.salesTotal - prevMetrics.salesTotal) / prevMetrics.salesTotal) * 100) : 0;
 
                 // Get staff goal（期間フィルターに応じて調整）
-                const staffStore = storeFilter === 'all' ? (safeRawData.find(d => d && d.staff?.toLowerCase() === staffLower)?.store || getStaffStoreFromRoster(staff) || 'ebisu') : storeFilter;
+                const staffStore = storeFilter === 'all' ? (safeRawData.find(d => d && d.staff?.toLowerCase() === staffLower)?.store || getStaffStoreFromRoster(staff) || Object.keys(STAFF_ROSTER)[0]) : storeFilter;
                 const goalData = getStaffGoal(staffStore, staff);
                 const monthlyGoal = goalData.weekdays * goalData.weekdayTarget + goalData.weekends * goalData.weekendTarget;
 
@@ -9511,8 +9591,7 @@
                     salesTrend,
                     goalRate,
                     salesGoal,
-                    hpbNew: metrics.newByChannel?.hpb || 0,
-                    miniNaiNew: metrics.newByChannel?.mininai || 0
+                    channelNew: metrics.newByChannel || {}
                 };
             });
 
@@ -9548,7 +9627,7 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-accent-800 dark:text-surface-100">${s.name}</h4>
-                                    <p class="text-xs text-surface-500">${s.store === 'ebisu' ? '恵比寿駅前店' : s.store === 'kadomori' ? '大阪KADOMORI店' : s.store === 'fukushima' ? '福島店' : s.store}</p>
+                                    <p class="text-xs text-surface-500">${STORE_NAMES[s.store] || s.store}</p>
                                 </div>
                             </div>
                             <div class="text-right">
@@ -9739,7 +9818,7 @@
 
             // Generate table rows
             tableBody.innerHTML = allIncentives.map(s => {
-                const storeName = s.store === 'ebisu' ? '恵比寿駅前店' : s.store === 'kadomori' ? '大阪KADOMORI店' : s.store === 'fukushima' ? '福島店' : s.store;
+                const storeName = STORE_NAMES[s.store] || s.store;
                 return `
                     <tr class="hover:bg-surface-50 transition">
                         <td class="py-3 px-4 text-surface-600">${storeName}</td>
@@ -9772,8 +9851,12 @@
 
             filtered.forEach(d => {
                 const role = getStaffRole(d.store, d.staff);
-                const sales = (d.sales.cash || 0) + (d.sales.credit || 0) + (d.sales.qr || 0) + (d.sales.product || 0);
-                const cust = (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0) + (d.customers.existing || 0) + (d.customers.acquaintance || 0);
+                const s = d.sales || {};
+                const sales = (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
+                const ch = d.channels || {};
+                let nc = 0;
+                CHANNEL_KEYS.forEach(k => { nc += (ch[k]?.newCount || 0); });
+                const cust = nc + (d.customers?.existingCount || 0);
 
                 if (role === 'director') {
                     directorSales += sales;
@@ -9797,28 +9880,8 @@
             const container = document.getElementById('blog-progress-container');
             if (!container) return;
 
-            const BLOG_TARGET = 10; // 月間目標10件
-            const filtered = getFilteredData();
-
-            // 選択中の月のデータを取得
-            const dateSelector = document.getElementById('date-selector');
-            const selectedDate = dateSelector?.value || '';
-            const [targetYear, targetMonth] = selectedDate ? selectedDate.split('/').map(Number) : [new Date().getFullYear(), new Date().getMonth() + 1];
-
-            // スタッフごとのブログ・SNS更新数を集計
+            // ブログ・SNS更新は新データモデルでは未対応
             const staffProgress = {};
-            filtered.forEach(record => {
-                if (!record.date) return;
-                const recordDate = new Date(record.date);
-                if (recordDate.getFullYear() === targetYear && (recordDate.getMonth() + 1) === targetMonth) {
-                    const staffName = record.staff;
-                    if (!staffProgress[staffName]) {
-                        staffProgress[staffName] = { blogUpdates: 0, snsUpdates: 0 };
-                    }
-                    staffProgress[staffName].blogUpdates += record.blogUpdates || 0;
-                    staffProgress[staffName].snsUpdates += record.snsUpdates || 0;
-                }
-            });
 
             const staffList = Object.entries(staffProgress).sort((a, b) => b[1].blogUpdates - a[1].blogUpdates);
 
@@ -9872,10 +9935,16 @@
             const sorted = [...data].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 20);
 
             sorted.forEach(d => {
-                const total = d.sales.cash + d.sales.credit + d.sales.qr;
-                const allNewCust = (d.customers.newHPB || 0) + (d.customers.newMiniNai || 0);
-                const newResRate = allNewCust > 0 ? Math.round(((d.nextRes.newHPB + d.nextRes.newMiniNai)/allNewCust)*100) : '-';
-                const storeLabel = d.store === 'ebisu' ? '恵比寿駅前店' : d.store === 'kadomori' ? '大阪KADOMORI店' : d.store === 'fukushima' ? '福島店' : d.store;
+                const sales = d.sales || {};
+                const channels = d.channels || {};
+                const customers = d.customers || {};
+                const total = (sales.newSales || 0) + (sales.existingSales || 0) + (sales.treatment || 0) + (sales.retail || 0) + (sales.nomination || 0);
+                let newCust = 0;
+                CHANNEL_KEYS.forEach(ch => { newCust += (channels[ch]?.newCount || 0); });
+                const existCust = customers.existingCount || 0;
+                const allNewCust = newCust;
+                const newResRate = allNewCust > 0 ? Math.round((customers.newNextRes || 0) / allNewCust * 100) : '-';
+                const storeLabel = STORE_NAMES[d.store] || d.store;
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -9883,7 +9952,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-kadomori-600">${d.staff}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-kadomori-500">${d.date}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-right font-medium text-kadomori-800">¥${total.toLocaleString()}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-xs text-right text-kadomori-600">${d.customers.newHPB + d.customers.newMiniNai + d.customers.existing}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs text-right text-kadomori-600">${newCust + existCust}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-right ${newResRate < 40 && newResRate !== '-' ? 'text-red-400' : ''}">${newResRate !== '-' ? newResRate+'%' : '-'}</td>
                 `;
                 tbody.appendChild(tr);
@@ -9920,12 +9989,12 @@
             charts.share = new Chart(document.getElementById('channelShareChart'), { type: 'pie', data: {}, options: common });
             charts.trend = new Chart(document.getElementById('channelTrendChart'), { type: 'bar', data: {}, options: { ...common, scales: { x:{stacked:true}, y:{stacked:true} } } });
             charts.payment = new Chart(document.getElementById('paymentChart'), { type: 'doughnut', data: {}, options: { ...common, cutout: '60%' } });
-            charts.loss = new Chart(document.getElementById('lossChart'), { type: 'bar', indexAxis: 'y', data: {}, options: common });
+            charts.loss = new Chart(document.getElementById('lossChart'), { type: 'bar', data: {}, options: common });
         }
 
         function updateCharts(metrics) {
             // Debug log for HPB data
-            console.log('📊 媒体データ:', { HPB: metrics.newByChannel?.hpb || 0, minimo: metrics.newByChannel?.mininai || 0 });
+            console.log('📊 媒体データ:', metrics.newByChannel);
 
             const labels = Object.keys(metrics.daily).sort((a,b) => new Date(a) - new Date(b));
             const d = metrics.daily;
@@ -9972,18 +10041,25 @@
             charts.overview.update();
 
             charts.ratio.data = { labels: ['新規', '既存'], datasets: [{ data: [metrics.customersNew, metrics.customersExisting], backgroundColor: [BrandColors.gold, BrandColors.brown], borderWidth:0 }] }; charts.ratio.update();
-            // Update HPB share chart and display counts
-            const hpbCount = metrics.newByChannel.hpb || 0;
-            const mininaiCount = metrics.newByChannel.mininai || 0;
-            document.getElementById('hpb-count').innerText = hpbCount;
-            document.getElementById('mininai-count').innerText = mininaiCount;
-            charts.share.data = { labels: ['HPB', 'minimo/Nailie'], datasets: [{ data: [hpbCount, mininaiCount], backgroundColor: [BrandColors.gold, BrandColors.beige], borderWidth:1, borderColor:'#fff' }] }; charts.share.update();
-            charts.trend.data = { labels: labels, datasets: [
-                { label: 'HPB', data: labels.map(k=>d[k].hpb), backgroundColor: BrandColors.gold },
-                { label: 'minimo/Nailie', data: labels.map(k=>d[k].mininai), backgroundColor: BrandColors.beige }
-            ]}; charts.trend.update();
-            charts.payment.data = { labels: ['現金', 'クレカ', 'QR'], datasets: [{ data: [metrics.salesCash, metrics.salesCredit, metrics.salesQR], backgroundColor: [BrandColors.beige, BrandColors.gold, BrandColors.brown], borderWidth:0 }] }; charts.payment.update();
-            charts.loss.data = { labels: ['損失'], datasets: [{ label: '割引・返金', data: [metrics.lossTotal], backgroundColor: BrandColors.brown, barThickness:40 }] }; charts.loss.update();
+            // 媒体別チャネルシェア
+            const channelLabels = CHANNEL_KEYS.map(ch => CHANNEL_NAMES[ch]);
+            const channelData = CHANNEL_KEYS.map(ch => metrics.newByChannel[ch] || 0);
+            const channelColors = [BrandColors.gold, BrandColors.beige, BrandColors.brown, BrandColors.accent, BrandColors.sage, BrandColors.surface];
+            const hpbCountEl = document.getElementById('hpb-count');
+            if (hpbCountEl) hpbCountEl.innerText = metrics.newByChannel.hpb || 0;
+            const mininaiCountEl = document.getElementById('mininai-count');
+            if (mininaiCountEl) mininaiCountEl.innerText = channelData.reduce((a,b)=>a+b,0) - (metrics.newByChannel.hpb || 0);
+            charts.share.data = { labels: channelLabels, datasets: [{ data: channelData, backgroundColor: channelColors, borderWidth:1, borderColor:'#fff' }] }; charts.share.update();
+            charts.trend.data = { labels: labels, datasets: CHANNEL_KEYS.map((ch, i) => ({
+                label: CHANNEL_NAMES[ch], data: labels.map(k => d[k][ch] || 0), backgroundColor: channelColors[i]
+            }))}; charts.trend.update();
+            // 売上種別チャート（旧: 決済方法別）
+            charts.payment.data = { labels: ['新規売上', '既存売上', '技術売上', '店販売上', '指名料金'], datasets: [{ data: [metrics.salesNew, metrics.salesExisting, metrics.salesTreatment, metrics.salesRetail, metrics.salesNomination], backgroundColor: [BrandColors.beige, BrandColors.gold, BrandColors.brown, BrandColors.sage, BrandColors.accent], borderWidth:0 }] }; charts.payment.update();
+            // 媒体別新規チャネルチャート
+            charts.loss.data = { labels: channelLabels, datasets: [
+                { label: '新規数', data: CHANNEL_KEYS.map(ch => metrics.newByChannel[ch] || 0), backgroundColor: channelColors },
+                { label: '契約数', data: CHANNEL_KEYS.map(ch => metrics.contractByChannel[ch] || 0), backgroundColor: channelColors.map(c => c + '80') }
+            ]}; charts.loss.update();
         }
 
         // --- 5. EDIT & SAVE LOGIC ---
@@ -10010,8 +10086,7 @@
                 // オブジェクトのデフォルト値設定
                 const sales = row.sales || {};
                 const customers = row.customers || {};
-                const nextRes = row.nextRes || {};
-                const discounts = row.discounts || {};
+                const channels = row.channels || {};
 
                 // 日付フォーマット: 年を省略して MM/DD 表記にする
                 let displayDate = row.date || '';
@@ -10032,28 +10107,28 @@
                     <td class="px-4 py-2"><input type="text" class="edit-input edit-readonly" value="${row.staff || ''}" readonly></td>
                 `;
 
+                // 媒体別入力フィールド
+                let channelCols = '';
+                CHANNEL_KEYS.forEach(ch => {
+                    const chData = channels[ch] || {};
+                    channelCols += `
+                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="channels.${ch}.newCount" value="${safeNum(chData.newCount)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="channels.${ch}.contractCount" value="${safeNum(chData.contractCount)}" onchange="markChanged(${row.id})"></td>`;
+                });
+
                 tr.innerHTML = `
                     <td class="px-4 py-2"><input type="text" class="edit-input edit-input-date edit-readonly" value="${displayDate}" readonly></td>
                     ${storeStaffCols}
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.cash" value="${safeNum(sales.cash)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.credit" value="${safeNum(sales.credit)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.qr" value="${safeNum(sales.qr)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.product" value="${safeNum(sales.product)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.newSales" value="${safeNum(sales.newSales)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.existingSales" value="${safeNum(sales.existingSales)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.treatment" value="${safeNum(sales.treatment)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.retail" value="${safeNum(sales.retail)}" onchange="markChanged(${row.id})"></td>
                     <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="sales.nomination" value="${safeNum(sales.nomination)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.hpbPoints" value="${safeNum(discounts.hpbPoints)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.hpbGift" value="${safeNum(discounts.hpbGift)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.other" value="${safeNum(discounts.other)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input edit-input-amount" data-field="discounts.refund" value="${safeNum(discounts.refund)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.newHPB" value="${safeNum(customers.newHPB)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.newMiniNai" value="${safeNum(customers.newMiniNai)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.existing" value="${safeNum(customers.existing)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.acquaintance" value="${safeNum(customers.acquaintance)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="nextRes.newHPB" value="${safeNum(nextRes.newHPB)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="nextRes.newMiniNai" value="${safeNum(nextRes.newMiniNai)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="nextRes.existing" value="${safeNum(nextRes.existing)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="reviews5Star" value="${safeNum(row.reviews5Star)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="blogUpdates" value="${safeNum(row.blogUpdates)}" onchange="markChanged(${row.id})"></td>
-                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="snsUpdates" value="${safeNum(row.snsUpdates)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.nominationCount" value="${safeNum(customers.nominationCount)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.existingCount" value="${safeNum(customers.existingCount)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.newNextRes" value="${safeNum(customers.newNextRes)}" onchange="markChanged(${row.id})"></td>
+                    <td class="px-4 py-2"><input type="number" class="edit-input" data-field="customers.existingNextRes" value="${safeNum(customers.existingNextRes)}" onchange="markChanged(${row.id})"></td>
+                    ${channelCols}
                 `;
                 tbody.appendChild(tr);
             });
@@ -10084,14 +10159,15 @@
                 const val = safeNum(input.value);
                 const item = rawData.find(d => d && d.id === id);
                 if (item) {
-                    if (fieldPath.length === 2) {
-                        // ネストされたオブジェクトが存在しない場合は作成
-                        if (!item[fieldPath[0]]) {
-                            item[fieldPath[0]] = {};
-                        }
+                    if (fieldPath.length === 3) {
+                        // 3階層: channels.hpb.newCount など
+                        if (!item[fieldPath[0]]) item[fieldPath[0]] = {};
+                        if (!item[fieldPath[0]][fieldPath[1]]) item[fieldPath[0]][fieldPath[1]] = {};
+                        item[fieldPath[0]][fieldPath[1]][fieldPath[2]] = val;
+                    } else if (fieldPath.length === 2) {
+                        if (!item[fieldPath[0]]) item[fieldPath[0]] = {};
                         item[fieldPath[0]][fieldPath[1]] = val;
                     } else if (fieldPath.length === 1) {
-                        // Handle top-level fields like reviews5Star
                         item[fieldPath[0]] = val;
                     }
                 }
@@ -10400,7 +10476,7 @@
                 const titleEl = document.getElementById('goal-summary-title');
                 const descEl = document.getElementById('goal-summary-description');
                 if (context.type === 'store') {
-                    const storeName = context.store === 'ebisu' ? '恵比寿駅前店' : context.store === 'kadomori' ? '大阪KADOMORI店' : context.store === 'fukushima' ? '福島店' : context.store;
+                    const storeName = STORE_NAMES[context.store] || context.store;
                     titleEl.innerText = `${storeName} 目標サマリー`;
                     descEl.innerText = 'この目標は所属スタッフの目標の合算値です。個別のスタッフを選択すると、個人目標を編集できます。';
                 } else {
@@ -10449,7 +10525,7 @@
                 // 全店舗のスタッフ
                 Object.keys(STAFF_ROSTER).forEach(store => {
                     const staffList = STAFF_ROSTER[store] || [];
-                    const storeName = store === 'ebisu' ? '恵比寿駅前店' : store === 'kadomori' ? '大阪KADOMORI店' : store === 'fukushima' ? '福島店' : store;
+                    const storeName = STORE_NAMES[store] || store;
                     staffList.forEach(staff => {
                         const staffGoal = getStaffGoal(store, staff, yearMonth);
                         const monthlyTarget = ((staffGoal.weekdays || 0) * (staffGoal.weekdayTarget || 0)) +
@@ -10505,7 +10581,8 @@
                     const date = new Date(year, month, day);
                     const dayOfWeek = date.getDay(); // 0=日, 1=月, ..., 6=土
 
-                    const sales = record.sales.cash + record.sales.credit + record.sales.qr;
+                    const s = record.sales || {};
+                    const sales = (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
 
                     // 平日: 月〜金 (1-5), 休日: 土日 (0, 6)
                     if (dayOfWeek >= 1 && dayOfWeek <= 5) {
@@ -10691,7 +10768,7 @@
             document.getElementById('goal-unit-price-current').innerText = `¥${fmt(currentUnitPrice)}`;
             document.getElementById('goal-unit-price-target').innerText = `¥${fmt(unitPriceTarget)}`;
 
-            const currentNewResRate = metrics.hpbNewCount > 0 ? (((metrics.nextRes.hpbNew + metrics.nextRes.mininaiNew) / metrics.hpbNewCount)*100).toFixed(1) : 0;
+            const currentNewResRate = metrics.customersNew > 0 ? ((metrics.nextRes.new / metrics.customersNew)*100).toFixed(1) : 0;
             document.getElementById('goal-new-res-rate-current').innerText = `${currentNewResRate}%`;
             document.getElementById('goal-new-res-rate-target').innerText = `${newResRateTarget}%`;
 
@@ -11169,7 +11246,7 @@
             staffList.innerHTML = '';
             const baseUrl = window.location.origin + window.location.pathname;
             Object.keys(STAFF_ROSTER).forEach(storeId => {
-                const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                const storeName = STORE_NAMES[storeId] || storeId;
                 STAFF_ROSTER[storeId].forEach(staffName => {
                     const staffDiv = document.createElement('div');
                     staffDiv.className = 'bg-kadomori-50 p-3 rounded';
@@ -11406,7 +11483,7 @@
             let html = '';
 
             Object.keys(STAFF_ROSTER).forEach(storeId => {
-                const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                const storeName = STORE_NAMES[storeId] || storeId;
                 const staffList = STAFF_ROSTER[storeId];
 
                 staffList.forEach(staff => {
@@ -11442,7 +11519,7 @@
             // 店舗セレクタを初期化
             storeSel.innerHTML = '<option value="">店舗を選択</option>';
             Object.keys(STAFF_ROSTER).forEach(storeId => {
-                const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                const storeName = STORE_NAMES[storeId] || storeId;
                 const opt = document.createElement('option');
                 opt.value = storeId;
                 opt.text = storeName;
@@ -11527,7 +11604,7 @@
                 message.textContent = '管理ページへのアクセスにはパスワードが必要です';
             } else {
                 title.textContent = 'スタッフページ認証';
-                message.textContent = `${store === 'ebisu' ? '恵比寿駅前店' : store === 'kadomori' ? '大阪KADOMORI店' : store === 'fukushima' ? '福島店' : store} / ${staff} のページへのアクセスにはパスワードが必要です`;
+                message.textContent = `${STORE_NAMES[store] || store} / ${staff} のページへのアクセスにはパスワードが必要です`;
             }
 
             dialog.classList.remove('hidden');
@@ -11717,7 +11794,7 @@
 - 新規客: ${metrics.customersNew}名
 - 既存客: ${metrics.customersExisting}名
 - 平均客単価: ¥${metrics.customersTotal > 0 ? Math.round(metrics.salesTotal / metrics.customersTotal).toLocaleString() : 0}
-- 新規次回予約率: ${metrics.hpbNewCount > 0 ? (((metrics.nextRes.hpbNew + metrics.nextRes.mininaiNew) / metrics.hpbNewCount)*100).toFixed(1) : 0}%
+- 新規次回予約率: ${metrics.customersNew > 0 ? ((metrics.nextRes.new / metrics.customersNew)*100).toFixed(1) : 0}%
 
 【目標値】
 - 新規客目標: ${goalData.newCustomers}名
@@ -11901,7 +11978,7 @@
 
             // スタッフ専用ページの場合、所属店舗のみ表示
             if (lockedStore) {
-                const storeName = lockedStore === 'ebisu' ? '恵比寿駅前店' : lockedStore === 'kadomori' ? '大阪KADOMORI店' : lockedStore === 'fukushima' ? '福島店' : lockedStore;
+                const storeName = STORE_NAMES[lockedStore] || lockedStore;
                 storeSel.innerHTML = `<option value="${lockedStore}">${storeName}</option>`;
                 storeSel.disabled = true;
                 storeSel.parentElement.style.display = 'none';
@@ -11916,7 +11993,7 @@
                 // 通常ページの場合、全店舗を表示
                 storeSel.innerHTML = '<option value="all">全店舗</option>';
                 Object.keys(STAFF_ROSTER).forEach(storeId => {
-                    const storeName = storeId === 'ebisu' ? '恵比寿駅前店' : storeId === 'kadomori' ? '大阪KADOMORI店' : storeId === 'fukushima' ? '福島店' : storeId;
+                    const storeName = STORE_NAMES[storeId] || storeId;
                     const opt = document.createElement('option');
                     opt.value = storeId;
                     opt.text = storeName;
@@ -12018,10 +12095,13 @@
                             product: 0
                         };
                     }
-                    const totalSales = (record.sales?.cash || 0) + (record.sales?.credit || 0) + (record.sales?.qr || 0);
-                    const productSales = record.sales?.product || 0;
-                    const newCount = (record.customers?.newHPB || 0) + (record.customers?.newMiniNai || 0);
-                    const existCount = (record.customers?.existing || 0) + (record.customers?.acquaintance || 0);
+                    const s = record.sales || {};
+                    const totalSales = (s.newSales || 0) + (s.existingSales || 0) + (s.treatment || 0) + (s.retail || 0) + (s.nomination || 0);
+                    const productSales = s.retail || 0;
+                    const ch = record.channels || {};
+                    let newCount = 0;
+                    CHANNEL_KEYS.forEach(k => { newCount += (ch[k]?.newCount || 0); });
+                    const existCount = record.customers?.existingCount || 0;
 
                     dailySalesMap[day].sales += totalSales;
                     dailySalesMap[day].product += productSales;
@@ -12331,7 +12411,7 @@
                 monthInput.value = `${y}-${m.padStart(2, '0')}`;
                 const data = loadSubscriptionData();
                 const record = data[yearMonth]?.[storeId] || {};
-                document.getElementById('sub-edit-store').value = storeId || 'ebisu';
+                document.getElementById('sub-edit-store').value = storeId || Object.keys(STORE_NAMES)[0];
                 document.getElementById('sub-edit-start').value = record.startCount || 0;
                 document.getElementById('sub-edit-new').value = record.newMembers || 0;
                 document.getElementById('sub-edit-cancelled').value = record.cancelled || 0;
@@ -12339,7 +12419,7 @@
             } else {
                 monthInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
                 const selectedStore = document.getElementById('sub-store-selector').value;
-                document.getElementById('sub-edit-store').value = selectedStore === 'all' ? 'ebisu' : selectedStore;
+                document.getElementById('sub-edit-store').value = selectedStore === 'all' ? Object.keys(STORE_NAMES)[0] : selectedStore;
                 document.getElementById('sub-edit-start').value = 0;
                 document.getElementById('sub-edit-new').value = 0;
                 document.getElementById('sub-edit-cancelled').value = 0;
@@ -12395,7 +12475,7 @@
         }
 
         function getStoreNameById(id) {
-            const map = { ebisu: '恵比寿駅前店', kadomori: '大阪KADOMORI店', fukushima: '福島店' };
+            const map = STORE_NAMES;
             return map[id] || id;
         }
 
@@ -12419,7 +12499,7 @@
             }
 
             let currentMembers = 0, newMembers = 0, cancelled = 0, revenue = 0;
-            const stores = storeFilter === 'all' ? ['ebisu', 'kadomori', 'fukushima'] : [storeFilter];
+            const stores = storeFilter === 'all' ? Object.keys(STORE_NAMES) : [storeFilter];
 
             if (selectedYM && data[selectedYM]) {
                 stores.forEach(s => {
@@ -12526,7 +12606,7 @@
                 titleEl.textContent = '回数券登録';
                 document.getElementById('ticket-edit-id').value = '';
                 document.getElementById('ticket-edit-customer').value = '';
-                document.getElementById('ticket-edit-store').value = document.getElementById('ticket-store-selector').value === 'all' ? 'ebisu' : document.getElementById('ticket-store-selector').value;
+                document.getElementById('ticket-edit-store').value = document.getElementById('ticket-store-selector').value === 'all' ? Object.keys(STORE_NAMES)[0] : document.getElementById('ticket-store-selector').value;
                 document.getElementById('ticket-edit-name').value = '';
                 document.getElementById('ticket-edit-date').value = new Date().toISOString().split('T')[0];
                 document.getElementById('ticket-edit-total').value = 5;
