@@ -1488,35 +1488,13 @@
     <div id="loading-overlay" class="fixed inset-0 bg-white dark:bg-[#0a0a0a] z-[100] flex items-center justify-center">
         <div class="text-center px-8">
             <!-- Logo -->
-            <div class="splash-logo mb-8">
+            <div class="splash-logo mb-10">
                 <img src="assets/C055456988.jpg" alt="KADOMORI" class="h-[200px] w-auto mx-auto"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <!-- Fallback SVG Logo if image doesn't load -->
-                <div class="hidden">
-                    <svg viewBox="0 0 400 100" class="h-24 w-auto mx-auto" xmlns="http://www.w3.org/2000/svg">
-                        <text x="200" y="55" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="52" font-weight="400" letter-spacing="4">
-                            <tspan fill="#1a1a1a">KAD</tspan><tspan fill="#c4a265">O</tspan><tspan fill="#1a1a1a">M</tspan><tspan fill="#c4a265">O</tspan><tspan fill="#1a1a1a">RI</tspan>
-                        </text>
-                        <text x="368" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1a1a1a">&#174;</text>
-                        <path d="M 120 80 Q 200 65 280 80" stroke="#c4a265" stroke-width="2" fill="none"/>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Brand Name -->
-            <h1 class="splash-text text-3xl font-display font-light text-[#1a1a1a] dark:text-white tracking-[0.2em] mb-2">
-                KADOMORI
-            </h1>
-            <div class="splash-subtext flex items-center justify-center gap-4 mb-10">
-                <span class="h-[1px] w-8 bg-[#c4a265]"></span>
-                <p class="text-xs text-surface-500 dark:text-surface-400 font-medium uppercase tracking-[0.25em]">
-                    鍼灸サロンダッシュボード
-                </p>
-                <span class="h-[1px] w-8 bg-[#c4a265]"></span>
+                     onerror="this.style.display='none';">
             </div>
 
             <!-- Progress Bar -->
-            <div class="w-48 mx-auto">
+            <div class="w-56 mx-auto">
                 <div class="h-[2px] bg-surface-200 dark:bg-[#222] rounded-full overflow-hidden">
                     <div id="splash-progress-bar" class="h-full bg-gradient-to-r from-[#c4a265] to-[#d4b06a] rounded-full splash-progress"></div>
                 </div>
@@ -1534,7 +1512,7 @@
 
                 <!-- Logo -->
                 <div class="flex items-center gap-3">
-                    <img src="assets/C055456988.jpg" alt="KADOMORI Logo" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/C055456988.jpg" alt="KADOMORI Logo" class="h-14 md:h-20 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="hidden w-10 h-10 bg-[#1a1a1a] text-[#c4a265] rounded-xl items-center justify-center text-xl font-display tracking-widest shadow-glow">K</div>
                     <span id="staff-mode-badge" class="hidden text-xs bg-[#1a1a1a] text-[#c4a265] px-3 py-1 rounded-full font-sans normal-case tracking-normal shadow-sm">専用モード</span>
                 </div>
@@ -1648,76 +1626,78 @@
         <!-- Main Content -->
         <main id="main-content" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full safe-bottom">
 
-            <!-- KPI Cards Row - スマホでは2列でコンパクトに表示 -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-5 mb-6 md:mb-10" id="kpi-grid">
-                <!-- Sales -->
-                <div class="kpi-card accent-primary p-3 md:p-6">
-                    <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-3">
-                        <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg gradient-primary flex items-center justify-center">
-                            <i data-lucide="trending-up" class="w-3 h-3 md:w-4 md:h-4 text-white"></i>
+            <!-- KPI Cards Row - スマホでは2列、PCでは3列×2段 -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4 mb-6 md:mb-10" id="kpi-grid">
+                <!-- 総売上 -->
+                <div class="kpi-card accent-primary p-3 md:p-5">
+                    <div class="flex items-center gap-1.5 mb-1 md:mb-2">
+                        <div class="w-5 h-5 md:w-7 md:h-7 rounded-lg gradient-primary flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-3 h-3 md:w-3.5 md:h-3.5 text-white"></i>
                         </div>
                         <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">総売上</p>
                     </div>
-                    <h2 class="text-lg md:text-3xl font-display font-bold text-accent-900" id="kpi-sales">¥0</h2>
-                    <div class="mt-1.5 md:mt-3 text-[10px] md:text-sm text-surface-600 flex items-center gap-1">
-                        <i data-lucide="target" class="w-2.5 h-2.5 md:w-3 md:h-3 hidden md:inline"></i>
-                        目標比: <span id="kpi-goal-ratio" class="font-semibold text-primary-500">0%</span>
+                    <h2 class="text-xl md:text-4xl font-display font-bold text-accent-900 leading-tight" id="kpi-sales">¥0</h2>
+                    <div class="mt-1 md:mt-2 text-[10px] md:text-xs text-surface-600">
+                        目標比: <span id="kpi-goal-ratio" class="font-bold text-primary-500">0%</span>
                     </div>
                 </div>
 
-                <!-- Customers -->
-                <div class="kpi-card accent-navy p-3 md:p-6">
-                    <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-3">
-                        <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg gradient-accent flex items-center justify-center">
-                            <i data-lucide="users" class="w-3 h-3 md:w-4 md:h-4 text-white"></i>
+                <!-- 総来店数 -->
+                <div class="kpi-card accent-navy p-3 md:p-5">
+                    <div class="flex items-center gap-1.5 mb-1 md:mb-2">
+                        <div class="w-5 h-5 md:w-7 md:h-7 rounded-lg gradient-accent flex items-center justify-center">
+                            <i data-lucide="users" class="w-3 h-3 md:w-3.5 md:h-3.5 text-white"></i>
                         </div>
                         <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">総来店数</p>
                     </div>
-                    <h2 class="text-lg md:text-3xl font-display font-bold text-accent-900" id="kpi-customers">0<span class="text-sm md:text-lg font-sans font-normal ml-0.5 md:ml-1 text-surface-500">名</span></h2>
-                    <div class="mt-1.5 md:mt-3 text-[10px] md:text-sm text-surface-600">
-                        新規: <span id="kpi-new" class="font-semibold text-primary-500">0</span>
-                        <span class="mx-0.5 md:mx-1 text-surface-400">/</span>
-                        既存: <span id="kpi-existing" class="font-semibold text-accent-600">0</span>
+                    <h2 class="text-xl md:text-4xl font-display font-bold text-accent-900 leading-tight" id="kpi-customers">0<span class="text-sm md:text-lg font-sans font-normal ml-0.5 text-surface-500">名</span></h2>
+                    <div class="mt-1 md:mt-2 text-[10px] md:text-xs text-surface-600">
+                        既存: <span id="kpi-existing" class="font-bold text-accent-600">0</span>
                     </div>
                 </div>
 
-                <!-- Unit Price -->
-                <div class="kpi-card accent-success p-3 md:p-6">
-                    <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-3">
-                        <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg gradient-sage flex items-center justify-center">
-                            <i data-lucide="wallet" class="w-3 h-3 md:w-4 md:h-4 text-white"></i>
+                <!-- 平均客単価 -->
+                <div class="kpi-card accent-success p-3 md:p-5">
+                    <div class="flex items-center gap-1.5 mb-1 md:mb-2">
+                        <div class="w-5 h-5 md:w-7 md:h-7 rounded-lg gradient-sage flex items-center justify-center">
+                            <i data-lucide="wallet" class="w-3 h-3 md:w-3.5 md:h-3.5 text-white"></i>
                         </div>
                         <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">平均客単価</p>
                     </div>
-                    <h2 class="text-lg md:text-3xl font-display font-bold text-accent-900" id="kpi-unit-price">¥0</h2>
-                    <div class="mt-1.5 md:mt-3 text-[10px] md:text-sm text-surface-600 hidden md:flex items-center gap-1">
-                        <i data-lucide="shopping-bag" class="w-3 h-3"></i>
-                        物販込み平均
-                    </div>
+                    <h2 class="text-xl md:text-4xl font-display font-bold text-accent-900 leading-tight" id="kpi-unit-price">¥0</h2>
                 </div>
 
-                <!-- New Customer Reservation Rate -->
-                <div class="kpi-card accent-purple p-3 md:p-6">
-                    <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-3">
-                        <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg gradient-rose flex items-center justify-center">
-                            <i data-lucide="user-check" class="w-3 h-3 md:w-4 md:h-4 text-white"></i>
+                <!-- 総新規数 -->
+                <div class="kpi-card accent-navy p-3 md:p-5">
+                    <div class="flex items-center gap-1.5 mb-1 md:mb-2">
+                        <div class="w-5 h-5 md:w-7 md:h-7 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                            <i data-lucide="user-plus" class="w-3 h-3 md:w-3.5 md:h-3.5 text-white"></i>
+                        </div>
+                        <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">総新規数</p>
+                    </div>
+                    <h2 class="text-xl md:text-4xl font-display font-bold text-accent-900 leading-tight" id="kpi-new-total">0<span class="text-sm md:text-lg font-sans font-normal ml-0.5 text-surface-500">名</span></h2>
+                </div>
+
+                <!-- 新規次回予約率 -->
+                <div class="kpi-card accent-purple p-3 md:p-5">
+                    <div class="flex items-center gap-1.5 mb-1 md:mb-2">
+                        <div class="w-5 h-5 md:w-7 md:h-7 rounded-lg gradient-rose flex items-center justify-center">
+                            <i data-lucide="user-check" class="w-3 h-3 md:w-3.5 md:h-3.5 text-white"></i>
                         </div>
                         <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">新規次回予約率</p>
                     </div>
-                    <h2 class="text-lg md:text-3xl font-display font-bold text-accent-900" id="kpi-new-reservation-rate">0%</h2>
-                    <p class="text-[10px] md:text-sm text-surface-600 mt-1.5 md:mt-3 hidden md:block">(HPB+Mini新規予約数)÷HPB新規数</p>
+                    <h2 class="text-xl md:text-4xl font-display font-bold text-accent-900 leading-tight" id="kpi-new-reservation-rate">0%</h2>
                 </div>
 
-                <!-- Total Reservation Rate -->
-                <div class="kpi-card accent-gold p-3 md:p-6 col-span-2 md:col-span-1">
-                    <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-3">
-                        <div class="w-6 h-6 md:w-8 md:h-8 rounded-lg gradient-warmgold flex items-center justify-center">
-                            <i data-lucide="calendar-check" class="w-3 h-3 md:w-4 md:h-4 text-white"></i>
+                <!-- 契約率 -->
+                <div class="kpi-card accent-gold p-3 md:p-5">
+                    <div class="flex items-center gap-1.5 mb-1 md:mb-2">
+                        <div class="w-5 h-5 md:w-7 md:h-7 rounded-lg gradient-warmgold flex items-center justify-center">
+                            <i data-lucide="file-check" class="w-3 h-3 md:w-3.5 md:h-3.5 text-white"></i>
                         </div>
-                        <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">総次回予約率</p>
+                        <p class="text-[10px] md:text-xs font-semibold text-surface-500 uppercase tracking-wider">契約率</p>
                     </div>
-                    <h2 class="text-lg md:text-3xl font-display font-bold text-accent-900" id="kpi-total-reservation-rate">0%</h2>
-                    <p class="text-[10px] md:text-sm text-surface-600 mt-1.5 md:mt-3 hidden md:block">全次回予約数÷全来店数</p>
+                    <h2 class="text-xl md:text-4xl font-display font-bold text-accent-900 leading-tight" id="kpi-total-reservation-rate">0%</h2>
                 </div>
 
             </div>
@@ -9406,9 +9386,9 @@
             monthlyGoal = currentGoal; // Update global for backwards compatibility
 
             document.getElementById('kpi-sales').innerText = `¥${fmt(metrics.salesTotal)}`;
-            document.getElementById('kpi-customers').innerHTML = `${fmt(metrics.customersTotal)}<span class="text-base font-normal ml-1">名</span>`;
-            document.getElementById('kpi-new').innerText = fmt(metrics.customersNew);
-            document.getElementById('kpi-existing').innerText = fmt(metrics.customersExisting);
+            document.getElementById('kpi-customers').innerHTML = `${fmt(metrics.customersTotal)}<span class="text-sm md:text-lg font-sans font-normal ml-0.5 text-surface-500">名</span>`;
+            const kpiExistingEl = document.getElementById('kpi-existing');
+            if (kpiExistingEl) kpiExistingEl.innerText = fmt(metrics.customersExisting);
 
             // Update goal ratio
             const goalRatio = currentGoal > 0 ? Math.round((metrics.salesTotal / currentGoal) * 100) : 0;
@@ -9416,6 +9396,9 @@
 
             const unitPrice = metrics.customersTotal > 0 ? Math.round(metrics.salesTotal / metrics.customersTotal) : 0;
             document.getElementById('kpi-unit-price').innerText = `¥${fmt(unitPrice)}`;
+
+            // 総新規数
+            document.getElementById('kpi-new-total').innerHTML = `${fmt(metrics.customersNew)}<span class="text-sm md:text-lg font-sans font-normal ml-0.5 text-surface-500">名</span>`;
 
             // 新規次回予約率
             const allNewCustomers = metrics.customersNew;
@@ -9430,9 +9413,11 @@
             const kpiRateExistLg = document.getElementById('kpi-rate-exist-lg');
             if (kpiRateExistLg) kpiRateExistLg.innerText = `${existingResRate}%`;
 
-            // Total Reservation Rate: Total next reservations / Total customers
-            const totalResRate = metrics.customersTotal > 0 ? ((metrics.nextRes.total / metrics.customersTotal)*100).toFixed(1) : 0;
-            document.getElementById('kpi-total-reservation-rate').innerText = `${totalResRate}%`;
+            // 契約率: 全媒体の契約数合計 / 全媒体の新規数合計
+            let totalContracts = 0;
+            CHANNEL_KEYS.forEach(ch => { totalContracts += (metrics.contractByChannel[ch] || 0); });
+            const contractRate = metrics.customersNew > 0 ? ((totalContracts / metrics.customersNew)*100).toFixed(1) : 0;
+            document.getElementById('kpi-total-reservation-rate').innerText = `${contractRate}%`;
             // Also update the large display in KPI tab
             const kpiRateTotalLg = document.getElementById('kpi-rate-total-lg');
             if (kpiRateTotalLg) kpiRateTotalLg.innerText = `${totalResRate}%`;
