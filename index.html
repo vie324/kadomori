@@ -251,6 +251,24 @@
             animation: splashTextIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
         }
 
+        /* Toast Notification */
+        @keyframes toastIn {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes toastOut {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-10px) scale(0.95); }
+        }
+        .toast {
+            pointer-events: auto;
+            animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .toast.toast-exit {
+            animation: toastOut 0.3s ease forwards;
+        }
+
         .splash-subtext {
             opacity: 0;
             animation: splashTextIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
@@ -1516,15 +1534,9 @@
 
                 <!-- Logo -->
                 <div class="flex items-center gap-3">
-                    <img src="assets/C055456988.jpg" alt="KADOMORI Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/C055456988.jpg" alt="KADOMORI Logo" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="hidden w-10 h-10 bg-[#1a1a1a] text-[#c4a265] rounded-xl items-center justify-center text-xl font-display tracking-widest shadow-glow">K</div>
-                    <div>
-                        <h1 class="logo-text text-xl text-[#1a1a1a] dark:text-white flex items-center gap-3" style="letter-spacing: 0.15em;">
-                            KADOMORI
-                            <span id="staff-mode-badge" class="hidden text-xs bg-[#1a1a1a] text-[#c4a265] px-3 py-1 rounded-full font-sans normal-case tracking-normal shadow-sm">専用モード</span>
-                        </h1>
-                        <p class="logo-subtitle text-[10px] text-[#c4a265] font-medium uppercase tracking-[0.2em]">鍼灸サロンダッシュボード</p>
-                    </div>
+                    <span id="staff-mode-badge" class="hidden text-xs bg-[#1a1a1a] text-[#c4a265] px-3 py-1 rounded-full font-sans normal-case tracking-normal shadow-sm">専用モード</span>
                 </div>
 
                 <!-- Filters -->
@@ -5192,7 +5204,34 @@
             return null;
         }
 
-        // GASにPOSTでデータ保存（localStorageにもキャッシュ保存）
+        // トースト通知を表示
+        function showToast(message, type = 'success', duration = 3000) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            const icons = {
+                success: '<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>',
+                error: '<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>',
+                saving: '<svg class="w-5 h-5 flex-shrink-0 animate-spin" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M12 3a9 9 0 1 0 9 9"/></svg>'
+            };
+            const colors = {
+                success: 'bg-emerald-600 text-white',
+                error: 'bg-red-600 text-white',
+                saving: 'bg-gray-700 text-white'
+            };
+            toast.className = `toast flex items-center gap-3 px-5 py-3.5 rounded-xl ${colors[type] || colors.success} text-sm font-medium min-w-[280px] max-w-[400px]`;
+            toast.innerHTML = `${icons[type] || icons.success}<span>${message}</span>`;
+            container.appendChild(toast);
+            if (type !== 'saving') {
+                setTimeout(() => {
+                    toast.classList.add('toast-exit');
+                    setTimeout(() => toast.remove(), 300);
+                }, duration);
+            }
+            return toast;
+        }
+
+        // GASにPOSTでデータ保存（localStorageにもキャッシュ保存 + トースト通知）
         async function gasPost(action, payload, cacheKey) {
             // localStorageにキャッシュ保存
             if (cacheKey) {
@@ -5200,16 +5239,29 @@
             }
             if (!API_URL) {
                 console.log(`API未設定: ${action} はローカルのみに保存`);
+                showToast('ローカルに保存しました（API未設定）', 'success');
                 return { status: 'success', local: true };
             }
+            // 保存中トーストを表示
+            const savingToast = showToast('スプレッドシートに保存中...', 'saving');
             try {
                 const res = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ action, ...payload })
                 });
-                return await res.json();
+                const result = await res.json();
+                // 保存中トーストを消す
+                if (savingToast) { savingToast.classList.add('toast-exit'); setTimeout(() => savingToast.remove(), 300); }
+                if (result.status === 'success') {
+                    showToast('スプレッドシートに保存しました', 'success');
+                } else {
+                    showToast('保存エラー: ' + (result.message || ''), 'error', 5000);
+                }
+                return result;
             } catch(e) {
+                if (savingToast) { savingToast.classList.add('toast-exit'); setTimeout(() => savingToast.remove(), 300); }
+                showToast('通信エラー: ローカルのみに保存されました', 'error', 5000);
                 console.warn(`GAS ${action} 保存エラー:`, e.message);
                 return { status: 'error', message: e.message };
             }
@@ -12988,5 +13040,8 @@
         // スプラッシュ画面終了後に通知チェック
         setTimeout(() => checkTicketExpiryNotifications(), 3000);
     </script>
+
+    <!-- 保存通知トースト -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[200] flex flex-col gap-3 pointer-events-none"></div>
 </body>
 </html>
